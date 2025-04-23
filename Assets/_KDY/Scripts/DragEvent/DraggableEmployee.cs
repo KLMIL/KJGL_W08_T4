@@ -56,6 +56,8 @@ public class DraggableEmployee : MonoBehaviour
         _originalPosition = transform.position;
         _dragging = true;
 
+        _infoCanvas.HideEmployeeInfo();
+
         // 🔥 드래그 시작 시 현재 소속 백업!
         originalOwnerType = currentOwnerType;
         originalProject = currentProject;
@@ -96,6 +98,8 @@ public class DraggableEmployee : MonoBehaviour
             }
         }
 
+        //ShowInfo();
+
         ReturnToOrigin();
     }
 
@@ -103,15 +107,15 @@ public class DraggableEmployee : MonoBehaviour
     // 250423-1830 추가 - KWS
     private void OnMouseEnter()
     {
-        //Debug.Log("Mouse Enter to Project");
-        //_infoCanvas.ShowInfo($"Test Text");
-        /*        string[] infoStr = new string[4];
-                infoStr[0] = $"진행도: {_currentWorkAmount} / {_requiredWorkAmount}";
-                infoStr[1] = $"품질: {_quality} / 100";
-                infoStr[2] = $"요구 역량\n 기획: {_totalDesignSkill} / {_requiredDesignSkill} \n  개발: {_totalProgrammingSkill} / {_requiredProgrammingSkill}\n 아트: {_totalArtSkill} / {_requiredArtSkill}";
-                infoStr[3] = "";
-                _infoCanvas.ShowInfo(infoStr);*/
+        if (!_dragging)
+        {
+            //Debug.Log("Mouse Enter to Employee");
+            ShowInfo();
+        }
+    }
 
+    private void ShowInfo()
+    {
         string[] infoStr = new string[4];
         infoStr[0] = $"기획: {employee.GetEmployeeData().designSkil} \n개발: {employee.GetEmployeeData().devSkil} \n아트: {employee.GetEmployeeData().artSkil}";
         infoStr[1] = ((int)employee.GetEmployeeData().stress).ToString();
