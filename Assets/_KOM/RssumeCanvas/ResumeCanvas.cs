@@ -20,6 +20,11 @@ public class ResumeCanvas : MonoBehaviour
     string DesignText1; string DesignText2;
     string DevText1; string DevText2;
     string ArtText1; string ArtText2;
+
+    void Start()
+    {
+        resumePage.SetActive(false);
+    }
     public void NubieResumeButton()
     {
         resumePage.SetActive(true);
