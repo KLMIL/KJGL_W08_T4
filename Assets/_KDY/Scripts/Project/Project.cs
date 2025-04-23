@@ -116,6 +116,9 @@ public class Project : MonoBehaviour
         GameManager.Instance.AddFunds(finalReward);
         Debug.Log($"💰 프로젝트 완료: {_projectName} | 보상: {finalReward} (기본: {_completionReward}, 품질: {_quality}%)");
 
+        _infoCanvas.HideProjectInfo();
+        _infoCanvas.HideEmployeeInfo();
+
         Destroy(gameObject);
     }
 
