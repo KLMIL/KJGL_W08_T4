@@ -6,6 +6,9 @@ public class GameManager : MonoBehaviour
 
     public int todayMonth;
     public CompanyScale myCompanyScale;
+    private string _companyName;
+    private int _companyLevel;
+    private int _roomLevel;
 
     private int _companyFunds = 3000; // 초기 자산 예시
     private const int MaxEmployeeCount = 15;
@@ -31,6 +34,24 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.UpdateFundsUI(_companyFunds);
     }
 
+    public int RoomLevel
+    {
+        get => _roomLevel;
+        set => _roomLevel = Mathf.Clamp(value, 0, 3); // 0 ~ 3 단계
+    }
+
+    public int CompanyLevel
+    {
+        get => _companyLevel;
+        set => _companyLevel = Mathf.Max(0, value);
+    }
+
+    public string CompanyName
+    {
+        get => _companyName;
+        set => _companyName = value;
+    }
+
     // 현재 전체 고용 인원 수 (대기실 + 프로젝트 포함)
     public int GetTotalEmployeeCount()
     {
@@ -52,11 +73,9 @@ public class GameManager : MonoBehaviour
 
     public void OnEmployeeRemoved()
     {
-        // 현재 방식은 GetTotalEmployeeCount()가 실시간 계산이라, 직접 감소 저장할 필드는 없어도 됨.
-        // 다만 이 메서드는 "의미 있는 호출 지점"을 위해 존재함.
         Debug.Log("고용인 1명 퇴사  전체 인원 수 감소");
     }
-    
+
     public void AddFunds(int amount)
     {
         _companyFunds += amount;

@@ -7,13 +7,13 @@ public class ProjectManager : MonoBehaviour
 
     private List<Project> _currentProjects = new List<Project>();
     private List<EmployeeData> _currentEmployeeData = new List<EmployeeData>();
-    
+
     private GameObject _projectPrefab;
     private Transform _projectContainer;
+    private Transform[] _projectSlots = new Transform[8];
 
     private void Awake()
     {
-        // 중복 방지
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -24,39 +24,68 @@ public class ProjectManager : MonoBehaviour
 
         _projectPrefab = Resources.Load<GameObject>("_KDY/Prefabs/Project");
         _projectContainer = GameObject.Find("ProjectContainer")?.transform;
+
+        for (int i = 0; i < 8; i++)
+        {
+            var slot = _projectContainer.Find("Slot" + (i + 1).ToString());
+            if (slot != null)
+            {
+                _projectSlots[i] = slot;
+            }
+            else
+            {
+                 Debug.LogWarning($"⚠️ Slot{i} not found in ProjectContainer");
+            }
+        }
     }
 
     public void TestSmall() => MakeProject(ProjectType.Casual, ProjectSize.Small);
     public void TestMedium() => MakeProject(ProjectType.RPG, ProjectSize.Medium);
     public void TestLarge() => MakeProject(ProjectType.Strategy, ProjectSize.Large);
 
+    private int GetUnlockedProjectSlotCount()
+    {
+        switch (GameManager.Instance.RoomLevel)
+        {
+            case 1: return 2;
+            case 2: return 4;
+            case 3: return 6;
+            case 4: return 8;
+            default: return 2;
+        }
+    }
+
     public Project MakeProject(ProjectType type, ProjectSize size)
     {
-        const int MaxProjects = 8;
-        if (_currentProjects.Count >= MaxProjects)
+        int maxSlots = GetUnlockedProjectSlotCount();
+
+        for (int i = 0; i < maxSlots; i++)
         {
-            Debug.LogWarning("❌ 프로젝트 최대 생성 수 (8개)를 초과했습니다.");
-            return null;
+            if (_projectSlots[i].childCount == 0)
+            {
+                GameObject projectObject = Instantiate(_projectPrefab, _projectSlots[i]);
+                projectObject.transform.localPosition = Vector3.zero;
+
+                Project newProject = projectObject.GetComponent<Project>();
+                newProject.Type = type;
+                newProject.Size = size;
+                newProject.ProjectName = $"New {type} ({size}) Game";
+
+                newProject.RequiredDesignSkill = ProjectDataGenerator.GetRequiredSkill(type, size, SkillType.Design);
+                newProject.RequiredProgrammingSkill = ProjectDataGenerator.GetRequiredSkill(type, size, SkillType.Programming);
+                newProject.RequiredArtSkill = ProjectDataGenerator.GetRequiredSkill(type, size, SkillType.Art);
+                newProject.RequiredWorkAmount = ProjectDataGenerator.GetRequiredWorkAmount(size);
+                newProject.CompletionReward = ProjectDataGenerator.GetRewardEstimate(type, size);
+                newProject.Quality = 100;
+
+                _currentProjects.Add(newProject);
+                newProject.RefreshUI();
+                return newProject;
+            }
         }
 
-        GameObject projectPrefab = Instantiate(_projectPrefab, _projectContainer);
-        projectPrefab.transform.SetAsLastSibling();
-
-        Project newProject = projectPrefab.GetComponent<Project>();
-        newProject.Type = type;
-        newProject.Size = size;
-        newProject.ProjectName = $"New {type} ({size}) Game";
-
-        newProject.RequiredDesignSkill = ProjectDataGenerator.GetRequiredSkill(type, size, SkillType.Design);
-        newProject.RequiredProgrammingSkill = ProjectDataGenerator.GetRequiredSkill(type, size, SkillType.Programming);
-        newProject.RequiredArtSkill = ProjectDataGenerator.GetRequiredSkill(type, size, SkillType.Art);
-        newProject.RequiredWorkAmount = ProjectDataGenerator.GetRequiredWorkAmount(size);
-        newProject.CompletionReward = ProjectDataGenerator.GetRewardEstimate(type, size);
-        newProject.Quality = 100;
-
-        _currentProjects.Add(newProject);
-        newProject.RefreshUI();
-        return newProject;
+        Debug.LogWarning("❌ 프로젝트 생성 실패: 모든 슬롯이 사용 중입니다.");
+        return null;
     }
 
     public Project GetCurrentProjectByIndex(int index)
