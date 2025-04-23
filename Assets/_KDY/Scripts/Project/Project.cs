@@ -115,12 +115,7 @@ public class Project : MonoBehaviour
 
         GameManager.Instance.AddFunds(finalReward);
         Debug.Log($"💰 프로젝트 완료: {_projectName} | 보상: {finalReward} (기본: {_completionReward}, 품질: {_quality}%)");
-        Transform employeeContainer = GameObject.Find("EmployeeContainer").transform;
-        foreach (var emp in _assignedEmployees)
-        {
-            emp.ResetStress();
-            emp.transform.SetParent(employeeContainer, false);
-        }
+
         Destroy(gameObject);
     }
 
@@ -174,6 +169,9 @@ public class Project : MonoBehaviour
 
                 // 리스트에서 제거
                 _assignedEmployees.RemoveAt(i);
+                
+                // 직원 정보를 보고 있었다면 제거
+                _infoCanvas.HideEmployeeInfo();
 
                 // 오브젝트 제거
                 Destroy(emp.gameObject);
@@ -200,6 +198,8 @@ public class Project : MonoBehaviour
     // 250423-1830 추가 - KWS
     private void OnMouseEnter()
     {
+        if (Input.GetMouseButton(0)) return;
+
         //Debug.Log("Mouse Enter to Project");
         //_infoCanvas.ShowInfo($"Test Text");
         string[] infoStr = new string[4];
