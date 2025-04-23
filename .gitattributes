@@ -1,0 +1,39 @@
+# 기본 설정: 모든 텍스트 파일 LF로 통일
+* text=auto eol=lf
+
+# 코드 파일 (LF 통일)
+*.cs text eol=lf
+*.shader text eol=lf
+*.cginc text eol=lf
+*.hlsl text eol=lf
+*.txt text eol=lf
+*.json text eol=lf
+*.xml text eol=lf
+*.yaml text eol=lf
+*.md text eol=lf
+
+# Unity 특수 파일 (줄바꿈 강제 처리 X)
+*.meta -text
+*.unity -text
+*.prefab -text
+*.mat -text
+*.anim -text
+*.controller -text
+*.asset -text
+
+# 이미지/바이너리
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.psd binary
+*.fbx binary
+*.mp3 binary
+*.wav binary
+*.ogg binary
+*.ttf binary
+*.otf binary
+
+# 압축파일 등
+*.zip binary
+*.dll binary
+*.exe binary
