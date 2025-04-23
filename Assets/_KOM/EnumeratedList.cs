@@ -6,3 +6,9 @@ public enum CompanyScale
     MidsizeCompany,
     LargeCompany
 }
+public enum ExpType
+{
+    designExp,
+    devExp,
+    artExp
+}
