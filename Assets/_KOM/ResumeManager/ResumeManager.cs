@@ -1,34 +1,43 @@
 ﻿using System;
+using System.Net.NetworkInformation;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
 public struct EmployeeData
 {
     public int designSkil;
-    public int devSkill;
-    public int artSkill;
+    public int devSkil;
+    public int artSkil;
 
-    public int designExp;
-    public int devExp;
-    public int artExp;
+    public float designExp;
+    public float devExp;
+    public float artExp;
 
     public float stress;
-    public int joinDay;
+    public const float maxStress = 100;
+    public int joinMonth;
 
     public int salary;
-
-    public EmployeeData(int minStatus, int maxStatus, int todayDate, int startSalary)
+    /// <summary>
+    /// (int minStatus, int maxStatus, int todayMonth, int startSalary)
+    /// </summary>
+    /// <param name="minStatus"></param>
+    /// <param name="maxStatus"></param>
+    /// <param name="todayMonth"></param>
+    /// <param name="startSalary"></param>
+    public EmployeeData(int minStatus, int maxStatus, int todayMonth, int startSalary)
     {
         designSkil = RandomStatus(minStatus, maxStatus);
-        devSkill = RandomStatus(minStatus, maxStatus);
-        artSkill = RandomStatus(minStatus, maxStatus);
+        devSkil = RandomStatus(minStatus, maxStatus);
+        artSkil = RandomStatus(minStatus, maxStatus);
 
         designExp = 0;
         devExp = 0;
         artExp = 0;
 
         stress = 0f;
-        joinDay = todayDate;
+        joinMonth = todayMonth;
         salary = startSalary;
     }
     static int RandomStatus(int minStatus, int maxStatus)
@@ -36,9 +45,21 @@ public struct EmployeeData
         return UnityEngine.Random.Range(minStatus, maxStatus + 1);
     }
 }
-
 public class ResumeManager : MonoBehaviour
 {
+
+    private static ResumeManager instance;
+    public static ResumeManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = new ResumeManager();
+            }
+            return instance;
+        }
+    }
 
     [SerializeField][Range(1, 5)] int newbieIndieMinStatus;
     [SerializeField][Range(1, 5)] int newbieIndieMaxStatus;
@@ -69,7 +90,7 @@ public class ResumeManager : MonoBehaviour
 
     public EmployeeData CreateResume(bool isNewbie)
     { 
-        int todayDate = GameManager.Instance.todayDate;
+        int todayMonth = GameManager.Instance.todayMonth;
         int minStatus = 0;
         int maxStatus = 0;
         int salary = 0;
@@ -97,7 +118,7 @@ public class ResumeManager : MonoBehaviour
                 break;
         }
         int startSalary = RandomSalary(salary);
-        NowResume = new EmployeeData(minStatus, maxStatus, todayDate, startSalary);
+        NowResume = new EmployeeData(minStatus, maxStatus, todayMonth, startSalary);
         return NowResume;
     }
     int RandomSalary(int salary)

@@ -4,7 +4,7 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
 
-    public int todayDate;
+    public int todayMonth;
     public CompanyScale myCompanyScale;
     public static GameManager Instance
     {
