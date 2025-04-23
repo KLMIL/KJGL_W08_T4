@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Project : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class Project : MonoBehaviour
     [Header("Project current States")]
     private int _quality;
     private int _currentWorkAmount;
-    private List<EmployeeData> _assignedEmployees = new List<EmployeeData>();
+    private List<Employee> _assignedEmployees = new List<Employee>();
 
     [Header("Project Info panel")]
     private TextMeshPro _projectNameText;
@@ -31,6 +32,9 @@ public class Project : MonoBehaviour
     [Header("Project Tick Work")]
     private float _workTimer = 0f;
     private const float WORK_INTERVAL = 1f;
+    
+    [Header("Project Slots")]
+    private Transform[] employeeSlots;
 
     private void Update()
     {
@@ -53,8 +57,10 @@ public class Project : MonoBehaviour
         int totalPower = 0;
         foreach (var emp in _assignedEmployees)
         {
-            totalPower += emp.designSkil + emp.devSkil + emp.artSkil;
+            var data = emp.GetEmployeeData();  // Employee → EmployeeData 추출
+            totalPower += data.designSkil + data.devSkil + data.artSkil;
         }
+
 
         if (totalPower > 0)
         {
@@ -75,9 +81,16 @@ public class Project : MonoBehaviour
 
     private void CompleteProject()
     {
-        Debug.Log($"✅ 프로젝트 완료: {_projectName}");
+        float qualityFactor = Mathf.Clamp01(_quality / 100f); // 0.0 ~ 1.0
+        float randomFactor = Random.Range(0.8f, 1.2f);
+        int finalReward = Mathf.RoundToInt(_completionReward * qualityFactor * randomFactor);
+
+        GameManager.Instance.AddFunds(finalReward);
+        Debug.Log($"💰 프로젝트 완료: {_projectName} | 보상: {finalReward} (기본: {_completionReward}, 품질: {_quality}%)");
+
         Destroy(gameObject);
     }
+
     
     private void CheckAssignedStats()
     {
@@ -85,12 +98,14 @@ public class Project : MonoBehaviour
         int totalDev = 0;
         int totalArt = 0;
 
-        foreach (var emp in _assignedEmployees)
+        foreach (var employee in _assignedEmployees)
         {
-            totalDesign += emp.designSkil;
-            totalDev += emp.devSkil;
-            totalArt += emp.artSkil;
+            var data = employee.GetEmployeeData();
+            totalDesign += data.designSkil;
+            totalDev += data.devSkil;
+            totalArt += data.artSkil;
         }
+
 
         bool designInsufficient = totalDesign < _requiredDesignSkill;
         bool devInsufficient = totalDev < _requiredProgrammingSkill;
@@ -99,13 +114,42 @@ public class Project : MonoBehaviour
         if (designInsufficient || devInsufficient || artInsufficient)
         {
             Debug.LogWarning($"⚠️ [{_projectName}] 능력치 부족: " +
-                             $"{(designInsufficient ? "디자인 " : "")}" +
+                             $"{(designInsufficient ? "기획 " : "")}" +
                              $"{(devInsufficient ? "개발 " : "")}" +
                              $"{(artInsufficient ? "아트 " : "")}");
-            Debug.LogWarning("여기에서 고용인들 스트레스를 주세요!");
+            ApplyStressToEmployees(5);
             ApplyQualityPenalty();
         }
     }
+    
+    private void ApplyStressToEmployees(float amount)
+    {
+        for (int i = _assignedEmployees.Count - 1; i >= 0; i--)
+        {
+            var emp = _assignedEmployees[i];
+            bool isAlive = emp.IncreaseStress(amount);
+
+            Debug.Log($"[{_projectName}] 스트레스 증가 → {emp.GetEmployeeData().stress:F1}");
+
+            if (!isAlive)
+            {
+                Debug.LogWarning($"[{_projectName}] 스트레스 100 도달 → 직원 퇴사!");
+
+                // 리스트에서 제거
+                _assignedEmployees.RemoveAt(i);
+
+                // 오브젝트 제거
+                Destroy(emp.gameObject);
+
+                GameManager.Instance.OnEmployeeRemoved();
+            }
+        }
+
+        RefreshUI();
+    }
+
+
+
     private void ApplyQualityPenalty()
     {
         const int penaltyAmount = 5;
@@ -119,6 +163,21 @@ public class Project : MonoBehaviour
 
     private void Awake()
     {
+        // 슬롯 할당
+        Transform spawnParent = transform.Find("SpawnPositions");
+        if (spawnParent != null)
+        {
+            employeeSlots = new Transform[4];
+            for (int i = 0; i < 4; i++)
+            {
+                employeeSlots[i] = spawnParent.GetChild(i);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("❗ SpawnPositions 오브젝트가 없습니다.");
+        }
+        
         _projectNameText = transform.Find("InfoPanel/ProjectNameText")?.GetComponent<TextMeshPro>();
         if (_projectNameText == null)
             Debug.LogWarning("프로젝트 이름 UI 할당 안됨!");
@@ -148,11 +207,12 @@ public class Project : MonoBehaviour
             _workAmountText.text = $"TotalW:{_requiredWorkAmount} CurrentW:{_currentWorkAmount}\nQuality:{_quality}";
         
         int totalDesign = 0, totalDev = 0, totalArt = 0;
-        foreach (var emp in _assignedEmployees)
+        foreach (var employee in _assignedEmployees)
         {
-            totalDesign += emp.designSkil;
-            totalDev += emp.devSkil;
-            totalArt += emp.artSkil;
+            var data = employee.GetEmployeeData();
+            totalDesign += data.designSkil;
+            totalDev += data.devSkil;
+            totalArt += data.artSkil;
         }
 
         if (_employListText != null)
@@ -250,17 +310,67 @@ public class Project : MonoBehaviour
         }
     }
 
-    public List<EmployeeData> AssignedEmployees
+    public List<Employee> AssignedEmployees
     {
         get => _assignedEmployees;
         set => _assignedEmployees = value;
     }
-    
-    public void AddEmployee(EmployeeData data)
+
+
+    public bool AddEmployee(Employee employee)
     {
-        _assignedEmployees ??= new List<EmployeeData>();
-        _assignedEmployees.Add(data);
+        if (_assignedEmployees.Count >= employeeSlots.Length)
+        {
+            Debug.LogWarning($"❌ 프로젝트 '{_projectName}' 최대 고용 인원 초과 ({employeeSlots.Length}명)");
+            return false;
+        }
+
+        int targetIndex = -1;
+        for (int i = 0; i < employeeSlots.Length; i++)
+        {
+            if (employeeSlots[i].childCount == 0)
+            {
+                targetIndex = i;
+                break;
+            }
+        }
+
+        if (targetIndex == -1) return false;
+
+        _assignedEmployees.Add(employee);
+        RefreshUI();
+
+        var go = employee.gameObject;
+        go.transform.SetParent(employeeSlots[targetIndex], false);
+        go.transform.localPosition = new Vector3(0, 0, -1f);
+
+        var draggable = go.GetComponent<DraggableEmployee>();
+        if (draggable != null)
+        {
+            draggable.currentOwnerType = OwnerType.Project;
+            draggable.currentProject = this;
+            draggable.waitingRoomSlot = null;
+        }
+
+        return true;
+    }
+
+    public void RemoveEmployee(DraggableEmployee employee)
+    {
+        _assignedEmployees.Remove(employee.employee);
+
+        // 슬롯 자식 중 자신일 경우 위치 정리
+        foreach (Transform slot in employeeSlots)
+        {
+            if (slot.childCount > 0 && slot.GetChild(0) == employee.transform)
+            {
+                employee.transform.SetParent(null);
+                break;
+            }
+        }
+
         RefreshUI();
     }
+
 
 }
