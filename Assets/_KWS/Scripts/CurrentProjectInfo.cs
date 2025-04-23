@@ -7,6 +7,7 @@ public class CurrentProjectInfo : MonoBehaviour
     [SerializeField] private Image _infoImage;
 
     [SerializeField] private GameObject _projectObject;
+    [SerializeField] private TextMeshProUGUI _projectName;
     [SerializeField] private TextMeshProUGUI _progressText;
     [SerializeField] private TextMeshProUGUI _qualityText;
     [SerializeField] private TextMeshProUGUI _requireText;
@@ -22,10 +23,11 @@ public class CurrentProjectInfo : MonoBehaviour
     //public void ShowInfo(string text, bool isLeftArea)
     public void ShowProjectInfo(string[] text) //(string text)
     {
-        _progressText.SetText(text[0]);
-        _qualityText.SetText(text[1]);
-        _requireText.SetText(text[2]);
-        _welfareText.SetText(text[3]);
+        _projectName.SetText(text[0]);
+        _progressText.SetText(text[1]);
+        _qualityText.SetText(text[2]);
+        _requireText.SetText(text[3]);
+        _welfareText.SetText(text[4]);
         _projectObject.SetActive(true);
         _infoImage.gameObject.SetActive(true);
     }

@@ -215,11 +215,12 @@ public class Project : MonoBehaviour
 
         //Debug.Log("Mouse Enter to Project");
         //_infoCanvas.ShowInfo($"Test Text");
-        string[] infoStr = new string[4];
-        infoStr[0] = $"진행도: {_currentWorkAmount} / {_requiredWorkAmount}";
-        infoStr[1] = $"품질: {_quality} / 100";
-        infoStr[2] = $"요구 역량\n 기획: {_totalDesignSkill} / {_requiredDesignSkill} \n 개발: {_totalProgrammingSkill} / {_requiredProgrammingSkill}\n 아트: {_totalArtSkill} / {_requiredArtSkill}";
-        infoStr[3] = "";
+        string[] infoStr = new string[5];
+        infoStr[0] = $"{_projectName}";
+        infoStr[1] = $"진행도: {_currentWorkAmount} / {_requiredWorkAmount}";
+        infoStr[2] = $"품질: {_quality} / 100";
+        infoStr[3] = $"요구 역량\n 기획: {_totalDesignSkill} / {_requiredDesignSkill} \n 개발: {_totalProgrammingSkill} / {_requiredProgrammingSkill}\n 아트: {_totalArtSkill} / {_requiredArtSkill}";
+        infoStr[4] = "";
         _infoCanvas.ShowProjectInfo(infoStr);
     }
 
