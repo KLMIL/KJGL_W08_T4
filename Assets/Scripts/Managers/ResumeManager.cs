@@ -47,20 +47,6 @@ public struct EmployeeData
 }
 public class ResumeManager : MonoBehaviour
 {
-
-    private static ResumeManager instance;
-    public static ResumeManager Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                instance = new ResumeManager();
-            }
-            return instance;
-        }
-    }
-
     [SerializeField][Range(1, 5)] int newbieIndieMinStatus;
     [SerializeField][Range(1, 5)] int newbieIndieMaxStatus;
     [SerializeField] int newbieIndieSalary;
