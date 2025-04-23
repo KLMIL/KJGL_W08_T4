@@ -148,23 +148,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9ab35a7e0b6247468c1c42e5bba7761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newbieIndieMinStatus: 0
-  newbieIndieMaxStatus: 0
+  newbieIndieMinStatus: 1
+  newbieIndieMaxStatus: 1
   newbieIndieSalary: 0
-  newbieMidsizeCompanyMinStatus: 0
-  newbieMidsizeCompanyMaxStatus: 0
+  newbieMidsizeCompanyMinStatus: 1
+  newbieMidsizeCompanyMaxStatus: 1
   newbieMidsizeCompanySalary: 0
-  newbieLargeCompanyMinStatus: 0
-  newbieLargeCompanyMaxStatus: 0
+  newbieLargeCompanyMinStatus: 1
+  newbieLargeCompanyMaxStatus: 1
   newbieLargeCompanySalary: 0
-  experiencedIndieMinStatus: 0
-  experiencedIndieMaxStatus: 0
+  experiencedIndieMinStatus: 1
+  experiencedIndieMaxStatus: 1
   experiencedIndiSalary: 0
-  experiencedMidsizeCompanyMinStatus: 0
-  experiencedMidsizeCompanyMaxStatus: 0
+  experiencedMidsizeCompanyMinStatus: 1
+  experiencedMidsizeCompanyMaxStatus: 1
   experiencedMidsizeCompanySalary: 0
-  experiencedLargeCompanyMinStatus: 0
-  experiencedLargeCompanyMaxStatus: 0
+  experiencedLargeCompanyMinStatus: 1
+  experiencedLargeCompanyMaxStatus: 1
   experiencedLargeCompanySalary: 0
 --- !u!4 &7413699
 Transform:
