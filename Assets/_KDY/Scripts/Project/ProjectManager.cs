@@ -44,6 +44,7 @@ public class ProjectManager : MonoBehaviour
         newProject.RequiredArtSkill = ProjectDataGenerator.GetRequiredSkill(type, size, SkillType.Art);
         newProject.RequiredWorkAmount = ProjectDataGenerator.GetRequiredWorkAmount(size);
         newProject.CompletionReward = ProjectDataGenerator.GetRewardEstimate(type, size);
+        newProject.Quality = 100;
 
         _currentProjects.Add(newProject);
         newProject.RefreshUI();

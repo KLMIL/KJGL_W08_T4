@@ -26,9 +26,9 @@ public static class ProjectDataGenerator
     {
         return size switch
         {
-            ProjectSize.Small => Random.Range(80, 121),     // 80 ~ 120
-            ProjectSize.Medium => Random.Range(160, 241),   // 160 ~ 240
-            ProjectSize.Large => Random.Range(320, 481),    // 320 ~ 480
+            ProjectSize.Small => Random.Range(800, 1201),     // 800 ~ 1200
+            ProjectSize.Medium => Random.Range(1600, 2401),   // 1600 ~ 2400
+            ProjectSize.Large => Random.Range(3200, 4801),    // 3200 ~ 4800
             _ => 100
         };
     }

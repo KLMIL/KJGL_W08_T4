@@ -27,6 +27,95 @@ public class Project : MonoBehaviour
     private TextMeshPro _skillSummaryText;
     private TextMeshPro _workAmountText;
     private TextMeshPro _employListText;
+    
+    [Header("Project Tick Work")]
+    private float _workTimer = 0f;
+    private const float WORK_INTERVAL = 1f;
+
+    private void Update()
+    {
+        _workTimer += Time.deltaTime;
+        if (_workTimer >= WORK_INTERVAL)
+        {
+            _workTimer = 0f;
+            TickWork();
+        }
+    }
+    private void TickWork()
+    {
+        // 고용인이 있어야 작업 진행
+        if (_assignedEmployees.Count == 0) return;
+        
+        // 능력 부족시 스트레스 주기
+        CheckAssignedStats();
+        
+        
+        int totalPower = 0;
+        foreach (var emp in _assignedEmployees)
+        {
+            totalPower += emp.designSkil + emp.devSkil + emp.artSkil;
+        }
+
+        if (totalPower > 0)
+        {
+            _currentWorkAmount += totalPower;
+            RefreshUI();
+            CheckProjectCompletion();
+        }
+    }
+
+
+    private void CheckProjectCompletion()
+    {
+        if (_currentWorkAmount >= _requiredWorkAmount)
+        {
+            CompleteProject();
+        }
+    }
+
+    private void CompleteProject()
+    {
+        Debug.Log($"✅ 프로젝트 완료: {_projectName}");
+        Destroy(gameObject);
+    }
+    
+    private void CheckAssignedStats()
+    {
+        int totalDesign = 0;
+        int totalDev = 0;
+        int totalArt = 0;
+
+        foreach (var emp in _assignedEmployees)
+        {
+            totalDesign += emp.designSkil;
+            totalDev += emp.devSkil;
+            totalArt += emp.artSkil;
+        }
+
+        bool designInsufficient = totalDesign < _requiredDesignSkill;
+        bool devInsufficient = totalDev < _requiredProgrammingSkill;
+        bool artInsufficient = totalArt < _requiredArtSkill;
+
+        if (designInsufficient || devInsufficient || artInsufficient)
+        {
+            Debug.LogWarning($"⚠️ [{_projectName}] 능력치 부족: " +
+                             $"{(designInsufficient ? "디자인 " : "")}" +
+                             $"{(devInsufficient ? "개발 " : "")}" +
+                             $"{(artInsufficient ? "아트 " : "")}");
+            Debug.LogWarning("여기에서 고용인들 스트레스를 주세요!");
+            ApplyQualityPenalty();
+        }
+    }
+    private void ApplyQualityPenalty()
+    {
+        const int penaltyAmount = 5;
+        int prevQuality = _quality;
+        Quality = _quality - penaltyAmount;
+
+        Debug.LogWarning($"❗ 프로젝트 [{_projectName}] 품질 감소: {prevQuality} → {_quality}");
+    }
+
+
 
     private void Awake()
     {
@@ -58,8 +147,21 @@ public class Project : MonoBehaviour
         if (_workAmountText != null)
             _workAmountText.text = $"TotalW:{_requiredWorkAmount} CurrentW:{_currentWorkAmount}\nQuality:{_quality}";
         
+        int totalDesign = 0, totalDev = 0, totalArt = 0;
+        foreach (var emp in _assignedEmployees)
+        {
+            totalDesign += emp.designSkil;
+            totalDev += emp.devSkil;
+            totalArt += emp.artSkil;
+        }
+
         if (_employListText != null)
-            _employListText.text = $"Employees:{_assignedEmployees.Count}";
+        {
+            _employListText.text =
+                $"Employees: {_assignedEmployees.Count}\n" +
+                $"D:{totalDesign} P:{totalDev} A:{totalArt}";
+        }
+
     }
 
     // Getter & Setter
@@ -124,8 +226,13 @@ public class Project : MonoBehaviour
     public int Quality
     {
         get => _quality;
-        set => _quality = value;
+        set
+        {
+            _quality = Mathf.Max(0, value);
+            RefreshUI();
+        }
     }
+
 
     public int RequiredWorkAmount
     {
@@ -148,4 +255,12 @@ public class Project : MonoBehaviour
         get => _assignedEmployees;
         set => _assignedEmployees = value;
     }
+    
+    public void AddEmployee(EmployeeData data)
+    {
+        _assignedEmployees ??= new List<EmployeeData>();
+        _assignedEmployees.Add(data);
+        RefreshUI();
+    }
+
 }
