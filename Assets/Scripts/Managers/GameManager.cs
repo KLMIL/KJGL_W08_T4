@@ -7,10 +7,9 @@ public class GameManager : MonoBehaviour
     public int todayMonth;
     public CompanyScale myCompanyScale;
     private string _companyName;
-    private int _companyLevel;
-    private int _roomLevel = 1;
+    private int _roomLevel = 0;
 
-    private int _companyFunds = 3000; // 초기 자산 예시
+    private int _companyFunds = 20000; // 초기 자산 예시
     private const int MaxEmployeeCount = 15;
 
     public int CompanyFunds => _companyFunds;
@@ -44,12 +43,6 @@ public class GameManager : MonoBehaviour
     {
         get => _roomLevel;
         set => _roomLevel = Mathf.Clamp(value, 0, 3); // 0 ~ 3 단계
-    }
-
-    public int CompanyLevel
-    {
-        get => _companyLevel;
-        set => _companyLevel = Mathf.Max(0, value);
     }
 
     public string CompanyName
@@ -112,6 +105,14 @@ public class GameManager : MonoBehaviour
             Destroy(rightCCTV.transform.GetChild(3).gameObject);
             newActiveRoom = Instantiate(activeRoomPrefab, rightCCTV.transform);
             newActiveRoom.transform.SetSiblingIndex(RoomLevel);
+        }
+    }
+
+    public void UpgradeCompany()
+    {
+        if((int)myCompanyScale < 3)
+        {
+            myCompanyScale++;
         }
     }
 }

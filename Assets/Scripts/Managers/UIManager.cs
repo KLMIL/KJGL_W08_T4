@@ -10,7 +10,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject ui_UpgradesPanel;
     [SerializeField] GameObject ui_ProjectsPanel;
     [SerializeField] GameObject ui_RecruitPanel;
-
+    [SerializeField] TextMeshProUGUI _upgradeRoomText;
+    [SerializeField] TextMeshProUGUI _upgradeCompanyText;
     private TextMeshProUGUI fundsText;
     [SerializeField] int interviewFee = 100;
     private void Awake()
@@ -101,16 +102,20 @@ public class UIManager : MonoBehaviour
         if (GameManager.Instance.RoomLevel < 3)
         {
             int upgradePrice = 0;
+            int nextUpgradePrice = 0;
             switch (GameManager.Instance.RoomLevel)
             {
                 case 0:
                     upgradePrice = 5000;
+                    nextUpgradePrice = 20000;
                     break;
                 case 1:
                     upgradePrice = 20000;
+                    nextUpgradePrice = 50000;
                     break;
                 case 2:
                     upgradePrice = 50000;
+                    nextUpgradePrice = 0;
                     break;
                 default:
                     Debug.LogWarning("Wrong room level");
@@ -119,11 +124,58 @@ public class UIManager : MonoBehaviour
             if (GameManager.Instance.SpendFunds(upgradePrice))
             {
                 GameManager.Instance.UpgradeRoomLevel();
+                if(nextUpgradePrice == 0)
+                {
+                    _upgradeRoomText.SetText("사무실 구매\n(구매불가)");
+                } else
+                {
+                    _upgradeRoomText.SetText($"사무실 구매\n{nextUpgradePrice} G");
+                }
             }            
         }
         else
         {
             Debug.LogWarning("모든 방이 열렸습니다.");
+        }
+    }
+
+    public void OnUpgradeCompanyClick()
+    {
+        if((int)GameManager.Instance.myCompanyScale < 3)
+        {
+            int upgradePrice = 0;
+            int nextUpgradePrice = 0;
+            switch ((int)GameManager.Instance.myCompanyScale)
+            {
+                case 1:
+                    upgradePrice = 10000;
+                    nextUpgradePrice = 30000;
+                    break;
+                case 2:
+                    upgradePrice = 30000;
+                    nextUpgradePrice = 0;
+                    break;
+                default:
+                    Debug.LogWarning("Wrong room level");
+                    break;
+            }
+
+            if (GameManager.Instance.SpendFunds(upgradePrice))
+            {
+                GameManager.Instance.UpgradeCompany();
+                if (nextUpgradePrice == 0)
+                {
+                    _upgradeCompanyText.SetText("회사 규모 키우기\n(최대규모)");
+                }
+                else
+                {
+                    _upgradeCompanyText.SetText($"회사 규모 키우기\n{nextUpgradePrice} G");
+                }
+            }
+
+        } else
+        {
+            Debug.LogWarning("최대규모");
         }
     }
 }
