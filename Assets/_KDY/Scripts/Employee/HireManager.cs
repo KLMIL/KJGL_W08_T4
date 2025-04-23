@@ -3,29 +3,21 @@ using UnityEngine.UI;
 
 public class HireManager : MonoBehaviour
 {
-    public Button hireNewbieButton;
-    public Button hireExperiencedButton;
-
     private Transform employeeContainer;
     private const int MaxEmployeeCount = 15;
 
     private void Awake()
     {
-        hireNewbieButton.onClick.AddListener(() => HireEmployee(true));
-        hireExperiencedButton.onClick.AddListener(() => HireEmployee(false));
-        
         employeeContainer = GameObject.Find("EmployeeContainer")?.transform;
     }
 
-    private void HireEmployee(bool isNewbie)
+    public void HireEmployee(EmployeeData resume)
     {
         if (!GameManager.Instance.CanHireMore())
         {
             Debug.LogWarning("❌ 고용 인원 초과 (최대 15명)");
             return;
         }
-
-        var resume = ResumeManager.Instance.CreateResume(isNewbie);
         SpawnDraggableEmployee(resume);
     }
 
