@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public CompanyScale myCompanyScale;
     private string _companyName;
     private int _companyLevel;
-    private int _roomLevel;
+    private int _roomLevel = 1;
 
     private int _companyFunds = 3000; // 초기 자산 예시
     private const int MaxEmployeeCount = 15;
