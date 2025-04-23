@@ -15,6 +15,10 @@ public class GameManager : MonoBehaviour
 
     public int CompanyFunds => _companyFunds;
 
+    [SerializeField] GameObject activeRoomPrefab;
+    GameObject leftCCTV;
+    GameObject rightCCTV;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -32,6 +36,8 @@ public class GameManager : MonoBehaviour
         myCompanyScale = CompanyScale.Indie;
         todayMonth = 1;
         UIManager.Instance.UpdateFundsUI(_companyFunds);
+        leftCCTV = GameObject.Find("LeftCCTV");
+        rightCCTV = GameObject.Find("RightCCTV");
     }
 
     public int RoomLevel
@@ -93,5 +99,19 @@ public class GameManager : MonoBehaviour
 
         Debug.LogWarning("자산 부족!");
         return false;
+    }
+
+    public void UpgradeRoomLevel()
+    {
+        if(RoomLevel < 3)
+        {
+            RoomLevel += 1;
+            Destroy(leftCCTV.transform.GetChild(3).gameObject);
+            GameObject newActiveRoom = Instantiate(activeRoomPrefab, leftCCTV.transform);
+            newActiveRoom.transform.SetSiblingIndex(RoomLevel);
+            Destroy(rightCCTV.transform.GetChild(3).gameObject);
+            newActiveRoom = Instantiate(activeRoomPrefab, rightCCTV.transform);
+            newActiveRoom.transform.SetSiblingIndex(RoomLevel);
+        }
     }
 }
