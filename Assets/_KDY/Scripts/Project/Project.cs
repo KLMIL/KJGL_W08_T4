@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -17,6 +17,10 @@ public class Project : MonoBehaviour
     private int _requiredProgrammingSkill;
     private int _requiredArtSkill;
     private int _requiredWorkAmount;
+
+    private int _totalDesignSkill;
+    private int _totalProgrammingSkill;
+    private int _totalArtSkill;
 
     [Header("Project current States")]
     private int _quality;
@@ -115,6 +119,10 @@ public class Project : MonoBehaviour
         bool devInsufficient = totalDev < _requiredProgrammingSkill;
         bool artInsufficient = totalArt < _requiredArtSkill;
 
+        _totalArtSkill = totalArt;
+        _totalDesignSkill = totalDesign;
+        _totalProgrammingSkill = totalDev;
+
         if (designInsufficient || devInsufficient || artInsufficient)
         {
             Debug.LogWarning($"⚠️ [{_projectName}] 능력치 부족: " +
@@ -168,13 +176,19 @@ public class Project : MonoBehaviour
     private void OnMouseEnter()
     {
         //Debug.Log("Mouse Enter to Project");
-        _infoCanvas.ShowInfo($"Test Text");
+        //_infoCanvas.ShowInfo($"Test Text");
+        string[] infoStr = new string[4];
+        infoStr[0] = $"진행도: {_currentWorkAmount} / {_requiredWorkAmount}";
+        infoStr[1] = $"품질: {_quality} / 100";
+        infoStr[2] = $"요구 역량\n 기획: {_totalDesignSkill} / {_requiredDesignSkill} \n 개발: {_totalProgrammingSkill} / {_requiredProgrammingSkill}\n 아트: {_totalArtSkill} / {_requiredArtSkill}";
+        infoStr[3] = "";
+        _infoCanvas.ShowProjectInfo(infoStr);
     }
 
     private void OnMouseExit()
     {
         //Debug.Log("Mouse Exit from Project");
-        _infoCanvas.HideInfo();
+        _infoCanvas.HideProjectInfo();
     }
 
 

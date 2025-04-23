@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public enum OwnerType { None, WaitingRoom, Project }
 public class DraggableEmployee : MonoBehaviour
@@ -17,7 +17,14 @@ public class DraggableEmployee : MonoBehaviour
     private OwnerType originalOwnerType;
     private Project originalProject;
     private Transform originalWaitingSlot;
-    
+
+
+    // 250423-1830 추가 - KWS
+    [Header("Hover UI")]
+    private CurrentProjectInfo _infoCanvas;
+
+
+
     public void Init(EmployeeData data)
     {
         employee = GetComponent<Employee>();
@@ -29,6 +36,9 @@ public class DraggableEmployee : MonoBehaviour
         {
             Debug.LogError("Employee 컴포넌트를 찾을 수 없습니다.");
         }
+
+        // 250423-1830 추가 - KWS
+        _infoCanvas = FindAnyObjectByType<CurrentProjectInfo>();
     }
 
 
@@ -88,6 +98,35 @@ public class DraggableEmployee : MonoBehaviour
 
         ReturnToOrigin();
     }
+
+
+    // 250423-1830 추가 - KWS
+    private void OnMouseEnter()
+    {
+        //Debug.Log("Mouse Enter to Project");
+        //_infoCanvas.ShowInfo($"Test Text");
+        /*        string[] infoStr = new string[4];
+                infoStr[0] = $"진행도: {_currentWorkAmount} / {_requiredWorkAmount}";
+                infoStr[1] = $"품질: {_quality} / 100";
+                infoStr[2] = $"요구 역량\n 기획: {_totalDesignSkill} / {_requiredDesignSkill} \n  개발: {_totalProgrammingSkill} / {_requiredProgrammingSkill}\n 아트: {_totalArtSkill} / {_requiredArtSkill}";
+                infoStr[3] = "";
+                _infoCanvas.ShowInfo(infoStr);*/
+
+        string[] infoStr = new string[4];
+        infoStr[0] = $"기획: {employee.GetEmployeeData().designSkil} \n개발: {employee.GetEmployeeData().devSkil} \n아트: {employee.GetEmployeeData().artSkil}";
+        infoStr[1] = $"스트레스: {employee.GetEmployeeData().stress} / 100 ";
+        infoStr[2] = $"입사일: {employee.GetEmployeeData().joinMonth}";
+        infoStr[3] = $"연봉: {employee.GetEmployeeData().salary}";
+        _infoCanvas.ShowEmployeeInfo(infoStr);
+    }
+
+    private void OnMouseExit()
+    {
+        //Debug.Log("Mouse Exit from Project");
+        _infoCanvas.HideEmployeeInfo();
+    }
+
+
 
     private void ReturnToOrigin()
     {
