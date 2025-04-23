@@ -3,34 +3,42 @@ using UnityEngine;
 
 public class ProjectManager : MonoBehaviour
 {
+    public static ProjectManager Instance { get; private set; }
+
     private List<Project> _currentProjects = new List<Project>();
     private List<EmployeeData> _currentEmployeeData = new List<EmployeeData>();
     
     private GameObject _projectPrefab;
     private Transform _projectContainer;
-    
-    void Awake()
+
+    private void Awake()
     {
+        // 중복 방지
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+
         _projectPrefab = Resources.Load<GameObject>("_KDY/Prefabs/Project");
         _projectContainer = GameObject.Find("ProjectContainer")?.transform;
     }
 
-    public void TestSmall()
-    {
-        MakeProject(ProjectType.Casual, ProjectSize.Small);
-    }
-    public void TestMedium()
-    {
-        MakeProject(ProjectType.RPG, ProjectSize.Medium);
-    }
-    public void TestLarge()
-    {
-        MakeProject(ProjectType.Strategy, ProjectSize.Large);
-    }
-    
-    // make project with type and size
+    public void TestSmall() => MakeProject(ProjectType.Casual, ProjectSize.Small);
+    public void TestMedium() => MakeProject(ProjectType.RPG, ProjectSize.Medium);
+    public void TestLarge() => MakeProject(ProjectType.Strategy, ProjectSize.Large);
+
     public Project MakeProject(ProjectType type, ProjectSize size)
     {
+        const int MaxProjects = 8;
+        if (_currentProjects.Count >= MaxProjects)
+        {
+            Debug.LogWarning("❌ 프로젝트 최대 생성 수 (8개)를 초과했습니다.");
+            return null;
+        }
+
         GameObject projectPrefab = Instantiate(_projectPrefab, _projectContainer);
         projectPrefab.transform.SetAsLastSibling();
 
@@ -51,10 +59,6 @@ public class ProjectManager : MonoBehaviour
         return newProject;
     }
 
-
-
-
-    // get project with index in _currentProjects
     public Project GetCurrentProjectByIndex(int index)
     {
         if (index < 0 || index >= _currentProjects.Count)
@@ -62,13 +66,10 @@ public class ProjectManager : MonoBehaviour
             Debug.LogWarning("Project index is out of range.");
             return null;
         }
-        else
-        {
-            return CurrentProjects[index];
-        }
+
+        return _currentProjects[index];
     }
-    
-    // Getter & Setter
+
     public List<Project> CurrentProjects
     {
         get => _currentProjects;
