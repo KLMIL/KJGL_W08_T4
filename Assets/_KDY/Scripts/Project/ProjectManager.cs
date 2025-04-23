@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class ProjectManager : MonoBehaviour
@@ -47,10 +47,10 @@ public class ProjectManager : MonoBehaviour
     {
         switch (GameManager.Instance.RoomLevel)
         {
-            case 1: return 2;
-            case 2: return 4;
-            case 3: return 6;
-            case 4: return 8;
+            case 0: return 2;
+            case 1: return 4;
+            case 2: return 6;
+            case 3: return 8;
             default: return 2;
         }
     }

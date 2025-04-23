@@ -10,9 +10,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject ui_UpgradesPanel;
     [SerializeField] GameObject ui_ProjectsPanel;
     [SerializeField] GameObject ui_RecruitPanel;
-    
+
     private TextMeshProUGUI fundsText;
-    [SerializeField] int interviewFee;
+    [SerializeField] int interviewFee = 100;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -76,10 +76,12 @@ public class UIManager : MonoBehaviour
 
     public void ToggleResumeCanvas(bool isNewbie)
     {
-        GameManager.Instance.SpendFunds(interviewFee);
-        ToggleUpgradesCanvas(false);
-        ui_ResumeCanvas.enabled = true;
-        OnRecruitClick(isNewbie);
+        if (GameManager.Instance.SpendFunds(interviewFee))
+        {
+            ToggleUpgradesCanvas(false);
+            ui_ResumeCanvas.enabled = true;
+            OnRecruitClick(isNewbie);
+        }    
     }
 
     public void OnRecruitClick(bool isNewbie)
@@ -90,7 +92,38 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            ui_ResumeCanvas.GetComponent <ResumeCanvas>().ExperiencedResumeButton();
+            ui_ResumeCanvas.GetComponent<ResumeCanvas>().ExperiencedResumeButton();
+        }
+    }
+
+    public void OnUpgradeRoomClick()
+    {
+        if (GameManager.Instance.RoomLevel < 3)
+        {
+            int upgradePrice = 0;
+            switch (GameManager.Instance.RoomLevel)
+            {
+                case 0:
+                    upgradePrice = 5000;
+                    break;
+                case 1:
+                    upgradePrice = 20000;
+                    break;
+                case 2:
+                    upgradePrice = 50000;
+                    break;
+                default:
+                    Debug.LogWarning("Wrong room level");
+                    break;
+            }
+            if (GameManager.Instance.SpendFunds(upgradePrice))
+            {
+                GameManager.Instance.UpgradeRoomLevel();
+            }            
+        }
+        else
+        {
+            Debug.LogWarning("모든 방이 열렸습니다.");
         }
     }
 }

@@ -116,6 +116,9 @@ public class Project : MonoBehaviour
         GameManager.Instance.AddFunds(finalReward);
         Debug.Log($"💰 프로젝트 완료: {_projectName} | 보상: {finalReward} (기본: {_completionReward}, 품질: {_quality}%)");
 
+        _infoCanvas.HideProjectInfo();
+        _infoCanvas.HideEmployeeInfo();
+
         Destroy(gameObject);
     }
 
@@ -149,8 +152,11 @@ public class Project : MonoBehaviour
                              $"{(designInsufficient ? "기획 " : "")}" +
                              $"{(devInsufficient ? "개발 " : "")}" +
                              $"{(artInsufficient ? "아트 " : "")}");
-            ApplyStressToEmployees(5);
+            ApplyStressToEmployees(20);
             ApplyQualityPenalty();
+        } else if(!designInsufficient && !devInsufficient && !artInsufficient)
+        {
+            AddQuality(1);
         }
     }
 
@@ -194,6 +200,13 @@ public class Project : MonoBehaviour
         Debug.LogWarning($"❗ 프로젝트 [{_projectName}] 품질 감소: {prevQuality} → {_quality}");
     }
 
+    private void AddQuality(int amount)
+    {
+        int prevQuality = _quality;
+        Quality = _quality + amount;
+
+        Debug.LogWarning($"❗ 프로젝트 [{_projectName}] 품질 증가: {prevQuality} → {_quality}");
+    }
 
     // 250423-1830 추가 - KWS
     private void OnMouseEnter()
