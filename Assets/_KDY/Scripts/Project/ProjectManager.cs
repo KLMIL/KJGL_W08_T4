@@ -67,15 +67,15 @@ public class ProjectManager : MonoBehaviour
                 projectObject.transform.localPosition = Vector3.zero;
 
                 Project newProject = projectObject.GetComponent<Project>();
-                newProject.Type = type;
                 newProject.Size = size;
-                newProject.ProjectName = $"New {type} ({size}) Game";
-
-                newProject.RequiredDesignSkill = ProjectDataGenerator.GetRequiredSkill(type, size, SkillType.Design);
-                newProject.RequiredProgrammingSkill = ProjectDataGenerator.GetRequiredSkill(type, size, SkillType.Programming);
-                newProject.RequiredArtSkill = ProjectDataGenerator.GetRequiredSkill(type, size, SkillType.Art);
+                string projectName = ProjectDataGenerator.GetRandomProjectName();
+                newProject.ProjectName = projectName;
+                newProject.RequiredDesignSkill = ProjectDataGenerator.GetRequiredSkill(size);
+                newProject.RequiredProgrammingSkill = ProjectDataGenerator.GetRequiredSkill(size);
+                newProject.RequiredArtSkill = ProjectDataGenerator.GetRequiredSkill(size);
                 newProject.RequiredWorkAmount = ProjectDataGenerator.GetRequiredWorkAmount(size);
-                newProject.CompletionReward = ProjectDataGenerator.GetRewardEstimate(type, size);
+                newProject.CompletionReward = ProjectDataGenerator.GetRewardEstimate(size);
+
                 newProject.Quality = 100;
 
                 _currentProjects.Add(newProject);
