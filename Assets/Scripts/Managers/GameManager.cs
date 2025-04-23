@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,6 +20,9 @@ public class GameManager : MonoBehaviour
     GameObject leftCCTV;
     GameObject rightCCTV;
 
+    [Header("Canvas")]
+    [SerializeField] private GameObject gameFlowCanvas;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -28,10 +33,32 @@ public class GameManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+
+        // 2025-04-24 01:00 수정 - KWS
+        // 게임시작, 메인으로 돌아가기 버튼 찾아서 리스너 추가
+        Button startButton = gameFlowCanvas.transform.Find("GameStartImage").Find("StartButton").GetComponent<Button>();
+        Button resetButton = gameFlowCanvas.transform.Find("GameOverImage").Find("ResetButton").GetComponent<Button>();
+
+        startButton.onClick.AddListener(() =>
+        {
+            gameFlowCanvas.transform.Find("GameStartImage").gameObject.SetActive(false);
+            Time.timeScale = 1f;
+        });
+
+        resetButton.onClick.AddListener(() =>
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        });
     }
+
+    
 
     private void Start()
     {
+        // 2025-04-24 01:00 수정 - KWS
+        Time.timeScale = 0f;
+
         myCompanyScale = CompanyScale.Indie;
         todayMonth = 1;
         UIManager.Instance.UpdateFundsUI(_companyFunds);
@@ -114,5 +141,13 @@ public class GameManager : MonoBehaviour
         {
             myCompanyScale++;
         }
+    }
+
+
+    // 2025-04-24 01:00 수정 - KWS
+    public void GameOver()
+    {
+        Time.timeScale = 0f;
+        gameFlowCanvas.transform.Find("GameOverImage").gameObject.SetActive(true);
     }
 }

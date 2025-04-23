@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject ui_RecruitPanel;
     [SerializeField] TextMeshProUGUI _upgradeRoomText;
     [SerializeField] TextMeshProUGUI _upgradeCompanyText;
-    private TextMeshProUGUI fundsText;
+    [SerializeField] TextMeshProUGUI fundsText;
     [SerializeField] int interviewFee = 100;
     private void Awake()
     {
@@ -27,15 +27,15 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        var obj = GameObject.Find("Funds");
-        if (obj != null)
-        {
-            fundsText = obj.GetComponent<TextMeshProUGUI>();
-        }
-        else
-        {
-            Debug.LogWarning("'Funds' 오브젝트를 찾을 수 없습니다.");
-        }
+        //var obj = GameObject.Find("Funds");
+        //if (obj != null)
+        //{
+        //    fundsText = obj.GetComponent<TextMeshProUGUI>();
+        //}
+        //else
+        //{
+        //    Debug.LogWarning("'Funds' 오브젝트를 찾을 수 없습니다.");
+        //}
     }
 
     public void UpdateFundsUI(int funds)
