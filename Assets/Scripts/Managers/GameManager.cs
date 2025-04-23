@@ -2,19 +2,27 @@
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager instance;
+    public static GameManager Instance { get; private set; }
 
     public int todayMonth;
     public CompanyScale myCompanyScale;
-    public static GameManager Instance
+
+    private void Awake()
     {
-        get
+        // 중복 싱글톤 방지
+        if (Instance != null && Instance != this)
         {
-            if (instance == null)
-            {
-                instance = new GameManager();
-            }
-            return instance;
+            Destroy(gameObject);
+            return;
         }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject); // 씬 전환에도 유지하려면
+    }
+
+    private void Start()
+    {
+        myCompanyScale = CompanyScale.Indie;
+        todayMonth = 1;
     }
 }

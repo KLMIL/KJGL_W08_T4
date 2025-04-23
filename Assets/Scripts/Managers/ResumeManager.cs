@@ -47,18 +47,17 @@ public struct EmployeeData
 }
 public class ResumeManager : MonoBehaviour
 {
-
-    private static ResumeManager instance;
-    public static ResumeManager Instance
+    public static ResumeManager Instance { get; private set; }
+    private void Awake()
     {
-        get
+        if (Instance != null && Instance != this)
         {
-            if (instance == null)
-            {
-                instance = new ResumeManager();
-            }
-            return instance;
+            Destroy(gameObject);
+            return;
         }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject); // 필요할 경우만
     }
 
     [SerializeField][Range(1, 5)] int newbieIndieMinStatus;

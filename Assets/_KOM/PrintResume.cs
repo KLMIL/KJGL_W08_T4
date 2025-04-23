@@ -8,10 +8,10 @@ public class PrintResume : MonoBehaviour
     List<string>[] resumeDevText;
     List<string>[] resumeDesignText;
 
-    public string GetRandomText(SkilType skilType ,int ablityStatus)
-    {
-        
-    }
+    // public string GetRandomText(SkilType skilType ,int ablityStatus)
+    // {
+    //     
+    // }
 
     void Start()
     {

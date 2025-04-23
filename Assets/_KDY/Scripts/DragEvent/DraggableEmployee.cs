@@ -10,10 +10,14 @@ public class DraggableEmployee : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private int _originalOrder;
     
+    public void Init(EmployeeData data)
+    {
+        employeeData = data;
+    }
+    
     void Start()
     {
         // 예시용 더미 데이터
-        employeeData = new EmployeeData(10, 20, 1, 300);
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         _originalOrder = _spriteRenderer.sortingOrder;
     }
