@@ -45,6 +45,7 @@ public struct EmployeeData
 public class ResumeManager : MonoBehaviour
 {
     public static ResumeManager Instance { get; private set; }
+    public PrintResume printResume;
     [SerializeField][Range(0, 100)] public static int increaseSalary;
     private void Awake()
     {
@@ -56,6 +57,10 @@ public class ResumeManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject); // 필요할 경우만
+    }
+    private void Start()
+    {
+        printResume = GetComponent<PrintResume>();
     }
 
     [SerializeField][Range(1, 5)] int newbieIndieMinStatus;
@@ -122,6 +127,6 @@ public class ResumeManager : MonoBehaviour
     {
         int min = Mathf.FloorToInt(salary * 0.8f);
         int max = Mathf.CeilToInt(salary * 1.2f);
-        return UnityEngine.Random.Range(min, max + 1);
+        return Random.Range(min, max + 1);
     }
 }
