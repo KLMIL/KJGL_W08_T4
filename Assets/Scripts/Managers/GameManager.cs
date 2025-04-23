@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     {
         // 현재 방식은 GetTotalEmployeeCount()가 실시간 계산이라, 직접 감소 저장할 필드는 없어도 됨.
         // 다만 이 메서드는 "의미 있는 호출 지점"을 위해 존재함.
-        Debug.Log("📉 고용인 1명 퇴사 → 전체 인원 수 감소");
+        Debug.Log("고용인 1명 퇴사  전체 인원 수 감소");
     }
     
     public void AddFunds(int amount)
@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
             return true;
         }
 
-        Debug.LogWarning("❌ 자산 부족!");
+        Debug.LogWarning("자산 부족!");
         return false;
     }
 }
