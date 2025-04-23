@@ -36,11 +36,11 @@ public class Project : MonoBehaviour
     // 250423-1830 추가 - KWS
     [Header("Hover UI")]
     private CurrentProjectInfo _infoCanvas;
-    
+
     [Header("Project Tick Work")]
     private float _workTimer = 0f;
     private const float WORK_INTERVAL = 1f;
-    
+
     [Header("Project Slots")]
     private Transform[] employeeSlots;
 
@@ -57,16 +57,35 @@ public class Project : MonoBehaviour
     {
         // 고용인이 있어야 작업 진행
         if (_assignedEmployees.Count == 0) return;
-        
+
         // 능력 부족시 스트레스 주기
         CheckAssignedStats();
-        
-        
+
+
         int totalPower = 0;
         foreach (var emp in _assignedEmployees)
         {
             var data = emp.GetEmployeeData();  // Employee → EmployeeData 추출
             totalPower += data.designSkil + data.devSkil + data.artSkil;
+            float expToGive = 0;
+            switch (_projectSize)
+            {
+                    expToGive = 15;
+                    break;
+                case ProjectSize.Medium:
+                    expToGive = 50;
+                    break;
+                case ProjectSize.Large:
+                    expToGive = 150;
+                    break;
+                default:
+                    Debug.LogWarning("Wrong project size");
+                    break;
+            }
+
+            emp.IncreaseExp(expToGive, ExpType.designExp);
+            emp.IncreaseExp(expToGive, ExpType.devExp);
+            emp.IncreaseExp(expToGive, ExpType.artExp);
         }
 
 
@@ -95,11 +114,16 @@ public class Project : MonoBehaviour
 
         GameManager.Instance.AddFunds(finalReward);
         Debug.Log($"💰 프로젝트 완료: {_projectName} | 보상: {finalReward} (기본: {_completionReward}, 품질: {_quality}%)");
-
+        Transform employeeContainer = GameObject.Find("EmployeeContainer").transform;
+        foreach (var emp in _assignedEmployees)
+        {
+            emp.ResetStress();
+            emp.transform.SetParent(employeeContainer, false);
+        }
         Destroy(gameObject);
     }
 
-    
+
     private void CheckAssignedStats()
     {
         int totalDesign = 0;
@@ -133,7 +157,7 @@ public class Project : MonoBehaviour
             ApplyQualityPenalty();
         }
     }
-    
+
     private void ApplyStressToEmployees(float amount)
     {
         for (int i = _assignedEmployees.Count - 1; i >= 0; i--)
@@ -209,7 +233,7 @@ public class Project : MonoBehaviour
         {
             Debug.LogWarning("❗ SpawnPositions 오브젝트가 없습니다.");
         }
-        
+
         _projectNameText = transform.Find("InfoPanel/ProjectNameText")?.GetComponent<TextMeshPro>();
         if (_projectNameText == null)
             Debug.LogWarning("프로젝트 이름 UI 할당 안됨!");
@@ -217,11 +241,11 @@ public class Project : MonoBehaviour
         _skillSummaryText = transform.Find("InfoPanel/SkillSummaryText")?.GetComponent<TextMeshPro>();
         if (_skillSummaryText == null)
             Debug.LogWarning("프로젝트 정보 UI 할당 안됨!");
-        
+
         _workAmountText = transform.Find("InfoPanel/WorkAmountText")?.GetComponent<TextMeshPro>();
         if (_workAmountText == null)
             Debug.LogWarning("프로젝트 진행상황 UI 할당 안됨!");
-        
+
         _employListText = transform.Find("InfoPanel/EmployeeListText")?.GetComponent<TextMeshPro>();
         if (_employListText == null)
             Debug.LogWarning("노동자 목록 UI 할당 안됨!");
@@ -238,10 +262,10 @@ public class Project : MonoBehaviour
 
         if (_skillSummaryText != null)
             _skillSummaryText.text = $"D:{_requiredDesignSkill} P:{_requiredProgrammingSkill} A:{_requiredArtSkill}";
-        
+
         if (_workAmountText != null)
             _workAmountText.text = $"TotalW:{_requiredWorkAmount} CurrentW:{_currentWorkAmount}\nQuality:{_quality}";
-        
+
         int totalDesign = 0, totalDev = 0, totalArt = 0;
         foreach (var employee in _assignedEmployees)
         {

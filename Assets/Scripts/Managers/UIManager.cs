@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject ui_RecruitPanel;
     
     private TextMeshProUGUI fundsText;
-
+    [SerializeField] int interviewFee;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -76,6 +76,7 @@ public class UIManager : MonoBehaviour
 
     public void ToggleResumeCanvas(bool isNewbie)
     {
+        GameManager.Instance.SpendFunds(interviewFee);
         ToggleUpgradesCanvas(false);
         ui_ResumeCanvas.enabled = true;
         OnRecruitClick(isNewbie);

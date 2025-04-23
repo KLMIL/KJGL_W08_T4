@@ -43,6 +43,12 @@ public class Employee : MonoBehaviour
                 break;
         }
     }
+
+    public void ResetStress()
+    {
+        _employeeData.stress = 0;
+    }
+
     bool ChekSkilLevelup(int skilLevel, float expValue)
     {
         return levelupExpTable[skilLevel] < expValue;
