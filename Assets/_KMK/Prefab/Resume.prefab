@@ -1556,7 +1556,7 @@ MonoBehaviour:
   DevText2GUI: {fileID: 5133916004025979552}
   ArtText1GUI: {fileID: 5793746157995328834}
   ArtText2GUI: {fileID: 8531877730543944499}
-  SalaryValuyeGUI: {fileID: 0}
+  SalaryValuyeGUI: {fileID: 2975770020005222542}
 --- !u!1 &5578573109531824122
 GameObject:
   m_ObjectHideFlags: 0
