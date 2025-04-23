@@ -24,6 +24,9 @@ public class ResumeCanvas : MonoBehaviour
     void Start()
     {
         resumePage.SetActive(false);
+        resumeManager = ResumeManager.Instance;
+        printResume = ResumeManager.Instance.printResume;
+
     }
     public void NubieResumeButton()
     {
@@ -57,8 +60,8 @@ public class ResumeCanvas : MonoBehaviour
 
     public void ChoiceEmployee()
     {
-        // GameObject EmployeePrefab = Instantiate()
-        // EmployeePrefab.GetComponent<Employee>().SetEmployeeData(nowEmployData);
+        //GameObject EmployeePrefab = Instantiate()
+        //EmployeePrefab.GetComponent<Employee>().SetEmployeeData(nowEmployData);
         resumePage.SetActive(false);
     }
     public void ExitResumePage()
