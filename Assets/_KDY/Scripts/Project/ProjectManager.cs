@@ -3,25 +3,38 @@ using UnityEngine;
 
 public class ProjectManager : MonoBehaviour
 {
-    private List<Project> _currentProjects;
-    private List<EmployeeData> _currentEmployeeData;
+    private List<Project> _currentProjects = new List<Project>();
+    private List<EmployeeData> _currentEmployeeData = new List<EmployeeData>();
     
     private GameObject _projectPrefab;
     private Transform _projectContainer;
     
     void Awake()
     {
-        _projectPrefab = Resources.Load<GameObject>("Assets/_KDY/Prefabs/Project.prefab"); // Project.prefab 경로
+        _projectPrefab = Resources.Load<GameObject>("_KDY/Prefabs/Project");
         _projectContainer = GameObject.Find("ProjectContainer")?.transform;
+    }
+
+    public void TestSmall()
+    {
+        MakeProject(ProjectType.Casual, ProjectSize.Small);
+    }
+    public void TestMedium()
+    {
+        MakeProject(ProjectType.RPG, ProjectSize.Medium);
+    }
+    public void TestLarge()
+    {
+        MakeProject(ProjectType.Strategy, ProjectSize.Large);
     }
     
     // make project with type and size
     public Project MakeProject(ProjectType type, ProjectSize size)
     {
-        GameObject projectGO = Instantiate(_projectPrefab, _projectContainer);
-        projectGO.transform.SetAsLastSibling();
+        GameObject projectPrefab = Instantiate(_projectPrefab, _projectContainer);
+        projectPrefab.transform.SetAsLastSibling();
 
-        Project newProject = projectGO.GetComponent<Project>();
+        Project newProject = projectPrefab.GetComponent<Project>();
         newProject.Type = type;
         newProject.Size = size;
         newProject.ProjectName = $"New {type} ({size}) Game";
@@ -33,6 +46,7 @@ public class ProjectManager : MonoBehaviour
         newProject.CompletionReward = ProjectDataGenerator.GetRewardEstimate(type, size);
 
         _currentProjects.Add(newProject);
+        newProject.RefreshUI();
         return newProject;
     }
 

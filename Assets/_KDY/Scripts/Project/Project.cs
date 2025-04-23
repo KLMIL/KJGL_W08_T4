@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Project : MonoBehaviour
@@ -18,7 +20,47 @@ public class Project : MonoBehaviour
     [Header("Project current States")]
     private int _quality;
     private int _currentWorkAmount;
-    private List<EmployeeData> _assignedEmployees;
+    private List<EmployeeData> _assignedEmployees = new List<EmployeeData>();
+
+    [Header("Project Info panel")]
+    private TextMeshPro _projectNameText;
+    private TextMeshPro _skillSummaryText;
+    private TextMeshPro _workAmountText;
+    private TextMeshPro _employListText;
+
+    private void Awake()
+    {
+        _projectNameText = transform.Find("InfoPanel/ProjectNameText")?.GetComponent<TextMeshPro>();
+        if (_projectNameText == null)
+            Debug.LogWarning("프로젝트 이름 UI 할당 안됨!");
+
+        _skillSummaryText = transform.Find("InfoPanel/SkillSummaryText")?.GetComponent<TextMeshPro>();
+        if (_skillSummaryText == null)
+            Debug.LogWarning("프로젝트 정보 UI 할당 안됨!");
+        
+        _workAmountText = transform.Find("InfoPanel/WorkAmountText")?.GetComponent<TextMeshPro>();
+        if (_workAmountText == null)
+            Debug.LogWarning("프로젝트 진행상황 UI 할당 안됨!");
+        
+        _employListText = transform.Find("InfoPanel/EmployeeListText")?.GetComponent<TextMeshPro>();
+        if (_employListText == null)
+            Debug.LogWarning("노동자 목록 UI 할당 안됨!");
+    }
+
+    public void RefreshUI()
+    {
+        if (_projectNameText != null)
+            _projectNameText.text = _projectName;
+
+        if (_skillSummaryText != null)
+            _skillSummaryText.text = $"D:{_requiredDesignSkill} P:{_requiredProgrammingSkill} A:{_requiredArtSkill}";
+        
+        if (_workAmountText != null)
+            _workAmountText.text = $"TotalW:{_requiredWorkAmount} CurrentW:{_currentWorkAmount}\nQuality:{_quality}";
+        
+        if (_employListText != null)
+            _employListText.text = $"Employees:{_assignedEmployees.Count}";
+    }
 
     // Getter & Setter
     public int CompletionReward
@@ -26,10 +68,15 @@ public class Project : MonoBehaviour
         get => _completionReward;
         set => _completionReward = value;
     }
+
     public string ProjectName
     {
         get => _projectName;
-        set => _projectName = value;
+        set
+        {
+            _projectName = value;
+            RefreshUI();
+        }
     }
 
     public ProjectType Type
@@ -47,19 +94,31 @@ public class Project : MonoBehaviour
     public int RequiredDesignSkill
     {
         get => _requiredDesignSkill;
-        set => _requiredDesignSkill = value;
+        set
+        {
+            _requiredDesignSkill = value;
+            RefreshUI();
+        }
     }
 
     public int RequiredProgrammingSkill
     {
         get => _requiredProgrammingSkill;
-        set => _requiredProgrammingSkill = value;
+        set
+        {
+            _requiredProgrammingSkill = value;
+            RefreshUI();
+        }
     }
 
     public int RequiredArtSkill
     {
         get => _requiredArtSkill;
-        set => _requiredArtSkill = value;
+        set
+        {
+            _requiredArtSkill = value;
+            RefreshUI();
+        }
     }
 
     public int Quality
@@ -77,7 +136,11 @@ public class Project : MonoBehaviour
     public int CurrentWorkAmount
     {
         get => _currentWorkAmount;
-        set => _currentWorkAmount = value;
+        set
+        {
+            _currentWorkAmount = value;
+            RefreshUI();
+        }
     }
 
     public List<EmployeeData> AssignedEmployees
