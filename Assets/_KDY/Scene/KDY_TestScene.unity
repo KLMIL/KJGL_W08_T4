@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   newbieIndieMinStatus: 1
+<<<<<<< HEAD
   newbieIndieMaxStatus: 3
   newbieIndieSalary: 0
   newbieMidsizeCompanyMinStatus: 1
@@ -165,6 +166,24 @@ MonoBehaviour:
   experiencedMidsizeCompanySalary: 0
   experiencedLargeCompanyMinStatus: 1
   experiencedLargeCompanyMaxStatus: 5
+=======
+  newbieIndieMaxStatus: 1
+  newbieIndieSalary: 0
+  newbieMidsizeCompanyMinStatus: 1
+  newbieMidsizeCompanyMaxStatus: 1
+  newbieMidsizeCompanySalary: 0
+  newbieLargeCompanyMinStatus: 1
+  newbieLargeCompanyMaxStatus: 1
+  newbieLargeCompanySalary: 0
+  experiencedIndieMinStatus: 1
+  experiencedIndieMaxStatus: 1
+  experiencedIndiSalary: 0
+  experiencedMidsizeCompanyMinStatus: 1
+  experiencedMidsizeCompanyMaxStatus: 1
+  experiencedMidsizeCompanySalary: 0
+  experiencedLargeCompanyMinStatus: 1
+  experiencedLargeCompanyMaxStatus: 1
+>>>>>>> origin/main
   experiencedLargeCompanySalary: 0
 --- !u!4 &7413699
 Transform:

@@ -28,6 +28,10 @@ public class Project : MonoBehaviour
     private TextMeshPro _skillSummaryText;
     private TextMeshPro _workAmountText;
     private TextMeshPro _employListText;
+
+    // 250423-1830 추가 - KWS
+    [Header("Hover UI")]
+    private CurrentProjectInfo _infoCanvas;
     
     [Header("Project Tick Work")]
     private float _workTimer = 0f;
@@ -160,6 +164,20 @@ public class Project : MonoBehaviour
     }
 
 
+    // 250423-1830 추가 - KWS
+    private void OnMouseEnter()
+    {
+        //Debug.Log("Mouse Enter to Project");
+        _infoCanvas.ShowInfo($"Test Text");
+    }
+
+    private void OnMouseExit()
+    {
+        //Debug.Log("Mouse Exit from Project");
+        _infoCanvas.HideInfo();
+    }
+
+
 
     private void Awake()
     {
@@ -193,6 +211,10 @@ public class Project : MonoBehaviour
         _employListText = transform.Find("InfoPanel/EmployeeListText")?.GetComponent<TextMeshPro>();
         if (_employListText == null)
             Debug.LogWarning("노동자 목록 UI 할당 안됨!");
+
+
+        // 250423-1830 추가 - KWS
+        _infoCanvas = FindAnyObjectByType<CurrentProjectInfo>();
     }
 
     public void RefreshUI()
