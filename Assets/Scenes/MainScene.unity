@@ -1865,6 +1865,7 @@ MonoBehaviour:
   ui_UpgradesPanel: {fileID: 409038990}
   ui_ProjectsPanel: {fileID: 1357403234}
   ui_RecruitPanel: {fileID: 1202292560}
+  interviewFee: 0
 --- !u!114 &839664848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1890,23 +1891,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   printResume: {fileID: 839664848}
-  newbieIndieMinStatus: 1
-  newbieIndieMaxStatus: 1
+  newbieIndieMinStatus: 4
+  newbieIndieMaxStatus: 4
   newbieIndieSalary: 0
-  newbieMidsizeCompanyMinStatus: 1
-  newbieMidsizeCompanyMaxStatus: 1
+  newbieMidsizeCompanyMinStatus: 4
+  newbieMidsizeCompanyMaxStatus: 4
   newbieMidsizeCompanySalary: 0
-  newbieLargeCompanyMinStatus: 1
-  newbieLargeCompanyMaxStatus: 1
+  newbieLargeCompanyMinStatus: 4
+  newbieLargeCompanyMaxStatus: 4
   newbieLargeCompanySalary: 0
-  experiencedIndieMinStatus: 1
-  experiencedIndieMaxStatus: 1
+  experiencedIndieMinStatus: 4
+  experiencedIndieMaxStatus: 4
   experiencedIndiSalary: 0
-  experiencedMidsizeCompanyMinStatus: 1
-  experiencedMidsizeCompanyMaxStatus: 1
+  experiencedMidsizeCompanyMinStatus: 4
+  experiencedMidsizeCompanyMaxStatus: 4
   experiencedMidsizeCompanySalary: 0
-  experiencedLargeCompanyMinStatus: 1
-  experiencedLargeCompanyMaxStatus: 1
+  experiencedLargeCompanyMinStatus: 4
+  experiencedLargeCompanyMaxStatus: 4
   experiencedLargeCompanySalary: 0
 --- !u!114 &839664850
 MonoBehaviour:
