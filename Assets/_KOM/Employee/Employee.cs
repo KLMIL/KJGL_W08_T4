@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Employee : MonoBehaviour
@@ -45,6 +46,10 @@ public class Employee : MonoBehaviour
     bool ChekSkilLevelup(int skilLevel, float expValue)
     {
         return levelupExpTable[skilLevel] < expValue;
+    }
+    public void IncreaseSalary()
+    {
+        _employeeData.salary += (int)Math.Floor(ResumeManager.increaseSalary * _employeeData.salary/100.0);
     }
     Dictionary<int, int> levelupExpTable = new Dictionary<int, int>
     {
