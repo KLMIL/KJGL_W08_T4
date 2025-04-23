@@ -12,3 +12,9 @@ public enum ExpType
     devExp,
     artExp
 }
+public enum SkilType
+{
+    design,
+    dev,
+    art
+}
