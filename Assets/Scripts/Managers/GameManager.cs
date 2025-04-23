@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -8,7 +9,7 @@ public class GameManager : MonoBehaviour
 
     public int todayMonth;
     public CompanyScale myCompanyScale;
-    private string _companyName;
+    [SerializeField] private string _companyName;
     private int _roomLevel = 0;
 
     private int _companyFunds = 20000; // 초기 자산 예시
@@ -40,8 +41,12 @@ public class GameManager : MonoBehaviour
         Button startButton = gameFlowCanvas.transform.Find("GameStartImage").Find("StartButton").GetComponent<Button>();
         Button resetButton = gameFlowCanvas.transform.Find("GameOverImage").Find("ResetButton").GetComponent<Button>();
 
+        TMP_InputField companyNameInput = gameFlowCanvas.transform.Find("GameStartImage").Find("CompanyNameInput").GetComponent<TMP_InputField>();
+        companyNameInput.onValueChanged.AddListener(UpdateButtonState);
+
         startButton.onClick.AddListener(() =>
         {
+            _companyName = companyNameInput.text;
             gameFlowCanvas.transform.Find("GameStartImage").gameObject.SetActive(false);
             Time.timeScale = 1f;
         });
@@ -50,6 +55,11 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         });
+
+        startButton.interactable = false;
+
+        // InputField에 입력이 감지되면 버튼 활성화
+
     }
 
     
@@ -147,7 +157,14 @@ public class GameManager : MonoBehaviour
     // 2025-04-24 01:00 수정 - KWS
     public void GameOver()
     {
+        gameFlowCanvas.transform.Find("GameOverImage").Find("TitleText").GetComponent<TextMeshProUGUI>().text =
+            $"{_companyName} 피산!";
         Time.timeScale = 0f;
         gameFlowCanvas.transform.Find("GameOverImage").gameObject.SetActive(true);
+    }
+
+    public void UpdateButtonState(string inputText)
+    {
+        gameFlowCanvas.transform.Find("GameStartImage").Find("StartButton").GetComponent<Button>().interactable = true;
     }
 }
