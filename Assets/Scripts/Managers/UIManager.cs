@@ -1,17 +1,42 @@
-﻿using UnityEngine;
+﻿using System;
+using TMPro;
+using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    private static UIManager instance;
-    public static UIManager Instance
+    public static UIManager Instance { get; private set; }
+
+    private TextMeshProUGUI  fundsText;
+
+    private void Awake()
     {
-        get
+        if (Instance != null && Instance != this)
         {
-            if (instance == null)
-            {
-                instance = new UIManager();
-            }
-            return instance;
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+    }
+
+    private void Start()
+    {
+        var obj = GameObject.Find("Funds");
+        if (obj != null)
+        {
+            fundsText = obj.GetComponent<TextMeshProUGUI >();
+        }
+        else
+        {
+            Debug.LogWarning("'Funds' 오브젝트를 찾을 수 없습니다.");   
+        }
+    }
+
+    public void UpdateFundsUI(int funds)
+    {
+        if (fundsText != null)
+        {
+            fundsText.text = $"Funds: {funds:N0} G";
         }
     }
 }

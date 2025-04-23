@@ -9,11 +9,13 @@ public class ProjectDropReceiver : MonoBehaviour
         _project = GetComponent<Project>();
     }
 
-    public void OnEmployeeDropped(EmployeeData data)
+    public Project GetProject()
     {
-        if (_project != null)
-        {
-            _project.AddEmployee(data);
-        }
+        return _project;
+    }
+    
+    public bool OnEmployeeDropped(DraggableEmployee draggable)
+    {
+        return _project != null && _project.AddEmployee(draggable.employee);
     }
 }

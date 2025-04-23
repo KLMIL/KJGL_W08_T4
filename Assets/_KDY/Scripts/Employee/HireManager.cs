@@ -6,18 +6,25 @@ public class HireManager : MonoBehaviour
     public Button hireNewbieButton;
     public Button hireExperiencedButton;
 
-    private Transform employeeSpawnPoint;
+    private Transform employeeContainer;
+    private const int MaxEmployeeCount = 15;
 
     private void Awake()
     {
         hireNewbieButton.onClick.AddListener(() => HireEmployee(true));
         hireExperiencedButton.onClick.AddListener(() => HireEmployee(false));
         
-        employeeSpawnPoint = GameObject.Find("EmployeeSpawnPoint")?.transform;
+        employeeContainer = GameObject.Find("EmployeeContainer")?.transform;
     }
 
     private void HireEmployee(bool isNewbie)
     {
+        if (!GameManager.Instance.CanHireMore())
+        {
+            Debug.LogWarning("❌ 고용 인원 초과 (최대 15명)");
+            return;
+        }
+
         var resume = ResumeManager.Instance.CreateResume(isNewbie);
         SpawnDraggableEmployee(resume);
     }
@@ -31,15 +38,16 @@ public class HireManager : MonoBehaviour
             return;
         }
 
-        var instance = Instantiate(prefab, employeeSpawnPoint);
+        var instance = Instantiate(prefab, employeeContainer);
         var draggable = instance.GetComponent<DraggableEmployee>();
         if (draggable != null)
         {
             draggable.Init(data);
-        }
-        else
-        {
-            Debug.LogWarning("⚠️ DraggableEmployee 컴포넌트가 프리팹에 없습니다.");
+        
+            // ✅ 대기실 소속으로 세팅
+            draggable.currentOwnerType = OwnerType.WaitingRoom;
+            draggable.waitingRoomSlot = instance.transform.parent;
         }
     }
+
 }

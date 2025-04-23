@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 4098950450152258656}
   - component: {fileID: 7400526435532316240}
   - component: {fileID: 4031596207745306010}
+  - component: {fileID: 2251372280499784381}
   m_Layer: 0
   m_Name: DraggableEmployee
   m_TagString: Untagged
@@ -137,6 +138,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8000703bc21e498eaed8a60f17d0a086, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentOwnerType: 0
+  currentProject: {fileID: 0}
+  waitingRoomSlot: {fileID: 0}
 --- !u!58 &4031596207745306010
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -173,3 +177,15 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!114 &2251372280499784381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3197189700575453027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 113665e6ed5fc6749aab63fca45e4cb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
