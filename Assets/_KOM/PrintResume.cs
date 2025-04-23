@@ -88,7 +88,6 @@ public class PrintResume : MonoBehaviour
         return (text1, text2);
     }
 
-
     void Start()
     {
         // Design
