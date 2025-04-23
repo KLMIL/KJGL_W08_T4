@@ -8,10 +8,85 @@ public class PrintResume : MonoBehaviour
     List<string>[] resumeDevText;
     List<string>[] resumeDesignText;
 
-    // public string GetRandomText(SkilType skilType ,int ablityStatus)
-    // {
-    //     
-    // }
+    public (string text1, string text2) GetRandomText(SkilType skilType, int abilityStatus)
+    {
+        string text1 = string.Empty;
+        string text2 = string.Empty;
+
+        switch (skilType)
+        {
+            case SkilType.design:
+                if (abilityStatus == 1)
+                {
+                    text1 = resumeDesignText[1][Random.Range(0, resumeDesignText[1].Count)];
+                    text2 = resumeDesignText[0][Random.Range(0, resumeDesignText[0].Count)];
+                }
+                if (abilityStatus == 2)
+                {
+                    text1 = resumeDesignText[2][Random.Range(0, resumeDesignText[2].Count)];
+                    text2 = resumeDesignText[0][Random.Range(0, resumeDesignText[0].Count)];
+                }
+                if (abilityStatus == 3)
+                {
+                    text1 = resumeDesignText[1][Random.Range(0, resumeDesignText[1].Count)];
+                    text2 = resumeDesignText[2][Random.Range(0, resumeDesignText[2].Count)];
+                }
+                if (abilityStatus == 4)
+                {
+                    text1 = resumeDesignText[2][Random.Range(0, resumeDesignText[2].Count)];
+                    text2 = resumeDesignText[2][Random.Range(0, resumeDesignText[2].Count)];
+                }
+                break;
+
+            case SkilType.dev:
+                if (abilityStatus == 1)
+                {
+                    text1 = resumeDevText[1][Random.Range(0, resumeDevText[1].Count)];
+                    text2 = resumeDevText[0][Random.Range(0, resumeDevText[0].Count)];
+                }
+                if (abilityStatus == 2)
+                {
+                    text1 = resumeDevText[2][Random.Range(0, resumeDevText[2].Count)];
+                    text2 = resumeDevText[0][Random.Range(0, resumeDevText[0].Count)];
+                }
+                if (abilityStatus == 3)
+                {
+                    text1 = resumeDevText[1][Random.Range(0, resumeDevText[1].Count)];
+                    text2 = resumeDevText[2][Random.Range(0, resumeDevText[2].Count)];
+                }
+                if (abilityStatus == 4)
+                {
+                    text1 = resumeDevText[2][Random.Range(0, resumeDevText[2].Count)];
+                    text2 = resumeDevText[2][Random.Range(0, resumeDevText[2].Count)];
+                }
+                break;
+
+            case SkilType.art:
+                if (abilityStatus == 1)
+                {
+                    text1 = resumeArtText[1][Random.Range(0, resumeArtText[1].Count)];
+                    text2 = resumeArtText[0][Random.Range(0, resumeArtText[0].Count)];
+                }
+                if (abilityStatus == 2)
+                {
+                    text1 = resumeArtText[2][Random.Range(0, resumeArtText[2].Count)];
+                    text2 = resumeArtText[0][Random.Range(0, resumeArtText[0].Count)];
+                }
+                if (abilityStatus == 3)
+                {
+                    text1 = resumeArtText[1][Random.Range(0, resumeArtText[1].Count)];
+                    text2 = resumeArtText[2][Random.Range(0, resumeArtText[2].Count)];
+                }
+                if (abilityStatus == 4)
+                {
+                    text1 = resumeArtText[2][Random.Range(0, resumeArtText[2].Count)];
+                    text2 = resumeArtText[2][Random.Range(0, resumeArtText[2].Count)];
+                }
+                break;
+        }
+
+        return (text1, text2);
+    }
 
     void Start()
     {

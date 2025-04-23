@@ -1,7 +1,4 @@
-﻿using System;
-using System.Net.NetworkInformation;
-using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 public struct EmployeeData
@@ -46,8 +43,7 @@ public struct EmployeeData
     }
 }
 public class ResumeManager : MonoBehaviour
-{
-    public static ResumeManager Instance { get; private set; }
+{    public static ResumeManager Instance { get; private set; }
     private void Awake()
     {
         if (Instance != null && Instance != this)
