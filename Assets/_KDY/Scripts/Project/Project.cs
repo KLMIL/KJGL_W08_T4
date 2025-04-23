@@ -70,6 +70,7 @@ public class Project : MonoBehaviour
             float expToGive = 0;
             switch (_projectSize)
             {
+                case ProjectSize.Small:
                     expToGive = 15;
                     break;
                 case ProjectSize.Medium:
