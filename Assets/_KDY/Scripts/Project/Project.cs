@@ -37,23 +37,23 @@ public class Project : MonoBehaviour
     [Header("Hover UI")]
     private CurrentProjectInfo _infoCanvas;
 
-    [Header("Project Tick Work")]
-    private float _workTimer = 0f;
-    private const float WORK_INTERVAL = 1f;
+    //[Header("Project Tick Work")]
+    //private float _workTimer = 0f;
+    //private const float WORK_INTERVAL = 1f;
 
     [Header("Project Slots")]
     private Transform[] employeeSlots;
 
     private void Update()
     {
-        _workTimer += Time.deltaTime;
-        if (_workTimer >= WORK_INTERVAL)
-        {
-            _workTimer = 0f;
-            TickWork();
-        }
+        //_workTimer += Time.deltaTime;
+        //if (_workTimer >= WORK_INTERVAL)
+        //{
+        //    _workTimer = 0f;
+        //    TickWork();
+        //}
     }
-    private void TickWork()
+    public void TickWork()
     {
         // 고용인이 있어야 작업 진행
         if (_assignedEmployees.Count == 0) return;

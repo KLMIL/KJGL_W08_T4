@@ -110,4 +110,14 @@ public class ProjectManager : MonoBehaviour
         get => _currentEmployeeData;
         set => _currentEmployeeData = value;
     }
+
+
+    // 2025-04-24 10:30 수정 - KWS
+    public void TickWork()
+    {
+        foreach(var project in _currentProjects)
+        {
+            project.TickWork();
+        }
+    }
 }

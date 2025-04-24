@@ -24,6 +24,15 @@ public class GameManager : MonoBehaviour
     [Header("Canvas")]
     [SerializeField] private GameObject gameFlowCanvas;
 
+    // 2025-04-24 10:30 수정 - KWS
+    [Header("Game Timer")]
+    private float _workTimer = 0f;
+    private const float WORK_INTERVAL = 1f;
+    [SerializeField] private TextMeshPro _YearText;
+    [SerializeField] private TextMeshPro _MonthText;
+
+
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -62,7 +71,29 @@ public class GameManager : MonoBehaviour
 
     }
 
-    
+    // 2025-04-24 10:30 수정 - KWS
+    private void FixedUpdate()
+    {
+        _workTimer += Time.deltaTime;
+        if (_workTimer >= WORK_INTERVAL)
+        {
+            _workTimer = 0f;
+            TickWork();
+        }
+    }
+
+    // 2025-04-24 10:30 수정 - KWS
+    private void TickWork()
+    {
+        ProjectManager.Instance.TickWork();
+        todayMonth++;
+
+        // 시계 시간 바꿔주기
+        _YearText.text = (2000 + (todayMonth / 12)).ToString();
+        _MonthText.text = ((todayMonth % 12) + 1).ToString("D2");
+    }
+
+
 
     private void Start()
     {
@@ -70,7 +101,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
 
         myCompanyScale = CompanyScale.Indie;
-        todayMonth = 1;
+        todayMonth = 0;
         UIManager.Instance.UpdateFundsUI(_companyFunds);
         leftCCTV = GameObject.Find("LeftCCTV");
         rightCCTV = GameObject.Find("RightCCTV");
