@@ -2086,12 +2086,12 @@ GameObject:
   - component: {fileID: 8284895300938051224}
   - component: {fileID: 137594304720535848}
   m_Layer: 0
-  m_Name: Square
+  m_Name: RoomCover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8284895300938051224
 Transform:
   m_ObjectHideFlags: 0
@@ -2152,7 +2152,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.68235296}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.78431374}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
