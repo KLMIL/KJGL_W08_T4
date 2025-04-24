@@ -46,7 +46,7 @@ public class ResumeManager : MonoBehaviour
 {
     public static ResumeManager Instance { get; private set; }
     public PrintResume printResume;
-    [SerializeField][Range(0, 100)] public static int increaseSalary;
+    public static int increaseSalary = 30;
     private void Awake()
     {
         if (Instance != null && Instance != this)
