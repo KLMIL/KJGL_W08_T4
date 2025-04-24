@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private string _companyName;
     private int _roomLevel = 0;
 
-    private int _companyFunds = 20000; // 초기 자산 예시
+    private int _companyFunds = 3000; // 초기 자산 예시
     private const int MaxEmployeeCount = 15;
 
     public int CompanyFunds => _companyFunds;
@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject activeRoomPrefab;
     GameObject leftCCTV;
     GameObject rightCCTV;
-
+    [SerializeField] int secSalary = 100;
     [Header("Canvas")]
     [SerializeField] private GameObject gameFlowCanvas;
 
@@ -29,12 +29,16 @@ public class GameManager : MonoBehaviour
     [Header("Game Timer")]
     private float _workTimer = 0f;
     private const float WORK_INTERVAL = 15f;
-    [SerializeField] private TextMeshPro _YearText;
-    [SerializeField] private TextMeshPro _MonthText;
+    [SerializeField] private TextMeshProUGUI _MultipleText;
+    [SerializeField] private TextMeshProUGUI _YearText;
+    [SerializeField] private TextMeshProUGUI _MonthText;
+
     [SerializeField] private SecretaryTalk _SecretaryTalk;
 
     [SerializeField] private TextMeshPro _companyNameText;
     private bool _isTutorial = true;
+
+    [SerializeField] private int multipleIndex = 1;
 
 
     private void Awake()
@@ -110,6 +114,8 @@ public class GameManager : MonoBehaviour
         // 시계 시간 바꿔주기
         _YearText.text = (2000 + (todayMonth / 12)).ToString();
         _MonthText.text = ((todayMonth % 12) + 1).ToString("D2");
+        //비서 월급 주기
+        SpendFunds(secSalary);
     }
 
 
@@ -177,8 +183,8 @@ public class GameManager : MonoBehaviour
             UIManager.Instance.UpdateFundsUI(_companyFunds);
             return true;
         }
-
-        Debug.LogWarning("자산 부족!");
+        // 자산 부족시 게임 오버
+        GameOver();
         return false;
     }
 
@@ -217,5 +223,34 @@ public class GameManager : MonoBehaviour
     public void UpdateButtonState(string inputText)
     {
         gameFlowCanvas.transform.Find("GameStartImage").Find("StartButton").GetComponent<Button>().interactable = true;
+    }
+
+
+    public void ChangeTimeMultiple()
+    {
+        multipleIndex++;
+        multipleIndex %= 4;
+
+        switch (multipleIndex)
+        {
+            case 0:
+                _MultipleText.text = "속도X0.5";
+                Time.timeScale = 0.5f;
+                break;
+            case 1:
+                _MultipleText.text = "속도X1";
+                Time.timeScale = 1f;
+                break;
+            case 2:
+                _MultipleText.text = "속도X2";
+                Time.timeScale = 2f;
+                break;
+            case 3:
+                _MultipleText.text = "속도X4";
+                Time.timeScale = 4f;
+                break;
+            default:
+                break;
+        }   
     }
 }

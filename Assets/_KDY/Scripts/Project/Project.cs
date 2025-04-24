@@ -37,7 +37,7 @@ public class Project : MonoBehaviour
     // 250423-1830 추가 - KWS
     [Header("Hover UI")]
     private CurrentProjectInfo _infoCanvas;
-
+    bool _isHovering = false;
     //[Header("Project Tick Work")]
     //private float _workTimer = 0f;
     //private const float WORK_INTERVAL = 1f;
@@ -47,12 +47,10 @@ public class Project : MonoBehaviour
 
     private void Update()
     {
-        //_workTimer += Time.deltaTime;
-        //if (_workTimer >= WORK_INTERVAL)
-        //{
-        //    _workTimer = 0f;
-        //    TickWork();
-        //}
+        if (_isHovering)
+        {
+            SetInfo();
+        }
     }
     public void TickWork()
     {
@@ -244,7 +242,11 @@ public class Project : MonoBehaviour
     private void OnMouseEnter()
     {
         if (Input.GetMouseButton(0)) return;
+        _isHovering = true;
+    }
 
+    private void SetInfo()
+    {
         //Debug.Log("Mouse Enter to Project");
         //_infoCanvas.ShowInfo($"Test Text");
         string[] infoStr = new string[5];
@@ -259,6 +261,7 @@ public class Project : MonoBehaviour
     private void OnMouseExit()
     {
         //Debug.Log("Mouse Exit from Project");
+        _isHovering = false;
         _infoCanvas.HideProjectInfo();
     }
 

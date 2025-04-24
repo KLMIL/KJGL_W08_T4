@@ -7,13 +7,14 @@ public class DraggableEmployee : MonoBehaviour
 
     private Vector3 _offset;
     private bool _dragging;
+    private bool _isHovering;
 
     private SpriteRenderer _spriteRenderer;
     private Vector3 _originalPosition;
     public OwnerType currentOwnerType;
     public Project currentProject;
-    public Transform waitingRoomSlot;    
-    
+    public Transform waitingRoomSlot;
+
     private OwnerType originalOwnerType;
     private Project originalProject;
     private Transform originalWaitingSlot;
@@ -40,9 +41,6 @@ public class DraggableEmployee : MonoBehaviour
         // 250423-1830 추가 - KWS
         _infoCanvas = FindAnyObjectByType<CurrentProjectInfo>();
     }
-
-
-    
     void Start()
     {
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -110,7 +108,7 @@ public class DraggableEmployee : MonoBehaviour
         if (!_dragging)
         {
             //Debug.Log("Mouse Enter to Employee");
-            ShowInfo();
+            _isHovering = true;
         }
     }
 
@@ -127,6 +125,7 @@ public class DraggableEmployee : MonoBehaviour
     private void OnMouseExit()
     {
         //Debug.Log("Mouse Exit from Project");
+        _isHovering = false;
         _infoCanvas.HideEmployeeInfo();
     }
 
@@ -179,6 +178,11 @@ public class DraggableEmployee : MonoBehaviour
         {
             transform.position = GetMouseWorldPosition() + _offset;
         }
+        else if (_isHovering)
+        {
+            ShowInfo();
+        }
+
     }
 
     private Vector3 GetMouseWorldPosition()
