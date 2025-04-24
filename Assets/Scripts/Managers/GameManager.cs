@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -33,7 +34,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SecretaryTalk _SecretaryTalk;
 
     [SerializeField] private TextMeshPro _companyNameText;
-
+    private bool _isTutorial = true;
 
 
     private void Awake()
@@ -62,6 +63,7 @@ public class GameManager : MonoBehaviour
             _companyNameText.text = "(주)" + _companyName;
             gameFlowCanvas.transform.Find("GameStartImage").gameObject.SetActive(false);
             Time.timeScale = 1f;
+            StartCoroutine(TutorialCoroutine());
         });
 
         resetButton.onClick.AddListener(() =>
@@ -78,12 +80,24 @@ public class GameManager : MonoBehaviour
     // 2025-04-24 10:30 수정 - KWS
     private void FixedUpdate()
     {
-        _workTimer += Time.deltaTime;
-        if (_workTimer >= WORK_INTERVAL)
+        if (!_isTutorial)
         {
-            _workTimer = 0f;
-            TickWork();
+            _workTimer += Time.deltaTime;
+            if (_workTimer >= WORK_INTERVAL)
+            {
+                _workTimer = 0f;
+                TickWork();
+            }
         }
+
+    }
+
+    IEnumerator TutorialCoroutine()
+    {
+        UIManager.Instance.ToggleTutorialCanvas(true);
+        yield return new WaitForSeconds(5f);
+        UIManager.Instance.ToggleTutorialCanvas(false);
+        _isTutorial = false;
     }
 
     // 2025-04-24 10:30 수정 - KWS
@@ -170,7 +184,7 @@ public class GameManager : MonoBehaviour
 
     public void UpgradeRoomLevel()
     {
-        if(RoomLevel < 3)
+        if (RoomLevel < 3)
         {
             RoomLevel += 1;
             Destroy(leftCCTV.transform.GetChild(3).gameObject);
@@ -184,7 +198,7 @@ public class GameManager : MonoBehaviour
 
     public void UpgradeCompany()
     {
-        if((int)myCompanyScale < 3)
+        if ((int)myCompanyScale < 3)
         {
             myCompanyScale++;
         }

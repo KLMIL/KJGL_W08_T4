@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance { get; private set; }
     [SerializeField] Canvas ui_UpgradeCanvas;
     [SerializeField] Canvas ui_ResumeCanvas;
+    [SerializeField] Canvas ui_TutorialCanvas;
     [SerializeField] GameObject ui_UpgradesPanel;
     [SerializeField] GameObject ui_ProjectsPanel;
     [SerializeField] GameObject ui_RecruitPanel;
@@ -44,6 +45,11 @@ public class UIManager : MonoBehaviour
         {
             fundsText.text = $"Funds: {funds:N0} G";
         }
+    }
+
+    public void ToggleTutorialCanvas(bool status)
+    {
+        ui_TutorialCanvas.enabled = status;
     }
 
     public void ToggleUpgradesCanvas(bool status)
