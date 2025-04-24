@@ -239,8 +239,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -744,4 +744,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dc523331c4aca3428332bb47d4e6cf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  secretaryTalkGUI: {fileID: 0}
+  secretaryTalkGUI: {fileID: 8693379176050126698}
