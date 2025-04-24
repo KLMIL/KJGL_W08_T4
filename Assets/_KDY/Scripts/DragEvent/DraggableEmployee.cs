@@ -46,7 +46,7 @@ public class DraggableEmployee : MonoBehaviour
     void Start()
     {
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        _spriteRenderer.sortingOrder = 999;
+        //_spriteRenderer.sortingOrder = 999;
         transform.position = new Vector3(transform.position.x, transform.position.y, -1f);
     }
 
