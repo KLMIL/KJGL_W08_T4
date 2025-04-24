@@ -466,6 +466,8 @@ public class Project : MonoBehaviour
         _assignedEmployees.Add(employee);
         RefreshUI();
 
+        _infoCanvas;
+
         var go = employee.gameObject;
         go.transform.SetParent(employeeSlots[targetIndex], false);
         go.transform.localPosition = new Vector3(0, 0, -1f);
