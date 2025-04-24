@@ -125,6 +125,8 @@ public class Project : MonoBehaviour
         _infoCanvas.HideProjectInfo();
         _infoCanvas.HideEmployeeInfo();
 
+        ProjectManager.Instance.notifier.ShowNotification($"{_projectName} 프로젝트가 완료되었습니다.");
+
         Destroy(gameObject);
     }
 
@@ -188,6 +190,8 @@ public class Project : MonoBehaviour
 
                 // 직원 정보를 보고 있었다면 제거
                 _infoCanvas.HideEmployeeInfo();
+
+                ProjectManager.Instance.notifier.ShowNotification($"직원 한 명이 퇴사했습니다.");
 
                 // 오브젝트 제거
                 Destroy(emp.gameObject);
