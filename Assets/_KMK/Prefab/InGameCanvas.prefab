@@ -744,4 +744,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dc523331c4aca3428332bb47d4e6cf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  secretaryTalkGUI: {fileID: 0}
+  secretaryTalkGUI: {fileID: 8693379176050126698}
