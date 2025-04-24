@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ProjectManager : MonoBehaviour
@@ -119,16 +120,38 @@ public class ProjectManager : MonoBehaviour
     // 2025-04-24 10:30 수정 - KWS
     public void TickWork()
     {
-        // 월급 정산(대기실 + 프로젝트 모든 직원)
-        foreach (var employee in _allEmployees)
+        // 🔹 파괴된 직원 제거
+        _allEmployees = _allEmployees.Where(e => e != null).ToList();
+
+        // 🔹 복사 리스트로 순회 (파괴 중 리스트 수정 대비)
+        var employeeSnapshot = new List<Employee>(_allEmployees);
+        foreach (var employee in employeeSnapshot)
         {
             GameManager.Instance.SpendFunds(employee.GetEmployeeData().salary / 12);    
         }
-        
-        // 프로젝트 정산
-        foreach(var project in _currentProjects)
+
+        // 🔹 파괴된 프로젝트 제거
+        _currentProjects = _currentProjects.Where(p => p != null).ToList();
+
+        // 🔹 복사 리스트로 순회
+        var projectSnapshot = new List<Project>(_currentProjects);
+        foreach (var project in projectSnapshot)
         {
             project.TickWork();
         }
     }
+
+    
+    public void RemoveProject(Project project)
+    {
+        if (_currentProjects.Contains(project))
+            _currentProjects.Remove(project);
+    }
+
+    public void RemoveEmployee(Employee emp)
+    {
+        if (_allEmployees.Contains(emp))
+            _allEmployees.Remove(emp);
+    }
+
 }

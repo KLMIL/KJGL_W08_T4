@@ -26,6 +26,7 @@ public class Project : MonoBehaviour
     private int _quality;
     private int _currentWorkAmount;
     private List<Employee> _assignedEmployees = new List<Employee>();
+    private bool _isCompleted = false;
 
     [Header("Project Info panel")]
     private TextMeshPro _projectNameText;
@@ -56,7 +57,7 @@ public class Project : MonoBehaviour
     public void TickWork()
     {
         // 고용인이 있어야 작업 진행
-        if (_assignedEmployees.Count == 0) return;
+        if (_isCompleted || _assignedEmployees.Count == 0) return;
 
         // 능력 부족시 스트레스 주기
         CheckAssignedStats();
@@ -109,6 +110,8 @@ public class Project : MonoBehaviour
 
     private void CompleteProject()
     {
+        _isCompleted = true;
+            
         float qualityFactor = Mathf.Clamp01(_quality / 100f); // 0.0 ~ 1.0
         float randomFactor = Random.Range(0.8f, 1.2f);
         int finalReward = Mathf.RoundToInt(_completionReward * qualityFactor * randomFactor);
@@ -119,6 +122,16 @@ public class Project : MonoBehaviour
         foreach (var emp in _assignedEmployees)
         {
             emp.transform.SetParent(employeeContainer);
+            var draggable = emp.GetComponent<DraggableEmployee>();
+            if (draggable != null)
+            {
+                transform.SetParent(employeeContainer, false);
+                draggable.currentProject = null;
+                draggable.currentOwnerType = OwnerType.WaitingRoom;
+                draggable.waitingRoomSlot = employeeContainer;
+                transform.localPosition = new Vector3(0, 0, -1f);
+                
+            }
             emp.ResetStress();
         }
 
@@ -127,6 +140,7 @@ public class Project : MonoBehaviour
 
         ProjectManager.Instance.notifier.ShowNotification($"{_projectName} 프로젝트가 완료되었습니다.");
 
+        ProjectManager.Instance.RemoveProject(this);
         Destroy(gameObject);
     }
 
@@ -193,6 +207,8 @@ public class Project : MonoBehaviour
 
                 ProjectManager.Instance.notifier.ShowNotification($"직원 한 명이 퇴사했습니다.");
 
+                ProjectManager.Instance.AllEmployees.Remove(emp);
+                
                 // 오브젝트 제거
                 Destroy(emp.gameObject);
 
