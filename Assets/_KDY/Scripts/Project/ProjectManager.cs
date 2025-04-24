@@ -80,6 +80,7 @@ public class ProjectManager : MonoBehaviour
 
                 _currentProjects.Add(newProject);
                 newProject.RefreshUI();
+                UIManager.Instance.ToggleUpgradesCanvas(false);
                 return newProject;
             }
         }
