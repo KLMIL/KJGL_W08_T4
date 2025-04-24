@@ -131,7 +131,10 @@ public class ProjectManager : MonoBehaviour
         var employeeSnapshot = new List<Employee>(_allEmployees);
         foreach (var employee in employeeSnapshot)
         {
-            GameManager.Instance.SpendFunds(employee.GetEmployeeData().salary / 12);    
+            if (!GameManager.Instance.SpendFunds(employee.GetEmployeeData().salary / 12))
+            {
+                break;
+            } 
         }
 
         // 🔹 파괴된 프로젝트 제거

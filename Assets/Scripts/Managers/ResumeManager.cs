@@ -56,7 +56,6 @@ public class ResumeManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject); // 필요할 경우만
     }
     private void Start()
     {

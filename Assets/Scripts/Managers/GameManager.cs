@@ -50,7 +50,6 @@ public class GameManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
 
 
         // 2025-04-24 01:00 수정 - KWS
