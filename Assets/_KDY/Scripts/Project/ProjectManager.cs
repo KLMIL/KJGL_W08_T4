@@ -65,10 +65,14 @@ public class ProjectManager : MonoBehaviour
 
         for (int i = 0; i < maxSlots; i++)
         {
-            if (_projectSlots[i].childCount == 0)
+            if (_projectSlots[i].childCount == 1)
             {
                 GameObject projectObject = Instantiate(_projectPrefab, _projectSlots[i]);
                 projectObject.transform.localPosition = Vector3.zero;
+
+                // 2025-04-24 13:00 수정 - KWS
+                // 자식의 "Cover" 객체 찾아서 SetActive = false
+                _projectSlots[i].transform.Find("Cover").gameObject.SetActive(false);
 
                 Project newProject = projectObject.GetComponent<Project>();
                 newProject.Size = size;

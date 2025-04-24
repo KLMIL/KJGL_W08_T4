@@ -141,6 +141,8 @@ public class Project : MonoBehaviour
         ProjectManager.Instance.notifier.ShowNotification($"{_projectName} 프로젝트가 완료되었습니다.");
 
         ProjectManager.Instance.RemoveProject(this);
+        transform.parent.Find("Cover").gameObject.SetActive(true);
+
         Destroy(gameObject);
     }
 
