@@ -125,7 +125,7 @@ public class Project : MonoBehaviour
             var draggable = emp.GetComponent<DraggableEmployee>();
             if (draggable != null)
             {
-                transform.SetParent(employeeContainer, false);
+                draggable.transform.SetParent(employeeContainer, false);
                 draggable.currentProject = null;
                 draggable.currentOwnerType = OwnerType.WaitingRoom;
                 draggable.waitingRoomSlot = employeeContainer;
