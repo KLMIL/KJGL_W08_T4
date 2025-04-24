@@ -30,6 +30,9 @@ public class GameManager : MonoBehaviour
     private const float WORK_INTERVAL = 1f;
     [SerializeField] private TextMeshPro _YearText;
     [SerializeField] private TextMeshPro _MonthText;
+    [SerializeField] private SecretaryTalk _SecretaryTalk;
+
+    [SerializeField] private TextMeshPro _companyNameText;
 
 
 
@@ -56,6 +59,7 @@ public class GameManager : MonoBehaviour
         startButton.onClick.AddListener(() =>
         {
             _companyName = companyNameInput.text;
+            _companyNameText.text = "(주)" + _companyName;
             gameFlowCanvas.transform.Find("GameStartImage").gameObject.SetActive(false);
             Time.timeScale = 1f;
         });
@@ -87,7 +91,8 @@ public class GameManager : MonoBehaviour
     {
         ProjectManager.Instance.TickWork();
         todayMonth++;
-
+        //비서 대화 바꾸기
+        _SecretaryTalk.RandomSaying();
         // 시계 시간 바꿔주기
         _YearText.text = (2000 + (todayMonth / 12)).ToString();
         _MonthText.text = ((todayMonth % 12) + 1).ToString("D2");
@@ -105,6 +110,7 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.UpdateFundsUI(_companyFunds);
         leftCCTV = GameObject.Find("LeftCCTV");
         rightCCTV = GameObject.Find("RightCCTV");
+        _SecretaryTalk = FindAnyObjectByType<SecretaryTalk>();
     }
 
     public int RoomLevel

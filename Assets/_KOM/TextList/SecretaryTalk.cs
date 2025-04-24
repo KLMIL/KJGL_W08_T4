@@ -1,17 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
 
 public class SecretaryTalk : MonoBehaviour
 {
     List<string> secretaryTalk;
+
+    [SerializeField] TextMeshProUGUI secretaryTalkGUI;
 
     void Start()
     {
         InstantiateList();
     }
 
-    public string RandomSaying() { return secretaryTalk[Random.Range(0, secretaryTalk.Count)]; }// 랜덤 대화 반환
+    //string RandomSaying() { return secretaryTalk[Random.Range(0, secretaryTalk.Count)]; }// 랜덤 대화 반환
 
+    public void RandomSaying()
+    {
+        secretaryTalkGUI.text = secretaryTalk[Random.Range(0, secretaryTalk.Count)];
+    }
     void InstantiateList()
     {
         secretaryTalk = new List<string>
