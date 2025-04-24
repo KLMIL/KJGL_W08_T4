@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject activeRoomPrefab;
     GameObject leftCCTV;
     GameObject rightCCTV;
-
+    [SerializeField] int secSalary = 100;
     [Header("Canvas")]
     [SerializeField] private GameObject gameFlowCanvas;
 
@@ -110,6 +110,8 @@ public class GameManager : MonoBehaviour
         // 시계 시간 바꿔주기
         _YearText.text = (2000 + (todayMonth / 12)).ToString();
         _MonthText.text = ((todayMonth % 12) + 1).ToString("D2");
+        //비서 월급 주기
+        SpendFunds(secSalary);
     }
 
 
