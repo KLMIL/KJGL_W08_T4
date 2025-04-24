@@ -466,7 +466,7 @@ public class Project : MonoBehaviour
         _assignedEmployees.Add(employee);
         RefreshUI();
 
-        _infoCanvas;
+        // _infoCanvas;
 
         var go = employee.gameObject;
         go.transform.SetParent(employeeSlots[targetIndex], false);
