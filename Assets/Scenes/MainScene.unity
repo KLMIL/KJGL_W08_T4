@@ -1537,11 +1537,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7049162499617572494, guid: e1f091ebe45a16a44ac670c5c2ad53f1, type: 3}
       propertyPath: m_Spacing.x
-      value: 1
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 7049162499617572494, guid: e1f091ebe45a16a44ac670c5c2ad53f1, type: 3}
+      propertyPath: m_Spacing.y
+      value: 0.001
       objectReference: {fileID: 0}
     - target: {fileID: 7049162499617572494, guid: e1f091ebe45a16a44ac670c5c2ad53f1, type: 3}
       propertyPath: m_CellSize.x
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7049162499617572494, guid: e1f091ebe45a16a44ac670c5c2ad53f1, type: 3}
+      propertyPath: m_ChildAlignment
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7049162499617572494, guid: e1f091ebe45a16a44ac670c5c2ad53f1, type: 3}
+      propertyPath: m_ConstraintCount
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7049162499617572494, guid: e1f091ebe45a16a44ac670c5c2ad53f1, type: 3}
+      propertyPath: m_Padding.m_Right
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -1917,7 +1933,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 00000000d1542c83
+  m_ApplyToSortingLayers: 00000000d1542c83d380d18f7794ca43
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
