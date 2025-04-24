@@ -3050,8 +3050,8 @@ MonoBehaviour:
   m_text: "\uC9C1\uC6D0 \uC804\uC6D0 \uC0AC\uD45C \uC81C\uCD9C,\n\uD68C\uADC0\uB85C
     \uD574\uACB0\uD588\uC2B5\uB2C8\uB2E4."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 425f29185fab7de45a6a9521a32342bc, type: 2}
-  m_sharedMaterial: {fileID: 7046050184719477439, guid: 425f29185fab7de45a6a9521a32342bc, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9128b553ed8f0104c859cb5404b56ba3, type: 2}
+  m_sharedMaterial: {fileID: 5446056761023578119, guid: 9128b553ed8f0104c859cb5404b56ba3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
