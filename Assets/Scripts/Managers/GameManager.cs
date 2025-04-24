@@ -21,17 +21,18 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject activeRoomPrefab;
     GameObject leftCCTV;
     GameObject rightCCTV;
-
+    [SerializeField] int secSalary = 100;
     [Header("Canvas")]
     [SerializeField] private GameObject gameFlowCanvas;
 
     // 2025-04-24 10:30 수정 - KWS
     [Header("Game Timer")]
     private float _workTimer = 0f;
-    private const float WORK_INTERVAL = 1f;
+    private const float WORK_INTERVAL = 15f;
     [SerializeField] private TextMeshProUGUI _MultipleText;
     [SerializeField] private TextMeshProUGUI _YearText;
     [SerializeField] private TextMeshProUGUI _MonthText;
+
     [SerializeField] private SecretaryTalk _SecretaryTalk;
 
     [SerializeField] private TextMeshPro _companyNameText;
@@ -113,6 +114,8 @@ public class GameManager : MonoBehaviour
         // 시계 시간 바꿔주기
         _YearText.text = (2000 + (todayMonth / 12)).ToString();
         _MonthText.text = ((todayMonth % 12) + 1).ToString("D2");
+        //비서 월급 주기
+        SpendFunds(secSalary);
     }
 
 
