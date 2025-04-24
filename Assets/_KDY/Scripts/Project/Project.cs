@@ -136,7 +136,23 @@ public class Project : MonoBehaviour
         _infoCanvas.HideProjectInfo();
         _infoCanvas.HideEmployeeInfo();
 
-        ProjectManager.Instance.notifier.ShowNotification($"{_projectName} 프로젝트가 완료되었습니다.");
+        string infoStr = $"{_projectName} 프로젝트가 완료되었습니다.\n ";
+        if (_quality > 70)
+        {
+            infoStr += "대박! ";
+        }
+        else if (_quality > 40)
+        {
+            infoStr += "중박! ";
+        }
+        else
+        {
+            infoStr += "쪽박! ";
+        }
+        infoStr += $"{_completionReward}G를 획득했습니다.";
+
+
+        ProjectManager.Instance.notifier.ShowNotification(infoStr);
 
         ProjectManager.Instance.RemoveProject(this);
         transform.parent.Find("Cover").gameObject.SetActive(true);
