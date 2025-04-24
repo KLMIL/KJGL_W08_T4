@@ -54,7 +54,8 @@ public class CompleteNotifierText : MonoBehaviour
         float elapsed = 0f;
         while (elapsed < fadeInDuration)
         {
-            elapsed += Time.deltaTime;
+            //elapsed += Time.deltaTime;
+            elapsed += Time.unscaledDeltaTime;
             float t = elapsed / fadeInDuration;
             // 위치 보간
             rect.anchoredPosition = Vector2.Lerp(startPos, targetPos, t);
@@ -66,7 +67,8 @@ public class CompleteNotifierText : MonoBehaviour
         SetTextAlpha(1f);
 
         // 2. 유지 (0.3초)
-        yield return new WaitForSeconds(0.3f);
+        //yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSecondsRealtime(0.8f);
 
         // 3. 연해지며 사라짐 (0.5초)
         float fadeOutDuration = 0.5f;
