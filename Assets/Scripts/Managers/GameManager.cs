@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     // 2025-04-24 10:30 수정 - KWS
     [Header("Game Timer")]
     private float _workTimer = 0f;
-    private const float WORK_INTERVAL = 1f;
+    private const float WORK_INTERVAL = 15f;
     [SerializeField] private TextMeshPro _YearText;
     [SerializeField] private TextMeshPro _MonthText;
     [SerializeField] private SecretaryTalk _SecretaryTalk;

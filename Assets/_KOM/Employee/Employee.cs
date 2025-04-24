@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
 using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Employee : MonoBehaviour
 {
     EmployeeData _employeeData;
+    public SpriteRenderer levelupImage;
 
     public void SetEmployeeData(EmployeeData EmployeeData)
     {
@@ -27,22 +30,37 @@ public class Employee : MonoBehaviour
             case ExpType.designExp:
                 _employeeData.designExp += expValue; 
                 if (_employeeData.designSkil >= 5) break; //Max Level 5
-                if (ChekSkilLevelup(_employeeData.designSkil, _employeeData.designExp)) { _employeeData.designSkil++; }
+                if (ChekSkilLevelup(_employeeData.designSkil, _employeeData.designExp)) { _employeeData.designSkil++; StartCoroutine("Levelup"); }
                 break;
 
             case ExpType.devExp:
                 _employeeData.devExp += expValue;
                 if (_employeeData.devSkil >= 5) break; //Max Level 5
-                if (ChekSkilLevelup(_employeeData.devSkil, _employeeData.devExp)) { _employeeData.devSkil++; }                    
+                if (ChekSkilLevelup(_employeeData.devSkil, _employeeData.devExp)) { _employeeData.devSkil++; StartCoroutine("Levelup"); }                    
                 break;
 
             case ExpType.artExp:
                 _employeeData.artExp += expValue;
                 if (_employeeData.artSkil >= 5) break; //Max Level 5 
-                if (ChekSkilLevelup(_employeeData.artSkil, _employeeData.artExp)) { _employeeData.artSkil++; }
+                if (ChekSkilLevelup(_employeeData.artSkil, _employeeData.artExp)) { _employeeData.artSkil++; StartCoroutine("Levelup"); }
                 break;
         }
     }
+    IEnumerable Levelup()
+    {
+        LevelupImageOn();
+        yield return new WaitForSeconds(3f);
+        LevelupImageOff();
+    }
+    void LevelupImageOn()
+    {
+        levelupImage.enabled = true;
+    }
+    void LevelupImageOff()
+    {
+        levelupImage.enabled = false;
+    }
+
 
     public void ResetStress()
     {
