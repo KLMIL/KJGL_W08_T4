@@ -2601,7 +2601,7 @@ MonoBehaviour:
   _upgradeRoomText: {fileID: 751954459}
   _upgradeCompanyText: {fileID: 2071573661}
   fundsText: {fileID: 267902889}
-  interviewFee: 0
+  interviewFee: 100
 --- !u!114 &839664848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2664,6 +2664,7 @@ MonoBehaviour:
   gameFlowCanvas: {fileID: 449489825}
   _YearText: {fileID: 3724567183506845978}
   _MonthText: {fileID: 1723939780}
+  _SecretaryTalk: {fileID: 0}
   _companyNameText: {fileID: 1375635665}
 --- !u!114 &839664851
 MonoBehaviour:
