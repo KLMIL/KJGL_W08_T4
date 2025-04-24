@@ -12,6 +12,9 @@ public class ProjectManager : MonoBehaviour
     private Transform _projectContainer;
     private Transform[] _projectSlots = new Transform[8];
 
+    // 2025-04-24 11:30 수정 - KWS
+    [SerializeField] public CompleteNotifierText notifier;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
