@@ -29,12 +29,15 @@ public class GameManager : MonoBehaviour
     [Header("Game Timer")]
     private float _workTimer = 0f;
     private const float WORK_INTERVAL = 1f;
-    [SerializeField] private TextMeshPro _YearText;
-    [SerializeField] private TextMeshPro _MonthText;
+    [SerializeField] private TextMeshProUGUI _MultipleText;
+    [SerializeField] private TextMeshProUGUI _YearText;
+    [SerializeField] private TextMeshProUGUI _MonthText;
     [SerializeField] private SecretaryTalk _SecretaryTalk;
 
     [SerializeField] private TextMeshPro _companyNameText;
     private bool _isTutorial = true;
+
+    [SerializeField] private int multipleIndex = 1;
 
 
     private void Awake()
@@ -217,5 +220,34 @@ public class GameManager : MonoBehaviour
     public void UpdateButtonState(string inputText)
     {
         gameFlowCanvas.transform.Find("GameStartImage").Find("StartButton").GetComponent<Button>().interactable = true;
+    }
+
+
+    public void ChangeTimeMultiple()
+    {
+        multipleIndex++;
+        multipleIndex %= 4;
+
+        switch (multipleIndex)
+        {
+            case 0:
+                _MultipleText.text = "속도X0.5";
+                Time.timeScale = 0.5f;
+                break;
+            case 1:
+                _MultipleText.text = "속도X1";
+                Time.timeScale = 1f;
+                break;
+            case 2:
+                _MultipleText.text = "속도X2";
+                Time.timeScale = 2f;
+                break;
+            case 3:
+                _MultipleText.text = "속도X4";
+                Time.timeScale = 4f;
+                break;
+            default:
+                break;
+        }   
     }
 }
