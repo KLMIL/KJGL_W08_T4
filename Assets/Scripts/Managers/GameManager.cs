@@ -41,6 +41,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int multipleIndex = 1;
 
 
+    bool isOver = false;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -214,6 +216,9 @@ public class GameManager : MonoBehaviour
     // 2025-04-24 01:00 수정 - KWS
     public void GameOver()
     {
+        if (isOver) return;
+
+        isOver = true;
         int thisCycle = ReturnManager.Instance.currentCycle;
         int thisCycleMoney = ReturnManager.Instance.currentEarnings;
         // 회차 반영
