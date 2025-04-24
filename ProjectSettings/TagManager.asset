@@ -44,5 +44,11 @@ TagManager:
   - name: Background
     uniqueID: 2200720593
     locked: 0
+  - name: Character
+    uniqueID: 2412871891
+    locked: 0
+  - name: Interior
+    uniqueID: 1137349751
+    locked: 0
   m_RenderingLayers:
   - Default
