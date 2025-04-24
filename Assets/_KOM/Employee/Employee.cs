@@ -26,19 +26,19 @@ public class Employee : MonoBehaviour
         {
             case ExpType.designExp:
                 _employeeData.designExp += expValue; 
-                if (_employeeData.designSkil >= 4) break; //Max Level 4
+                if (_employeeData.designSkil >= 5) break; //Max Level 5
                 if (ChekSkilLevelup(_employeeData.designSkil, _employeeData.designExp)) { _employeeData.designSkil++; }
                 break;
 
             case ExpType.devExp:
                 _employeeData.devExp += expValue;
-                if (_employeeData.devSkil >= 4) break; //Max Level 4
+                if (_employeeData.devSkil >= 5) break; //Max Level 5
                 if (ChekSkilLevelup(_employeeData.devSkil, _employeeData.devExp)) { _employeeData.devSkil++; }                    
                 break;
 
             case ExpType.artExp:
                 _employeeData.artExp += expValue;
-                if (_employeeData.artSkil >= 4) break; //Max Level 4 
+                if (_employeeData.artSkil >= 5) break; //Max Level 5 
                 if (ChekSkilLevelup(_employeeData.artSkil, _employeeData.artExp)) { _employeeData.artSkil++; }
                 break;
         }
