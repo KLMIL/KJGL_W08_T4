@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private string _companyName;
     private int _roomLevel = 0;
 
-    private int _companyFunds = 20000; // 초기 자산 예시
+    private int _companyFunds = 3000; // 초기 자산 예시
     private const int MaxEmployeeCount = 15;
 
     public int CompanyFunds => _companyFunds;
@@ -183,8 +183,8 @@ public class GameManager : MonoBehaviour
             UIManager.Instance.UpdateFundsUI(_companyFunds);
             return true;
         }
-
-        Debug.LogWarning("자산 부족!");
+        // 자산 부족시 게임 오버
+        GameOver();
         return false;
     }
 
