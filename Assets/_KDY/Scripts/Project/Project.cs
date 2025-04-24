@@ -182,8 +182,11 @@ public class Project : MonoBehaviour
             {
                 Debug.LogWarning($"[{_projectName}] 스트레스 100 도달 → 직원 퇴사!");
 
-                // 리스트에서 제거
+                // 현재 프로젝트의 리스트에서 제거
                 _assignedEmployees.RemoveAt(i);
+                
+                // 회사의 직원 리스트에서 제거
+                ProjectManager.Instance.AllEmployees.Remove(emp);
 
                 // 직원 정보를 보고 있었다면 제거
                 _infoCanvas.HideEmployeeInfo();

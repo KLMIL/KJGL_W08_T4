@@ -1,17 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
 
 public class SecretaryTalk : MonoBehaviour
 {
     List<string> secretaryTalk;
+
+    [SerializeField] TextMeshProUGUI secretaryTalkGUI;
 
     void Start()
     {
         InstantiateList();
     }
 
-    public string RandomSaying() { return secretaryTalk[Random.Range(0, secretaryTalk.Count)]; }// 랜덤 대화 반환
+    //string RandomSaying() { return secretaryTalk[Random.Range(0, secretaryTalk.Count)]; }// 랜덤 대화 반환
 
+    public void RandomSaying()
+    {
+        secretaryTalkGUI.text = secretaryTalk[Random.Range(0, secretaryTalk.Count)];
+    }
     void InstantiateList()
     {
         secretaryTalk = new List<string>
@@ -27,7 +34,9 @@ public class SecretaryTalk : MonoBehaviour
         "게임의 품질이 떨어지면 버는 돈도 같이 떨어진답니다!",
         "이번 달 월급은 얼마나 나갈까요.",
         "신입 사원은 제 역할을 할 때까지 시간이 걸리지만, 월급도 적게 받아요.",
-        "이력서의 모든 경력이 다 의미 있는 건 아니에요!"
+        "이력서의 모든 경력이 다 의미 있는 건 아니에요!",
+        "과중한 업무를 부여하면 손쉽게 직원을 해고할 수 있어요.",
+        "너무 많은 업무를 맡기면 직원이 퇴사할 수도 있어요!"
         };
     }
 }

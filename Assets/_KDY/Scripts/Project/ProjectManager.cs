@@ -6,7 +6,7 @@ public class ProjectManager : MonoBehaviour
     public static ProjectManager Instance { get; private set; }
 
     private List<Project> _currentProjects = new List<Project>();
-    private List<EmployeeData> _currentEmployeeData = new List<EmployeeData>();
+    private List<Employee> _allEmployees = new List<Employee>();
 
     private GameObject _projectPrefab;
     private Transform _projectContainer;
@@ -109,16 +109,23 @@ public class ProjectManager : MonoBehaviour
         set => _currentProjects = value;
     }
 
-    public List<EmployeeData> CurrentEmployeeData
+    public List<Employee> AllEmployees
     {
-        get => _currentEmployeeData;
-        set => _currentEmployeeData = value;
+        get => _allEmployees;
+        set => _allEmployees = value;
     }
 
 
     // 2025-04-24 10:30 수정 - KWS
     public void TickWork()
     {
+        // 월급 정산(대기실 + 프로젝트 모든 직원)
+        foreach (var employee in _allEmployees)
+        {
+            GameManager.Instance.SpendFunds(employee.GetEmployeeData().salary / 12);    
+        }
+        
+        // 프로젝트 정산
         foreach(var project in _currentProjects)
         {
             project.TickWork();

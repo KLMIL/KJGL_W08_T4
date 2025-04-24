@@ -40,6 +40,9 @@ public class HireManager : MonoBehaviour
             draggable.currentOwnerType = OwnerType.WaitingRoom;
             draggable.waitingRoomSlot = instance.transform.parent;
         }
+        
+        // 프로젝트 매니저에 회사 소속으로 등록
+        ProjectManager.Instance.AllEmployees.Add(draggable.GetComponent<Employee>());
     }
 
 }
