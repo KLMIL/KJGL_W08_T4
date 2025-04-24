@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshPro _YearText;
     [SerializeField] private TextMeshPro _MonthText;
 
+    [SerializeField] private TextMeshPro _companyNameText;
+
 
 
     private void Awake()
@@ -56,6 +58,7 @@ public class GameManager : MonoBehaviour
         startButton.onClick.AddListener(() =>
         {
             _companyName = companyNameInput.text;
+            _companyNameText.text = "(주)" + _companyName;
             gameFlowCanvas.transform.Find("GameStartImage").gameObject.SetActive(false);
             Time.timeScale = 1f;
         });
