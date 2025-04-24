@@ -3684,6 +3684,7 @@ GameObject:
   - component: {fileID: 839664848}
   - component: {fileID: 839664851}
   - component: {fileID: 839664852}
+  - component: {fileID: 839664853}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -3727,7 +3728,7 @@ MonoBehaviour:
   _upgradeRoomText: {fileID: 751954459}
   _upgradeCompanyText: {fileID: 2071573661}
   fundsText: {fileID: 267902889}
-  interviewFee: 0
+  interviewFee: 100
 --- !u!114 &839664848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3787,6 +3788,7 @@ MonoBehaviour:
   myCompanyScale: 1
   _companyName: 
   activeRoomPrefab: {fileID: 2861608800555824603, guid: 6d099de45b516ba4b9ce72ffa23dd1f8, type: 3}
+  secSalary: 100
   gameFlowCanvas: {fileID: 449489825}
   _MultipleText: {fileID: 723726187}
   _YearText: {fileID: 129879998}
@@ -3819,6 +3821,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   notifier: {fileID: 822755648}
+--- !u!114 &839664853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 839664845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf04a34fb38b48e3a30d5d56d5666d06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &874706042
 GameObject:
   m_ObjectHideFlags: 0
@@ -4780,10 +4794,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uBA54\uC778\uC73C\uB85C \uB3CC\uC544\uAC00\uAE30"
+  m_text: "\uD68C\uADC0"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 425f29185fab7de45a6a9521a32342bc, type: 2}
-  m_sharedMaterial: {fileID: 7046050184719477439, guid: 425f29185fab7de45a6a9521a32342bc, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9128b553ed8f0104c859cb5404b56ba3, type: 2}
+  m_sharedMaterial: {fileID: 5446056761023578119, guid: 9128b553ed8f0104c859cb5404b56ba3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5702,7 +5716,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -308}
-  m_SizeDelta: {x: 471.0187, y: 117.3648}
+  m_SizeDelta: {x: 301.8316, y: 117.3648}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1561107285
 MonoBehaviour:
@@ -5747,7 +5761,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1561107286}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 839664850}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: RestartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1561107286
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -172,6 +172,7 @@ public class GameManager : MonoBehaviour
     public void AddFunds(int amount)
     {
         _companyFunds += amount;
+        ReturnManager.Instance.AddEarnings(amount);
         UIManager.Instance.UpdateFundsUI(_companyFunds);
     }
 
@@ -214,11 +215,22 @@ public class GameManager : MonoBehaviour
     // 2025-04-24 01:00 수정 - KWS
     public void GameOver()
     {
+        int thisCycle = ReturnManager.Instance.currentCycle;
+        int thisCycleMoney = ReturnManager.Instance.currentEarnings;
+        // 회차 반영
+        ReturnManager.Instance.ResetForNextCycle();
+
+        // 게임 오버 UI 처리
         gameFlowCanvas.transform.Find("GameOverImage").Find("TitleText").GetComponent<TextMeshProUGUI>().text =
-            $"{_companyName} 피산!";
+            $"{_companyName} 파산!";
+        
+        gameFlowCanvas.transform.Find("GameOverImage").Find("InfoText").GetComponent<TextMeshProUGUI>().text =
+            $"이번 {thisCycle} 회차에 번 총 수입\n{thisCycleMoney}G";
+
         Time.timeScale = 0f;
         gameFlowCanvas.transform.Find("GameOverImage").gameObject.SetActive(true);
     }
+
 
     public void UpdateButtonState(string inputText)
     {
@@ -252,5 +264,11 @@ public class GameManager : MonoBehaviour
             default:
                 break;
         }   
+    }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1f; // 멈춰진 시간 복구
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // 현재 씬 다시 로드
     }
 }
