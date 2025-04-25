@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour
     private bool _isTutorial = true;
 
     [SerializeField] private int multipleIndex = 1;
+
+    [SerializeField] SpriteRenderer backgroundSprite;
     public int MultipleIndex
     {
         get { return multipleIndex; }
@@ -220,7 +222,21 @@ public class GameManager : MonoBehaviour
     {
         if ((int)myCompanyScale < 3)
         {
+            // 여기서 배경 바꿔야함
             myCompanyScale++;
+        }
+
+        switch(myCompanyScale)
+        {
+            case CompanyScale.MidsizeCompany:
+                Debug.LogError("Called here");
+                backgroundSprite.sprite = Resources.Load<Sprite>("CompanyBackground/CompanyBackground_Midsize");
+                break;
+            case CompanyScale.LargeCompany:
+                backgroundSprite.sprite = Resources.Load<Sprite>("CompanyBackground/CompanyBackground_Large");
+                break;
+            default:
+                break;
         }
     }
 
