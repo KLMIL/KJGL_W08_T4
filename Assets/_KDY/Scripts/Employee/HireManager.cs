@@ -5,6 +5,13 @@ public class HireManager : MonoBehaviour
 {
     private Transform employeeContainer;
     private const int MaxEmployeeCount = 15;
+    private bool _isNewbie = true;
+
+    public bool IsNewbie
+    {
+        get => _isNewbie;
+        set => _isNewbie = value;
+    }
 
     private void Awake()
     {
@@ -39,6 +46,13 @@ public class HireManager : MonoBehaviour
             // ✅ 대기실 소속으로 세팅
             draggable.currentOwnerType = OwnerType.WaitingRoom;
             draggable.waitingRoomSlot = instance.transform.parent;
+        }
+        
+        // 경력직은 일단 머리 쳐냄
+        if (!IsNewbie)
+        {
+            for (int i = 0; i < 10; i++)
+                instance.GetComponent<Employee>().FadeHairAlpha();
         }
         
         // 프로젝트 매니저에 회사 소속으로 등록

@@ -64,6 +64,9 @@ public class Project : MonoBehaviour
         int totalPower = 0;
         foreach (var emp in _assignedEmployees)
         {
+            // 프로젝트에 참가중인 모든 직원 머리 깎기
+            emp.FadeHairAlpha();
+            
             var data = emp.GetEmployeeData();  // Employee → EmployeeData 추출
             totalPower += data.designSkil + data.devSkil + data.artSkil;
             float expToGive = 0;
