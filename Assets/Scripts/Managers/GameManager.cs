@@ -39,7 +39,19 @@ public class GameManager : MonoBehaviour
     private bool _isTutorial = true;
 
     [SerializeField] private int multipleIndex = 1;
-
+    public int MultipleIndex
+    {
+        get { return multipleIndex; }
+        set { 
+            if(value < 0)
+            {
+                multipleIndex = 4 + value;
+            } else
+            {
+                multipleIndex = value;
+            }
+        }
+    }
 
     bool isOver = false;
 
@@ -227,7 +239,7 @@ public class GameManager : MonoBehaviour
         // 게임 오버 UI 처리
         gameFlowCanvas.transform.Find("GameOverImage").Find("TitleText").GetComponent<TextMeshProUGUI>().text =
             $"{_companyName} 파산!";
-        
+
         gameFlowCanvas.transform.Find("GameOverImage").Find("InfoText").GetComponent<TextMeshProUGUI>().text =
             $"이번 {thisCycle} 회차에 번 총 수입\n{thisCycleMoney}G";
 
@@ -267,7 +279,7 @@ public class GameManager : MonoBehaviour
                 break;
             default:
                 break;
-        }   
+        }
     }
 
     public void RestartGame()

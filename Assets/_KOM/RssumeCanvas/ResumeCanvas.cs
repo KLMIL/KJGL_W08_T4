@@ -8,8 +8,6 @@ public class ResumeCanvas : MonoBehaviour
 
     EmployeeData nowEmployData;
 
-    [SerializeField] GameObject resumePage;
-
     [SerializeField] TextMeshProUGUI DesignText1GUI;
     [SerializeField] TextMeshProUGUI DesignText2GUI;
     [SerializeField] TextMeshProUGUI DevText1GUI;
@@ -67,9 +65,13 @@ public class ResumeCanvas : MonoBehaviour
         //EmployeePrefab.GetComponent<Employee>().SetEmployeeData(nowEmployData);
         GetComponent<Canvas>().enabled = false;
         GameManager.Instance.GetComponent<HireManager>().HireEmployee(nowEmployData);
+        GameManager.Instance.MultipleIndex--;
+        GameManager.Instance.ChangeTimeMultiple();
     }
     public void ExitResumePage()
     {
         GetComponent<Canvas>().enabled = false;
+        GameManager.Instance.MultipleIndex--;
+        GameManager.Instance.ChangeTimeMultiple();
     }
 }

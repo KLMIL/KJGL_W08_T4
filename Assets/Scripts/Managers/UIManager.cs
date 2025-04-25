@@ -85,6 +85,7 @@ public class UIManager : MonoBehaviour
     {
         if (GameManager.Instance.SpendFunds(interviewFee))
         {
+            Time.timeScale = 0f;
             ToggleUpgradesCanvas(false);
             ui_ResumeCanvas.enabled = true;
             OnRecruitClick(isNewbie);
@@ -93,6 +94,7 @@ public class UIManager : MonoBehaviour
 
     public void OnRecruitClick(bool isNewbie)
     {
+        
         if (isNewbie)
         {
             ui_ResumeCanvas.GetComponent<ResumeCanvas>().NewbieResumeButton();
