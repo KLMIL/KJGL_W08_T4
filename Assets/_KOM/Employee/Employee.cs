@@ -69,14 +69,15 @@ public class Employee : MonoBehaviour
             case ExpType.artExp:
                 _employeeData.artExp += expValue;
                 if (_employeeData.artSkil >= 5) break; //Max Level 5 
-                if (ChekSkilLevelup(_employeeData.artSkil, _employeeData.artExp)) { _employeeData.artSkil++; StartCoroutine("Levelup"); }
+                if (ChekSkilLevelup(_employeeData.artSkil, _employeeData.artExp)) { _employeeData.artSkil++; StartCoroutine(Levelup()); }
                 break;
         }
     }
-    IEnumerable Levelup()
+    IEnumerator Levelup()
     {
+        Debug.Log("Levelup");
         LevelupImageOn();
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSecondsRealtime(3f);
         LevelupImageOff();
     }
     void LevelupImageOn()
