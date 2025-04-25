@@ -2781,7 +2781,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 2424471331569863385, guid: 67170c9ab8a75e845aa6a17affaf4b32, type: 3}
+  m_Sprite: {fileID: -6553405410906881566, guid: 9560e356f039d8545a3f62c44347a4a0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4676,6 +4676,7 @@ MonoBehaviour:
   ui_UpgradeCanvas: {fileID: 582273282}
   ui_ResumeCanvas: {fileID: 305079813}
   ui_TutorialCanvas: {fileID: 1467979506}
+  ui_SpendFundsCanvas: {fileID: 0}
   ui_UpgradesPanel: {fileID: 409038990}
   ui_ProjectsPanel: {fileID: 1357403234}
   ui_RecruitPanel: {fileID: 1202292560}
@@ -4750,6 +4751,7 @@ MonoBehaviour:
   _SecretaryTalk: {fileID: 0}
   _companyNameText: {fileID: 1375635665}
   multipleIndex: 1
+  backgroundSprite: {fileID: 492484785}
 --- !u!114 &839664851
 MonoBehaviour:
   m_ObjectHideFlags: 0

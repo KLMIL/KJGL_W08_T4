@@ -45,7 +45,7 @@ public class UIManager : MonoBehaviour
     {
         if (fundsText != null)
         {
-            fundsText.text = $"Funds: {funds:N0} G";
+            fundsText.text = $"{funds:N0} G";
         }
     }
 
