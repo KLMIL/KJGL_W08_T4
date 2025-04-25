@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class ProjectManager : MonoBehaviour
@@ -65,14 +66,10 @@ public class ProjectManager : MonoBehaviour
 
         for (int i = 0; i < maxSlots; i++)
         {
-            if (_projectSlots[i].childCount == 1)
+            if (_projectSlots[i].childCount == 2)
             {
                 GameObject projectObject = Instantiate(_projectPrefab, _projectSlots[i]);
                 projectObject.transform.localPosition = Vector3.zero;
-
-                // 2025-04-24 13:00 수정 - KWS
-                // 자식의 "Cover" 객체 찾아서 SetActive = false
-                _projectSlots[i].transform.Find("Cover").gameObject.SetActive(false);
 
                 Project newProject = projectObject.GetComponent<Project>();
                 newProject.Size = size;
@@ -85,6 +82,32 @@ public class ProjectManager : MonoBehaviour
                 newProject.CompletionReward = ProjectDataGenerator.GetRewardEstimate(size);
 
                 newProject.Quality = 100;
+
+
+                // 2025-04-24 13:00 수정 - KWS
+                // 자식의 "Cover" 객체 찾아서 SetActive = false
+                _projectSlots[i].transform.Find("Cover").gameObject.SetActive(false);
+
+                // 2025-04-25 15:30 수정 - KWS
+                string placardStr = "";
+                switch (size)
+                {
+                    case ProjectSize.Small:
+                        placardStr += "게임잼 개발중\n";
+                        break;
+                    case ProjectSize.Medium:
+                        placardStr += "인디게임 개발중\n";
+                        break;
+                    case ProjectSize.Large:
+                        placardStr += "AAA게임 개발중\n";
+                        break;
+                    default:
+                        break;
+                }
+                placardStr += projectName;
+
+                _projectSlots[i].transform.Find("Placard").Find("PlacardText").gameObject.GetComponent<TextMeshPro>().text = placardStr;
+                _projectSlots[i].transform.Find("Placard").gameObject.SetActive(true);
 
                 _currentProjects.Add(newProject);
                 newProject.RefreshUI();

@@ -152,13 +152,17 @@ public class Project : MonoBehaviour
         {
             infoStr += "쪽박! ";
         }
-        infoStr += $"{_completionReward}G를 획득했습니다.";
+        infoStr += $"{finalReward}G를 획득했습니다.";
 
 
         ProjectManager.Instance.notifier.ShowNotification(infoStr);
 
         ProjectManager.Instance.RemoveProject(this);
         transform.parent.Find("Cover").gameObject.SetActive(true);
+
+        // 2025-04-25 15:30 수정 - KWS
+        transform.parent.Find("Placard").Find("PlacardText").gameObject.GetComponent<TextMeshPro>().text = "";
+        transform.parent.Find("Placard").gameObject.SetActive(false);
 
         Destroy(gameObject);
     }
@@ -270,10 +274,11 @@ public class Project : MonoBehaviour
         //_infoCanvas.ShowInfo($"Test Text");
         string[] infoStr = new string[5];
         infoStr[0] = $"{_projectName}";
-        infoStr[1] = $"진행도: {_currentWorkAmount} / {_requiredWorkAmount}";
-        infoStr[2] = $"품질: {_quality} / 100";
-        infoStr[3] = $"요구 역량\n 기획: {_totalDesignSkill} / {_requiredDesignSkill} \n 개발: {_totalProgrammingSkill} / {_requiredProgrammingSkill}\n 아트: {_totalArtSkill} / {_requiredArtSkill}";
-        infoStr[4] = "";
+        infoStr[1] = $"[진행도] {_currentWorkAmount, 4} / {_requiredWorkAmount, 4}";
+        infoStr[2] = $"[ 품질 ] {_quality, 4} /  100";
+        infoStr[3] = $"[요구 역량]\n 기획: {_totalDesignSkill} / {_requiredDesignSkill} \n 개발: {_totalProgrammingSkill} / {_requiredProgrammingSkill}\n 아트: {_totalArtSkill} / {_requiredArtSkill}";
+        //infoStr[4] = "";
+        infoStr[4] = $"[예상 수익]\n {(int)(_completionReward * _quality / 100 * 0.8)} G ~ {(int)(_completionReward * _quality / 100 * 1.2)} G";
         _infoCanvas.ShowProjectInfo(infoStr);
     }
 

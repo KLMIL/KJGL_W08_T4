@@ -117,8 +117,11 @@ public class DraggableEmployee : MonoBehaviour
         string[] infoStr = new string[4];
         infoStr[0] = $"기획: {employee.GetEmployeeData().designSkil} \n개발: {employee.GetEmployeeData().devSkil} \n아트: {employee.GetEmployeeData().artSkil}";
         infoStr[1] = ((int)employee.GetEmployeeData().stress).ToString();
-        infoStr[2] = $"입사일: {employee.GetEmployeeData().joinMonth}";
-        infoStr[3] = $"연봉: {employee.GetEmployeeData().salary}";
+
+        int year = employee.GetEmployeeData().joinMonth / 12 + 2000;
+        int month = employee.GetEmployeeData().joinMonth % 12 + 1;
+        infoStr[2] = $"[입사] {year}년 {month}월";
+        infoStr[3] = $"[연봉] {employee.GetEmployeeData().salary} G";
         _infoCanvas.ShowEmployeeInfo(infoStr);
     }
 
