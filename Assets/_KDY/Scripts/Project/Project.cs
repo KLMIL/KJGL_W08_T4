@@ -218,7 +218,8 @@ public class Project : MonoBehaviour
             if (!isAlive)
             {
                 Debug.LogWarning($"[{_projectName}] 스트레스 100 도달 → 직원 퇴사!");
-
+                //지출 UI 데이터 갱신
+                UIManager.Instance.ui_SpendFundsCanvas.GetComponent<UI_SpendFund>().RemoveEmployeeList(emp); 
                 // 현재 프로젝트의 리스트에서 제거
                 _assignedEmployees.RemoveAt(i);
                 

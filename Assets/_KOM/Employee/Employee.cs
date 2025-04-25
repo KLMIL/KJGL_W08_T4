@@ -104,9 +104,9 @@ public class Employee : MonoBehaviour
     }
     Dictionary<int, int> levelupExpTable = new Dictionary<int, int>
     {
-        { 1, 100 },
-        { 2, 250 },
-        { 3, 750 },
-        { 4, 2850 }
+        { 1, 1000 },
+        { 2, 2500 },
+        { 3, 7500 },
+        { 4, 28500 }
     };
 }

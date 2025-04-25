@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class HireManager : MonoBehaviour
@@ -57,6 +57,7 @@ public class HireManager : MonoBehaviour
         
         // 프로젝트 매니저에 회사 소속으로 등록
         ProjectManager.Instance.AllEmployees.Add(draggable.GetComponent<Employee>());
+        UIManager.Instance.ui_SpendFundsCanvas.GetComponent<UI_SpendFund>().AddEmployeeList(draggable.GetComponent<Employee>());
     }
 
 }
