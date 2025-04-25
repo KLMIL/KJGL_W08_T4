@@ -25,6 +25,20 @@ public class Employee : MonoBehaviour
             }
         }
     }
+    public void FadeHairAlpha()
+    {
+        Transform hairTransform = transform.Find("Hair");
+        if (hairTransform != null)
+        {
+            SpriteRenderer hairRenderer = hairTransform.GetComponent<SpriteRenderer>();
+            if (hairRenderer != null)
+            {
+                Color currentColor = hairRenderer.color;
+                currentColor.a = Mathf.Max(0f, currentColor.a - 0.05f);
+                hairRenderer.color = currentColor;
+            }
+        }
+    }
 
     public EmployeeData GetEmployeeData()
     {

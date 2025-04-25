@@ -50,6 +50,8 @@ public class ResumeCanvas : MonoBehaviour
         (ArtText1, ArtText2) = printResume.GetRandomText(SkilType.art, nowEmployData.artSkil);
         SalaryValuyeGUI.text = nowEmployData.salary.ToString()+" G";
         PrintResume();
+        // 경력직 고용시에만 경력직으로 할당
+        GameManager.Instance.GetComponent<HireManager>().IsNewbie = false;
     }
     void PrintResume()
     {
@@ -63,13 +65,16 @@ public class ResumeCanvas : MonoBehaviour
 
     public void ChooseEmployee()
     {
-        //GameObject EmployeePrefab = Instantiate()
-        //EmployeePrefab.GetComponent<Employee>().SetEmployeeData(nowEmployData);
         GetComponent<Canvas>().enabled = false;
         GameManager.Instance.GetComponent<HireManager>().HireEmployee(nowEmployData);
+        
+        // 고용 후 HireManager에서 isNewbie 초기화
+        GameManager.Instance.GetComponent<HireManager>().IsNewbie = true;
     }
     public void ExitResumePage()
     {
         GetComponent<Canvas>().enabled = false;
+        // 고용 취소해도 isNewbie 초기화
+        GameManager.Instance.GetComponent<HireManager>().IsNewbie = true;
     }
 }
