@@ -9,10 +9,23 @@ public class Employee : MonoBehaviour
     EmployeeData _employeeData;
     public SpriteRenderer levelupImage;
 
-    public void SetEmployeeData(EmployeeData EmployeeData)
+    public void SetEmployeeData(EmployeeData employeeData)
     {
-        _employeeData = EmployeeData;
+        _employeeData = employeeData;
+
+        // Cloth 색상 랜덤화
+        Transform clothTransform = transform.Find("Cloth");
+        if (clothTransform != null)
+        {
+            SpriteRenderer clothRenderer = clothTransform.GetComponent<SpriteRenderer>();
+            if (clothRenderer != null)
+            {
+                Color randomColor = new Color(UnityEngine.Random.value, UnityEngine.Random.value, UnityEngine.Random.value);
+                clothRenderer.color = randomColor;
+            }
+        }
     }
+
     public EmployeeData GetEmployeeData()
     {
         return _employeeData;
