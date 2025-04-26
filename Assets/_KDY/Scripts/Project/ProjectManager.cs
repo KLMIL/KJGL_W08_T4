@@ -187,4 +187,16 @@ public class ProjectManager : MonoBehaviour
             _allEmployees.Remove(emp);
     }
 
+    public void IncreaseAllSalary()
+    {
+        // 🔹 파괴된 직원 제거
+        _allEmployees = _allEmployees.Where(e => e != null).ToList();
+
+        // 🔹 복사 리스트로 순회 (파괴 중 리스트 수정 대비)
+        var employeeSnapshot = new List<Employee>(_allEmployees);
+        foreach (var employee in employeeSnapshot)
+        {
+            employee.IncreaseSalary();
+        }
+    }
 }

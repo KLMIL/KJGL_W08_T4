@@ -122,6 +122,10 @@ public class GameManager : MonoBehaviour
     {
         ProjectManager.Instance.TickWork();
         todayMonth++;
+        if(todayMonth % 12 == 0)
+        {
+            ProjectManager.Instance.IncreaseAllSalary();
+        }
         //비서 대화 바꾸기
         _SecretaryTalk.RandomSaying();
         // 시계 시간 바꿔주기
