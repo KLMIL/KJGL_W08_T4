@@ -9684,9 +9684,33 @@ PrefabInstance:
       propertyPath: m_text
       value: "[\uD488\uC9C8]   0100 / 0100"
       objectReference: {fileID: 0}
+    - target: {fileID: 1761584135956206327, guid: fedd9c4dc4bf13a4f86290ac99aab5a3, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1761584135956206327, guid: fedd9c4dc4bf13a4f86290ac99aab5a3, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1761584135956206327, guid: fedd9c4dc4bf13a4f86290ac99aab5a3, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2057928338696050858, guid: fedd9c4dc4bf13a4f86290ac99aab5a3, type: 3}
       propertyPath: m_text
       value: "[\uC608\uC0C1 \uC218\uC775]\n 100000 G ~ 200000 G"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2057928338696050858, guid: fedd9c4dc4bf13a4f86290ac99aab5a3, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2057928338696050858, guid: fedd9c4dc4bf13a4f86290ac99aab5a3, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2057928338696050858, guid: fedd9c4dc4bf13a4f86290ac99aab5a3, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3056322014211296890, guid: fedd9c4dc4bf13a4f86290ac99aab5a3, type: 3}
       propertyPath: m_SizeDelta.x
@@ -9824,6 +9848,18 @@ PrefabInstance:
       propertyPath: m_text
       value: "[\uC9C4\uD589\uB3C4] 0000 / 1000"
       objectReference: {fileID: 0}
+    - target: {fileID: 4853488294741126508, guid: fedd9c4dc4bf13a4f86290ac99aab5a3, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853488294741126508, guid: fedd9c4dc4bf13a4f86290ac99aab5a3, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853488294741126508, guid: fedd9c4dc4bf13a4f86290ac99aab5a3, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5530223870893524593, guid: fedd9c4dc4bf13a4f86290ac99aab5a3, type: 3}
       propertyPath: m_Name
       value: CurrentProjectInfoCanvas
@@ -9848,6 +9884,18 @@ PrefabInstance:
       propertyPath: m_text
       value: "[\uC694\uAD6C \uC5ED\uB7C9]\n \uAE30\uD68D: 10 / 10\n \uAC1C\uBC1C:
         10 / 10\n \uC544\uD2B8: 10 / 10"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8118070916980922481, guid: fedd9c4dc4bf13a4f86290ac99aab5a3, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8118070916980922481, guid: fedd9c4dc4bf13a4f86290ac99aab5a3, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8118070916980922481, guid: fedd9c4dc4bf13a4f86290ac99aab5a3, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8188914181380607534, guid: fedd9c4dc4bf13a4f86290ac99aab5a3, type: 3}
       propertyPath: m_IsActive
