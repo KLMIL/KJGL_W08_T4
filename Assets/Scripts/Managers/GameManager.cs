@@ -102,6 +102,7 @@ public class GameManager : MonoBehaviour
         if (!_isTutorial)
         {
             _workTimer += Time.deltaTime;
+            UIManager.Instance.tickShower.UpdateTickShower(_workTimer);
             if (_workTimer >= WORK_INTERVAL)
             {
                 _workTimer = 0f;

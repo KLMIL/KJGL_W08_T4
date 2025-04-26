@@ -6,10 +6,14 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
 
+    public Canvas ui_SpendFundsCanvas;
+    public TickShower tickShower;
+
+
+    [SerializeField] Image UI_TickShowing;
     [SerializeField] Canvas ui_UpgradeCanvas;
     [SerializeField] Canvas ui_ResumeCanvas;
-    [SerializeField] Canvas ui_TutorialCanvas;
-              public Canvas ui_SpendFundsCanvas;
+    [SerializeField] Canvas ui_TutorialCanvas;  
     [SerializeField] GameObject ui_UpgradesPanel;
     [SerializeField] GameObject ui_ProjectsPanel;
     [SerializeField] GameObject ui_RecruitPanel;
