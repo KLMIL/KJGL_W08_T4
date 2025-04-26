@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3da749cab53c48f47b0fd5e18ece2374
+guid: 521d7ffd00686a545a7b00139816456f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5060988636471224731
-    second: CharacterInfoScren_0
+      213: -8556567597932146122
+    second: "pxArt-removebg-preview - \uBCF5\uC0AC\uBCF8_0"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -97,32 +97,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
     buildTarget: WindowsStoreApps
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -139,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CharacterInfoScren_0
+      name: "pxArt-removebg-preview - \uBCF5\uC0AC\uBCF8_0"
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 487
-        height: 639
+        width: 391
+        height: 556
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 56618de36a1c3c9b0800000000000000
-      internalID: -5060988636471224731
+      spriteID: 63213a4ba17f04980800000000000000
+      internalID: -8556567597932146122
       vertices: []
       indices: 
       edges: []
@@ -174,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      CharacterInfoScren_0: -5060988636471224731
+      "pxArt-removebg-preview - \uBCF5\uC0AC\uBCF8_0": -8556567597932146122
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
