@@ -115,7 +115,10 @@ public class DraggableEmployee : MonoBehaviour
     private void ShowInfo()
     {
         string[] infoStr = new string[4];
-        infoStr[0] = $"기획: {employee.GetEmployeeData().designSkil} \n개발: {employee.GetEmployeeData().devSkil} \n아트: {employee.GetEmployeeData().artSkil}";
+        infoStr[0] = employee.GetEmployeeData().designSkil == 5 ? $"기획: {employee.GetEmployeeData().designSkil} (Max)" : $"기획: {employee.GetEmployeeData().designSkil}";
+        infoStr[0] += employee.GetEmployeeData().devSkil == 5 ? $" \n개발: {employee.GetEmployeeData().devSkil} (Max)" : $" \n개발: {employee.GetEmployeeData().devSkil}";
+        infoStr[0] += employee.GetEmployeeData().artSkil == 5 ? $" \n개발: {employee.GetEmployeeData().artSkil} (Max)" : $" \n개발: {employee.GetEmployeeData().artSkil}";
+        //infoStr[0] = $"기획: {employee.GetEmployeeData().designSkil} \n개발: {employee.GetEmployeeData().devSkil} \n아트: {employee.GetEmployeeData().artSkil}";
         infoStr[1] = ((int)employee.GetEmployeeData().stress).ToString();
 
         int year = employee.GetEmployeeData().joinMonth / 12 + 2000;
