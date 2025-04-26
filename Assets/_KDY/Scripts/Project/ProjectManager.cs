@@ -94,12 +94,15 @@ public class ProjectManager : MonoBehaviour
                 {
                     case ProjectSize.Small:
                         placardStr += "게임잼 개발중\n";
+                        _projectSlots[i].transform.Find("Placard").gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("ProjectRoomPlacard/BluePlacard");
                         break;
                     case ProjectSize.Medium:
                         placardStr += "인디게임 개발중\n";
+                        _projectSlots[i].transform.Find("Placard").gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("ProjectRoomPlacard/YellowPlacard");
                         break;
                     case ProjectSize.Large:
                         placardStr += "AAA게임 개발중\n";
+                        _projectSlots[i].transform.Find("Placard").gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("ProjectRoomPlacard/RedPlacard");
                         break;
                     default:
                         break;
