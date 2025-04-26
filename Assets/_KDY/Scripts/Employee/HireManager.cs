@@ -4,7 +4,6 @@ using UnityEngine.UI;
 public class HireManager : MonoBehaviour
 {
     private Transform employeeContainer;
-    private const int MaxEmployeeCount = 15;
     private bool _isNewbie = true;
 
     public bool IsNewbie
