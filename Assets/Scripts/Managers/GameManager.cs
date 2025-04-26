@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] int secSalary = 100;
     [Header("Canvas")]
     [SerializeField] private GameObject gameFlowCanvas;
+    public bool IsTuto { get; set; } = false;
 
     // 2025-04-24 10:30 수정 - KWS
     [Header("Game Timer")]
@@ -36,18 +37,20 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SecretaryTalk _SecretaryTalk;
 
     [SerializeField] private TextMeshPro _companyNameText;
-    
+
     [SerializeField] private int multipleIndex = 1;
 
     [SerializeField] SpriteRenderer backgroundSprite;
     public int MultipleIndex
     {
         get { return multipleIndex; }
-        set { 
-            if(value < 0)
+        set
+        {
+            if (value < 0)
             {
                 multipleIndex = 4 + value;
-            } else
+            }
+            else
             {
                 multipleIndex = value;
             }
@@ -96,8 +99,15 @@ public class GameManager : MonoBehaviour
     }
 
     // 2025-04-24 10:30 수정 - KWS
-    private void FixedUpdate()
+    private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!IsTuto)
+            {
+                TutorialManager.Instance.ToggleTutoCanvas(true);
+            }
+        }
         _workTimer += Time.deltaTime;
         UIManager.Instance.tickShower.UpdateTickShower(_workTimer);
         if (_workTimer >= WORK_INTERVAL)
@@ -214,7 +224,7 @@ public class GameManager : MonoBehaviour
             myCompanyScale++;
         }
 
-        switch(myCompanyScale)
+        switch (myCompanyScale)
         {
             case CompanyScale.MidsizeCompany:
                 Debug.LogError("Called here");
@@ -266,19 +276,19 @@ public class GameManager : MonoBehaviour
         switch (multipleIndex)
         {
             case 0:
-                _MultipleText.text = "속도X0.5";
+                _MultipleText.text = "X 0.5";
                 Time.timeScale = 0.5f;
                 break;
             case 1:
-                _MultipleText.text = "속도X1";
+                _MultipleText.text = "X 1";
                 Time.timeScale = 1f;
                 break;
             case 2:
-                _MultipleText.text = "속도X2";
+                _MultipleText.text = "X 2";
                 Time.timeScale = 2f;
                 break;
             case 3:
-                _MultipleText.text = "속도X4";
+                _MultipleText.text = "X 4";
                 Time.timeScale = 4f;
                 break;
             default:

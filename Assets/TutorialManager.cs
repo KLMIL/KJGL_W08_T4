@@ -23,6 +23,7 @@ public class TutorialManager : MonoBehaviour
 
     public void ToggleTutoCanvas(bool status)
     {
+        GameManager.Instance.IsTuto = status;
         ui_tutoCanvas.enabled = status;
         if (status)
         {
