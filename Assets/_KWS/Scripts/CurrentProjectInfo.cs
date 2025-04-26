@@ -13,6 +13,9 @@ public class CurrentProjectInfo : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _requireText;
     //[SerializeField] private TextMeshProUGUI _welfareText;
     [SerializeField] private TextMeshProUGUI _expectCost;
+    [SerializeField] private TextMeshProUGUI _projectNotEnoughDesign;
+    [SerializeField] private TextMeshProUGUI _projectNotEnoughDev;
+    [SerializeField] private TextMeshProUGUI _projectNotEnoughArt;
 
     [SerializeField] private GameObject _employeeObject;
     [SerializeField] private TextMeshProUGUI _skillText;
@@ -22,7 +25,7 @@ public class CurrentProjectInfo : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _salaryText;
 
     //public void ShowInfo(string text, bool isLeftArea)
-    public void ShowProjectInfo(string[] text) //(string text)
+    public void ShowProjectInfo(string[] text, bool[] enough) //(string text)
     {
         _projectName.SetText(text[0]);
         _progressText.SetText(text[1]);
@@ -32,6 +35,20 @@ public class CurrentProjectInfo : MonoBehaviour
         _expectCost.SetText(text[4]);
         _projectObject.SetActive(true);
         _infoImage.gameObject.SetActive(true);
+
+        if (!enough[0])
+        {
+            _projectNotEnoughDesign.gameObject.SetActive(true);
+        }
+        if (!enough[1]) 
+        {
+            _projectNotEnoughDev.gameObject.SetActive(true);
+        }
+        if (!enough[2])
+        {
+            _projectNotEnoughArt.gameObject.SetActive(true);
+        }
+
     }
 
     public void HideProjectInfo()
@@ -44,6 +61,10 @@ public class CurrentProjectInfo : MonoBehaviour
         _requireText.SetText("");
         //_welfareText.SetText("");
         _expectCost.SetText("");
+
+        _projectNotEnoughDesign.gameObject.SetActive(false);
+        _projectNotEnoughDev.gameObject.SetActive(false);
+        _projectNotEnoughArt.gameObject.SetActive(false);
     }
 
 

@@ -280,7 +280,14 @@ public class Project : MonoBehaviour
         infoStr[3] = $"[요구 역량]\n 기획: {_totalDesignSkill} / {_requiredDesignSkill} \n 개발: {_totalProgrammingSkill} / {_requiredProgrammingSkill}\n 아트: {_totalArtSkill} / {_requiredArtSkill}";
         //infoStr[4] = "";
         infoStr[4] = $"[예상 수익]\n {(int)(_completionReward * _quality / 100 * 0.8)} G ~ {(int)(_completionReward * _quality / 100 * 1.2)} G";
-        _infoCanvas.ShowProjectInfo(infoStr);
+
+        bool[] enough = {
+            _totalDesignSkill >= _requiredDesignSkill ? true : false,
+            _totalProgrammingSkill >= _requiredProgrammingSkill ? true : false,
+            _totalArtSkill >= _requiredArtSkill ? true : false,
+        };
+        
+        _infoCanvas.ShowProjectInfo(infoStr, enough);
     }
 
     private void OnMouseExit()
