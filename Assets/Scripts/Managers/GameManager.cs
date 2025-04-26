@@ -36,8 +36,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SecretaryTalk _SecretaryTalk;
 
     [SerializeField] private TextMeshPro _companyNameText;
-    private bool _isTutorial = true;
-
+    
     [SerializeField] private int multipleIndex = 1;
 
     [SerializeField] SpriteRenderer backgroundSprite;
@@ -82,7 +81,7 @@ public class GameManager : MonoBehaviour
             _companyNameText.text = "(주)" + _companyName;
             gameFlowCanvas.transform.Find("GameStartImage").gameObject.SetActive(false);
             Time.timeScale = 1f;
-            StartCoroutine(TutorialCoroutine());
+            TutorialManager.Instance.ToggleTutoCanvas(true);
         });
 
         resetButton.onClick.AddListener(() =>
@@ -99,24 +98,12 @@ public class GameManager : MonoBehaviour
     // 2025-04-24 10:30 수정 - KWS
     private void FixedUpdate()
     {
-        if (!_isTutorial)
+        _workTimer += Time.deltaTime;
+        if (_workTimer >= WORK_INTERVAL)
         {
-            _workTimer += Time.deltaTime;
-            if (_workTimer >= WORK_INTERVAL)
-            {
-                _workTimer = 0f;
-                TickWork();
-            }
+            _workTimer = 0f;
+            TickWork();
         }
-
-    }
-
-    IEnumerator TutorialCoroutine()
-    {
-        UIManager.Instance.ToggleTutorialCanvas(true);
-        yield return new WaitForSeconds(5f);
-        UIManager.Instance.ToggleTutorialCanvas(false);
-        _isTutorial = false;
     }
 
     // 2025-04-24 10:30 수정 - KWS

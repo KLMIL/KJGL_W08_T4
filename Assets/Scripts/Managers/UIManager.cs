@@ -8,8 +8,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] Canvas ui_UpgradeCanvas;
     [SerializeField] Canvas ui_ResumeCanvas;
-    [SerializeField] Canvas ui_TutorialCanvas;
-              public Canvas ui_SpendFundsCanvas;
+    public Canvas ui_SpendFundsCanvas;
     [SerializeField] GameObject ui_UpgradesPanel;
     [SerializeField] GameObject ui_ProjectsPanel;
     [SerializeField] GameObject ui_RecruitPanel;
@@ -47,11 +46,6 @@ public class UIManager : MonoBehaviour
         {
             fundsText.text = $"{funds:N0} G";
         }
-    }
-
-    public void ToggleTutorialCanvas(bool status)
-    {
-        ui_TutorialCanvas.enabled = status;
     }
 
     public void ToggleUpgradesCanvas(bool status)
