@@ -36,7 +36,7 @@ public class ResumeCanvas : MonoBehaviour
         (DesignText1, DesignText2) = printResume.GetRandomText(SkilType.design, nowEmployData.designSkil);
         (DevText1, DevText2) = printResume.GetRandomText(SkilType.dev, nowEmployData.devSkil);
         (ArtText1, ArtText2) = printResume.GetRandomText(SkilType.art, nowEmployData.artSkil);
-        SalaryValuyeGUI.text = nowEmployData.salary.ToString()+" G";
+        SalaryValuyeGUI.text = nowEmployData.salary.ToString() + " G";
         PrintResume();
     }
     public void ExperiencedResumeButton()
