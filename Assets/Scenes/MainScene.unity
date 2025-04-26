@@ -5373,6 +5373,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7590639713222188239, guid: 3673b88d91702c8499c11832a48fc23c, type: 3}
+      propertyPath: m_text
+      value: " * [\uB2A5\uB825\uCE58] \n\uAC01 \uC9C1\uC6D0\uC740 \uAE30\uD68D, \uAC1C\uBC1C,
+        \uC544\uD2B8 \uB2A5\uB825\uC774 \uC788\uC2B5\uB2C8\uB2E4. \n\uD504\uB85C\uC81D\uD2B8\uC5D0\uC11C
+        \uC77C\uC744 \uD558\uBA74 \uACBD\uD5D8\uC774 \uC313\uC5EC \uB2A5\uB825\uCE58\uAC00
+        \uC62C\uB77C\uAC11\uB2C8\uB2E4.\r\n\n * [\uC2A4\uD2B8\uB808\uC2A4]\n\uAC01
+        \uC9C1\uC6D0\uC740 \uD504\uB85C\uC81D\uD2B8\uC5D0\uC11C \uC77C\uC744 \uD560
+        \uC2DC \uC2A4\uD2B8\uB808\uC2A4\uB97C \uBC1B\uC2B5\uB2C8\uB2E4. \r\n\uC2A4\uD2B8\uB808\uC2A4\uAC00
+        \uAC00\uB4DD \uCC30 \uACBD\uC6B0 \uD1F4\uC0AC\uD558\uAC8C \uB429\uB2C8\uB2E4.\r\n\uD504\uB85C\uC81D\uD2B8\uB97C
+        \uC644\uC131\uD558\uBA74 \uC2A4\uD2B8\uB808\uC2A4\uAC00 \uBAA8\uB450 \uD574\uC18C\uB429\uB2C8\uB2E4.\r\n\n
+        * [\uC5F0\uBD09]\n\uAC01 \uC9C1\uC6D0\uC740 \uC5F0\uBD09\uC774 \uC815\uD574\uC838\uC788\uACE0,
+        \uADF8 \uC5F0\uBD09\uC5D0 \uD574\uB2F9\uD558\uB294 \uC6D4\uAE09\uC744 \uBC1B\uC2B5\uB2C8\uB2E4.
+        \r\n1\uB144\uC774 \uC9C0\uB0A0 \uB54C\uB9C8\uB2E4 \uC77C\uC815 \uBE44\uC728\uB85C
+        \uC5F0\uBD09\uC774 \uC62C\uB77C\uAC11\uB2C8\uB2E4.\r\n"
+      objectReference: {fileID: 0}
     - target: {fileID: 8808608240948602299, guid: 3673b88d91702c8499c11832a48fc23c, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -5396,7 +5411,8 @@ PrefabInstance:
     - target: {fileID: 9003499153243527018, guid: 3673b88d91702c8499c11832a48fc23c, type: 3}
       propertyPath: m_text
       value: "* \uC124\uBA85\uC774 \uD544\uC694\uD560 \uACBD\uC6B0 \uC5B8\uC81C\uB4E0\uC9C0 
-        \n  Esc\uB97C \uB20C\uB7EC\uC774 \uD398\uC774\uC9C0\uB97C \uC5F4 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+        \n  Esc\uB97C \uB20C\uB7EC \uC774 \uD398\uC774\uC9C0\uB97C \uC5F4 \uC218
+        \uC788\uC2B5\uB2C8\uB2E4."
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
