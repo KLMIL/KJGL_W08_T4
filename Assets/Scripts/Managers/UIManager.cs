@@ -26,20 +26,6 @@ public class UIManager : MonoBehaviour
 
         Instance = this;
     }
-
-    private void Start()
-    {
-        //var obj = GameObject.Find("Funds");
-        //if (obj != null)
-        //{
-        //    fundsText = obj.GetComponent<TextMeshProUGUI>();
-        //}
-        //else
-        //{
-        //    Debug.LogWarning("'Funds' 오브젝트를 찾을 수 없습니다.");
-        //}
-    }
-
     public void UpdateFundsUI(int funds)
     {
         if (fundsText != null)
@@ -79,18 +65,24 @@ public class UIManager : MonoBehaviour
 
     public void ToggleResumeCanvas(bool isNewbie)
     {
-        if (GameManager.Instance.SpendFunds(interviewFee))
+        if (GameManager.Instance.CompanyFunds - interviewFee >= 0)
         {
-            Time.timeScale = 0f;
-            ToggleUpgradesCanvas(false);
-            ui_ResumeCanvas.enabled = true;
-            OnRecruitClick(isNewbie);
-        }    
+            if (GameManager.Instance.SpendFunds(interviewFee))
+            {
+                Time.timeScale = 0f;
+                ToggleUpgradesCanvas(false);
+                ui_ResumeCanvas.enabled = true;
+                OnRecruitClick(isNewbie);
+            }
+        } else
+        {
+            Debug.LogWarning("돈이 부족합니다.");
+        }
+        
     }
 
     public void OnRecruitClick(bool isNewbie)
     {
-        
         if (isNewbie)
         {
             ui_ResumeCanvas.GetComponent<ResumeCanvas>().NewbieResumeButton();
@@ -125,7 +117,7 @@ public class UIManager : MonoBehaviour
                     Debug.LogWarning("Wrong room level");
                     break;
             }
-            if (GameManager.Instance.CompanyFunds - upgradePrice > 0)
+            if (GameManager.Instance.CompanyFunds - upgradePrice >= 0)
             {
                 GameManager.Instance.SpendFunds(upgradePrice);
                 GameManager.Instance.UpgradeRoomLevel();
@@ -165,7 +157,7 @@ public class UIManager : MonoBehaviour
                     break;
             }
 
-            if (GameManager.Instance.CompanyFunds - upgradePrice > 0)
+            if (GameManager.Instance.CompanyFunds - upgradePrice >= 0)
             {
                 GameManager.Instance.SpendFunds(upgradePrice);
                 GameManager.Instance.UpgradeCompany();
