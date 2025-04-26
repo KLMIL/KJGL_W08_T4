@@ -66,7 +66,7 @@ public class Project : MonoBehaviour
         {
             // 프로젝트에 참가중인 모든 직원 머리 깎기
             emp.FadeHairAlpha();
-            
+
             var data = emp.GetEmployeeData();  // Employee → EmployeeData 추출
             totalPower += data.designSkil + data.devSkil + data.artSkil;
             float expToGive = 0;
@@ -112,7 +112,7 @@ public class Project : MonoBehaviour
     private void CompleteProject()
     {
         _isCompleted = true;
-            
+
         float qualityFactor = Mathf.Clamp01(_quality / 100f); // 0.0 ~ 1.0
         float randomFactor = Random.Range(0.8f, 1.2f);
         int finalReward = Mathf.RoundToInt(_completionReward * qualityFactor * randomFactor);
@@ -131,7 +131,7 @@ public class Project : MonoBehaviour
                 draggable.currentOwnerType = OwnerType.WaitingRoom;
                 draggable.waitingRoomSlot = employeeContainer;
                 transform.localPosition = new Vector3(0, 0, -1f);
-                
+
             }
             emp.ResetStress();
         }
@@ -219,10 +219,10 @@ public class Project : MonoBehaviour
             {
                 Debug.LogWarning($"[{_projectName}] 스트레스 100 도달 → 직원 퇴사!");
                 //지출 UI 데이터 갱신
-                UIManager.Instance.ui_SpendFundsCanvas.GetComponent<UI_SpendFund>().RemoveEmployeeList(emp); 
+                UIManager.Instance.ui_SpendFundsCanvas.GetComponent<UI_SpendFund>().RemoveEmployeeList(emp);
                 // 현재 프로젝트의 리스트에서 제거
                 _assignedEmployees.RemoveAt(i);
-                
+
                 // 회사의 직원 리스트에서 제거
                 ProjectManager.Instance.AllEmployees.Remove(emp);
 
@@ -232,7 +232,7 @@ public class Project : MonoBehaviour
                 ProjectManager.Instance.notifier.ShowNotification($"직원 한 명이 퇴사했습니다.");
 
                 ProjectManager.Instance.AllEmployees.Remove(emp);
-                
+
                 // 오브젝트 제거
                 Destroy(emp.gameObject);
 
@@ -275,8 +275,8 @@ public class Project : MonoBehaviour
         //_infoCanvas.ShowInfo($"Test Text");
         string[] infoStr = new string[5];
         infoStr[0] = $"{_projectName}";
-        infoStr[1] = $"[진행도] {_currentWorkAmount, 4} / {_requiredWorkAmount, 4}";
-        infoStr[2] = $"[ 품질 ] {_quality, 4} /  100";
+        infoStr[1] = $"[진행도] {_currentWorkAmount,4} / {_requiredWorkAmount,4}";
+        infoStr[2] = $"[ 품질 ] {_quality,4} /  100";
         infoStr[3] = $"[요구 역량]\n 기획: {_totalDesignSkill} / {_requiredDesignSkill} \n 개발: {_totalProgrammingSkill} / {_requiredProgrammingSkill}\n 아트: {_totalArtSkill} / {_requiredArtSkill}";
         //infoStr[4] = "";
         infoStr[4] = $"[예상 수익]\n {(int)(_completionReward * _quality / 100 * 0.8)} G ~ {(int)(_completionReward * _quality / 100 * 1.2)} G";
@@ -349,6 +349,9 @@ public class Project : MonoBehaviour
             totalDev += data.devSkil;
             totalArt += data.artSkil;
         }
+        _totalDesignSkill = totalDesign;
+        _totalProgrammingSkill = totalDev;
+        _totalArtSkill = totalArt;
 
         if (_employListText != null)
         {
