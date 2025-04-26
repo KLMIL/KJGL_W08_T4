@@ -191,13 +191,13 @@ public class Project : MonoBehaviour
         _totalDesignSkill = totalDesign;
         _totalProgrammingSkill = totalDev;
 
+        ApplyStressToEmployees(20);
         if (designInsufficient || devInsufficient || artInsufficient)
         {
             Debug.LogWarning($"⚠️ [{_projectName}] 능력치 부족: " +
                              $"{(designInsufficient ? "기획 " : "")}" +
                              $"{(devInsufficient ? "개발 " : "")}" +
                              $"{(artInsufficient ? "아트 " : "")}");
-            ApplyStressToEmployees(20);
             ApplyQualityPenalty();
         }
         else if (!designInsufficient && !devInsufficient && !artInsufficient)
