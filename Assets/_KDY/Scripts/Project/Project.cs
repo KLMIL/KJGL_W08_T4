@@ -258,7 +258,10 @@ public class Project : MonoBehaviour
     {
         int prevQuality = _quality;
         Quality = _quality + amount;
-
+        if(Quality > 100)
+        {
+            Quality = 100;
+        }
         Debug.LogWarning($"❗ 프로젝트 [{_projectName}] 품질 증가: {prevQuality} → {_quality}");
     }
 
