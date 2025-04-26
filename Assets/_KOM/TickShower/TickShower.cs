@@ -6,7 +6,7 @@ public class TickShower : MonoBehaviour
     [SerializeField] int tickCycle = 15;
     void Start()
     {
-        tickShower.GetComponent<Image>();
+        tickShower = GetComponent<Image>();
     }
     public void UpdateTickShower(float stress)
     {
