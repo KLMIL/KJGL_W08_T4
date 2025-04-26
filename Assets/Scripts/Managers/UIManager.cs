@@ -131,8 +131,9 @@ public class UIManager : MonoBehaviour
                     Debug.LogWarning("Wrong room level");
                     break;
             }
-            if (GameManager.Instance.SpendFunds(upgradePrice))
+            if (GameManager.Instance.CompanyFunds - upgradePrice > 0)
             {
+                GameManager.Instance.SpendFunds(upgradePrice);
                 GameManager.Instance.UpgradeRoomLevel();
                 if(nextUpgradePrice == 0)
                 {
@@ -170,8 +171,9 @@ public class UIManager : MonoBehaviour
                     break;
             }
 
-            if (GameManager.Instance.SpendFunds(upgradePrice))
+            if (GameManager.Instance.CompanyFunds - upgradePrice > 0)
             {
+                GameManager.Instance.SpendFunds(upgradePrice);
                 GameManager.Instance.UpgradeCompany();
                 if (nextUpgradePrice == 0)
                 {

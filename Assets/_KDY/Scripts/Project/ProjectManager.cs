@@ -39,7 +39,7 @@ public class ProjectManager : MonoBehaviour
             }
             else
             {
-                 Debug.LogWarning($"⚠️ Slot{i} not found in ProjectContainer");
+                Debug.LogWarning($"⚠️ Slot{i} not found in ProjectContainer");
             }
         }
     }
@@ -147,6 +147,16 @@ public class ProjectManager : MonoBehaviour
     // 2025-04-24 10:30 수정 - KWS
     public void TickWork()
     {
+        // 🔹 파괴된 프로젝트 제거
+        _currentProjects = _currentProjects.Where(p => p != null).ToList();
+
+        // 🔹 복사 리스트로 순회
+        var projectSnapshot = new List<Project>(_currentProjects);
+        foreach (var project in projectSnapshot)
+        {
+            project.TickWork();
+        }
+
         // 🔹 파괴된 직원 제거
         _allEmployees = _allEmployees.Where(e => e != null).ToList();
 
@@ -157,21 +167,11 @@ public class ProjectManager : MonoBehaviour
             if (!GameManager.Instance.SpendFunds(employee.GetEmployeeData().salary / 12))
             {
                 break;
-            } 
-        }
-
-        // 🔹 파괴된 프로젝트 제거
-        _currentProjects = _currentProjects.Where(p => p != null).ToList();
-
-        // 🔹 복사 리스트로 순회
-        var projectSnapshot = new List<Project>(_currentProjects);
-        foreach (var project in projectSnapshot)
-        {
-            project.TickWork();
+            }
         }
     }
 
-    
+
     public void RemoveProject(Project project)
     {
         if (_currentProjects.Contains(project))
