@@ -7,6 +7,7 @@ public class CurrentProjectInfo : MonoBehaviour
     [SerializeField] private Image _infoImage;
 
     [SerializeField] private GameObject _projectObject;
+    [SerializeField] private TextMeshProUGUI _projectProgress;
     [SerializeField] private TextMeshProUGUI _projectName;
     [SerializeField] private TextMeshProUGUI _progressText;
     [SerializeField] private TextMeshProUGUI _qualityText;
@@ -16,6 +17,7 @@ public class CurrentProjectInfo : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _projectNotEnoughDesign;
     [SerializeField] private TextMeshProUGUI _projectNotEnoughDev;
     [SerializeField] private TextMeshProUGUI _projectNotEnoughArt;
+
 
     [SerializeField] private GameObject _employeeObject;
     [SerializeField] private TextMeshProUGUI _skillText;
@@ -35,7 +37,7 @@ public class CurrentProjectInfo : MonoBehaviour
         _expectCost.SetText(text[4]);
         _projectObject.SetActive(true);
         _infoImage.gameObject.SetActive(true);
-
+        _projectProgress.SetText(text[5]);
         if (!enough[0])
         {
             _projectNotEnoughDesign.gameObject.SetActive(true);

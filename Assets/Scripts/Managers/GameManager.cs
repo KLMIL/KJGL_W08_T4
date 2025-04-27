@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -41,6 +42,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int multipleIndex = 1;
 
     [SerializeField] SpriteRenderer backgroundSprite;
+
     public int MultipleIndex
     {
         get { return multipleIndex; }

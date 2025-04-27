@@ -276,14 +276,14 @@ public class Project : MonoBehaviour
     {
         //Debug.Log("Mouse Enter to Project");
         //_infoCanvas.ShowInfo($"Test Text");
-        string[] infoStr = new string[5];
+        string[] infoStr = new string[6];
         infoStr[0] = $"{_projectName}";
         infoStr[1] = $"[진행도] {_currentWorkAmount,4} / {_requiredWorkAmount,4}";
         infoStr[2] = $"[ 품질 ] {_quality,4} /  100";
         infoStr[3] = $"[요구 역량]\n 기획: {_totalDesignSkill} / {_requiredDesignSkill} \n 개발: {_totalProgrammingSkill} / {_requiredProgrammingSkill}\n 아트: {_totalArtSkill} / {_requiredArtSkill}";
         //infoStr[4] = "";
         infoStr[4] = $"[예상 수익]\n {(int)(_completionReward * _quality / 100 * 0.8)} G ~ {(int)(_completionReward * _quality / 100 * 1.2)} G";
-
+        infoStr[5] = $"+{_totalArtSkill+_totalDesignSkill+_totalProgrammingSkill}";
         bool[] enough = {
             _totalDesignSkill >= _requiredDesignSkill ? true : false,
             _totalProgrammingSkill >= _requiredProgrammingSkill ? true : false,

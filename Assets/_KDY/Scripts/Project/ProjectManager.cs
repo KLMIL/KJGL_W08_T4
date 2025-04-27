@@ -171,6 +171,10 @@ public class ProjectManager : MonoBehaviour
             {
                 break;
             }
+            if(employee.GetComponent<DraggableEmployee>().currentOwnerType == OwnerType.WaitingRoom)
+            {
+                employee.IncreaseStress(-10);
+            }
         }
     }
 
