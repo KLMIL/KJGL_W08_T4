@@ -375,6 +375,28 @@ public class Project : MonoBehaviour
                 $"D:{totalDesign} P:{totalDev} A:{totalArt}";
         }
 
+        bool isStatuslack = false;
+        if (_requiredDesignSkill > _totalDesignSkill)
+        {
+            isStatuslack = true;
+        }
+        if (_requiredProgrammingSkill > _totalProgrammingSkill)
+        {
+            isStatuslack = true;
+        }
+        if (_requiredArtSkill > _totalArtSkill)
+        {
+            isStatuslack = true;
+        }
+
+        if (isStatuslack)
+        {
+            transform.parent.Find("Placard").Find("warningImg").gameObject.SetActive(true);
+        }
+        else
+        {
+            transform.parent.Find("Placard").Find("warningImg").gameObject.SetActive(false);
+        }
     }
 
     // Getter & Setter
