@@ -153,7 +153,7 @@ public class Project : MonoBehaviour
             infoStr += "쪽박! ";
         }
         infoStr += $"{finalReward}G를 획득했습니다.";
-
+        infoStr += "\n 할당된 직원들의 스트레스가 모두 해소됬습니다.";
 
         ProjectManager.Instance.notifier.ShowNotification(infoStr);
 
