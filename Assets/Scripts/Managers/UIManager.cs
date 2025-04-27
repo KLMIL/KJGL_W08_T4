@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance { get; private set; }
 
     public Canvas ui_SpendFundsCanvas;
+    public Canvas ui_projectProgressCavas;
     public TickShower tickShower;
 
     [SerializeField] Canvas ui_UpgradeCanvas;
