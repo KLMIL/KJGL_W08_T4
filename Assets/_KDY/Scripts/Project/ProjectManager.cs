@@ -72,6 +72,7 @@ public class ProjectManager : MonoBehaviour
                 projectObject.transform.localPosition = Vector3.zero;
 
                 Project newProject = projectObject.GetComponent<Project>();
+
                 newProject.Size = size;
                 string projectName = ProjectDataGenerator.GetRandomProjectName();
                 newProject.ProjectName = projectName;
@@ -80,6 +81,7 @@ public class ProjectManager : MonoBehaviour
                 newProject.RequiredArtSkill = ProjectDataGenerator.GetRequiredSkill(size);
                 newProject.RequiredWorkAmount = ProjectDataGenerator.GetRequiredWorkAmount(size);
                 newProject.CompletionReward = ProjectDataGenerator.GetRewardEstimate(size);
+                newProject.ThisProjectNum = i; // Set This Project Number _KOM
 
                 newProject.Quality = 100;
 

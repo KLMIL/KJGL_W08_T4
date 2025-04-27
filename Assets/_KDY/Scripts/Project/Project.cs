@@ -11,6 +11,7 @@ public class Project : MonoBehaviour
     private ProjectType _projectType;
     private ProjectSize _projectSize;
     private int _completionReward;
+    private int _thisProjectNum; // project Slot Number _KOM
 
     [Header("Project requirements")]
     private int _requiredDesignSkill;
@@ -95,6 +96,8 @@ public class Project : MonoBehaviour
         if (totalPower > 0)
         {
             _currentWorkAmount += totalPower;
+            UIManager.Instance.ui_projectProgressCavas.GetComponent<UI_ProjectProgress>().
+                UpdateBar(_thisProjectNum, (float)_currentWorkAmount / _requiredWorkAmount); //Progressbar Update _KOM
             RefreshUI();
             CheckProjectCompletion();
         }
@@ -105,6 +108,8 @@ public class Project : MonoBehaviour
     {
         if (_currentWorkAmount >= _requiredWorkAmount)
         {
+            UIManager.Instance.ui_projectProgressCavas.GetComponent<UI_ProjectProgress>().
+                UpdateBar(_thisProjectNum, 0); //Progressbar Reset _KOM
             CompleteProject();
         }
     }
@@ -456,6 +461,11 @@ public class Project : MonoBehaviour
             _currentWorkAmount = value;
             RefreshUI();
         }
+    }
+    public int ThisProjectNum
+    {
+        get => _thisProjectNum;
+        set => _thisProjectNum = value;
     }
 
     public List<Employee> AssignedEmployees
