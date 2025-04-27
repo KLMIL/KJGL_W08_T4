@@ -20,6 +20,15 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI _upgradeCompanyText;
     [SerializeField] TextMeshProUGUI fundsText;
     [SerializeField] int interviewFee = 100;
+
+    // 2025-04-27 16:00 수정 - KWS
+    [SerializeField] private Button _gameJamProjectButton;
+    [SerializeField] private Button _indieProjectButton;
+    [SerializeField] private Button _AAAProjectButton;
+
+    [SerializeField] private Image _indieUpgradeImage;
+    [SerializeField] private Image _AAAUpgradeImage;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -30,6 +39,15 @@ public class UIManager : MonoBehaviour
 
         Instance = this;
     }
+
+    private void Start()
+    {
+        // 2025-04-27 16:00 수정 - KWS
+        _gameJamProjectButton.enabled = true;
+        _indieProjectButton.enabled = false;
+        _AAAProjectButton.enabled = false;
+    }
+
     public void UpdateFundsUI(int funds)
     {
         if (fundsText != null)
@@ -163,6 +181,21 @@ public class UIManager : MonoBehaviour
 
             if (GameManager.Instance.CompanyFunds - upgradePrice >= 0)
             {
+                switch ((int)GameManager.Instance.myCompanyScale)
+                {
+                    case 1:
+                        _indieProjectButton.enabled = true;
+                        _indieUpgradeImage.gameObject.SetActive(false);
+                        break;
+                    case 2:
+                        _AAAProjectButton.enabled = true;
+                        _AAAUpgradeImage.gameObject.SetActive(false);
+                        break;
+                    default:
+                        break;
+                }
+
+
                 GameManager.Instance.SpendFunds(upgradePrice);
                 GameManager.Instance.UpgradeCompany();
                 if (nextUpgradePrice == 0)
