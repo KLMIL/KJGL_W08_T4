@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static Unity.Burst.Intrinsics.X86.Avx;
 using Random = UnityEngine.Random;
 
 public class Project : MonoBehaviour
@@ -45,6 +47,11 @@ public class Project : MonoBehaviour
 
     [Header("Project Slots")]
     private Transform[] employeeSlots;
+
+
+    // 2025-04-27 18:20 추가 - KWS
+    private List<GameObject> _resignationList = new List<GameObject>();
+    private List<Coroutine> _resignationCoroutineList = new List<Coroutine>();
 
     private void Update()
     {
@@ -170,6 +177,25 @@ public class Project : MonoBehaviour
         transform.parent.Find("Placard").gameObject.SetActive(false);
 
         Destroy(gameObject);
+
+
+        // 2025-04-27 18:20 수정 - KWS
+        if (_resignationCoroutineList.Count != 0)
+        {
+            foreach (var coroutine in _resignationCoroutineList)
+            {
+                StopCoroutine(coroutine);
+                _resignationCoroutineList.Remove(coroutine);
+            }
+        }
+        if (_resignationList.Count != 0)
+        {
+            foreach (var resignation in _resignationList)
+            {
+                Destroy(resignation);
+                _resignationList.Remove(resignation);
+            }
+        }
     }
 
 
@@ -241,6 +267,9 @@ public class Project : MonoBehaviour
                 // 오브젝트 제거
                 Destroy(emp.gameObject);
 
+                // 2025-04-27 18:20 추가 - KWS
+                _resignationCoroutineList.Add(StartCoroutine(ShowResignationCoroutine(emp.transform)));
+
                 GameManager.Instance.OnEmployeeRemoved();
             }
         }
@@ -248,6 +277,20 @@ public class Project : MonoBehaviour
         RefreshUI();
     }
 
+
+    private IEnumerator ShowResignationCoroutine(Transform empTransform)
+    {
+        // 사직서를 해당 캐릭터 위치에 생성 후 리스트에 추가. 제거할 때 리스트에서 제거
+        GameObject resignationPrefab = Resources.Load<GameObject>("_KWS/resignation");
+
+        GameObject currResination = Instantiate(resignationPrefab, empTransform.transform.position, Quaternion.identity);
+        _resignationList.Add(currResination);
+
+        yield return new WaitForSecondsRealtime(1.0f);
+
+        Destroy(currResination);
+        _resignationList.Remove(currResination);
+    }
 
 
     private void ApplyQualityPenalty()
