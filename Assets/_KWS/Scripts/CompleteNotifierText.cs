@@ -68,7 +68,7 @@ public class CompleteNotifierText : MonoBehaviour
 
         // 2. 유지 (0.3초)
         //yield return new WaitForSeconds(0.3f);
-        yield return new WaitForSecondsRealtime(0.8f);
+        yield return new WaitForSecondsRealtime(1.5f);
 
         // 3. 연해지며 사라짐 (0.5초)
         float fadeOutDuration = 0.5f;
