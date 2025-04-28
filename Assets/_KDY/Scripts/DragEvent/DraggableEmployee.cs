@@ -94,6 +94,11 @@ public class DraggableEmployee : MonoBehaviour
             {
                 if (waitingDrop.OnEmployeeDropped(this)) return;
             }
+
+            if (hit.TryGetComponent(out FireEmployeeDropReciever fireDrop))
+            {
+                if (fireDrop.OnEmployeeDropped(this)) return;
+            }
         }
 
         //ShowInfo();
