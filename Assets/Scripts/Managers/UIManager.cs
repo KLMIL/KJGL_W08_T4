@@ -19,7 +19,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI _upgradeRoomText;
     [SerializeField] TextMeshProUGUI _upgradeCompanyText;
     [SerializeField] TextMeshProUGUI fundsText;
-    [SerializeField] int interviewFee = 100;
+    [SerializeField] int newbieInterviewFee = 100;
+    [SerializeField] int experiencedInterviewFee = 300;
 
     // 2025-04-27 16:00 수정 - KWS
     [SerializeField] private Button _gameJamProjectButton;
@@ -87,19 +88,41 @@ public class UIManager : MonoBehaviour
 
     public void ToggleResumeCanvas(bool isNewbie)
     {
-        if (GameManager.Instance.CompanyFunds - interviewFee >= 0)
+        if (isNewbie)
         {
-            if (GameManager.Instance.SpendFunds(interviewFee))
+            if (GameManager.Instance.CompanyFunds - newbieInterviewFee >= 0)
             {
-                Time.timeScale = 0f;
-                ToggleUpgradesCanvas(false);
-                ui_ResumeCanvas.enabled = true;
-                OnRecruitClick(isNewbie);
+                if (GameManager.Instance.SpendFunds(newbieInterviewFee))
+                {
+                    Time.timeScale = 0f;
+                    ToggleUpgradesCanvas(false);
+                    ui_ResumeCanvas.enabled = true;
+                    OnRecruitClick(isNewbie);
+                }
             }
-        } else
-        {
-            Debug.LogWarning("돈이 부족합니다.");
+            else
+            {
+                Debug.LogWarning("돈이 부족합니다.");
+            }
         }
+        else
+        {
+            if (GameManager.Instance.CompanyFunds - experiencedInterviewFee >= 0)
+            {
+                if (GameManager.Instance.SpendFunds(experiencedInterviewFee))
+                {
+                    Time.timeScale = 0f;
+                    ToggleUpgradesCanvas(false);
+                    ui_ResumeCanvas.enabled = true;
+                    OnRecruitClick(isNewbie);
+                }
+            }
+            else
+            {
+                Debug.LogWarning("돈이 부족합니다.");
+            }
+        }
+        
         
     }
 

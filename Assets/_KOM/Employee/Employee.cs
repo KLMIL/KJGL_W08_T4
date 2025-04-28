@@ -55,21 +55,49 @@ public class Employee : MonoBehaviour
         switch (expType)
         {
             case ExpType.designExp:
-                _employeeData.designExp += expValue; 
+                _employeeData.designExp += expValue;
                 if (_employeeData.designSkill >= 5) break; //Max Level 5
-                if (ChekSkilLevelup(_employeeData.designSkill, _employeeData.designExp)) { _employeeData.designSkill++; StartCoroutine("Levelup"); }
+                if (ChekSkilLevelup(_employeeData.designSkill, _employeeData.designExp))
+                {
+                    Project currentProj = GetComponent<DraggableEmployee>().currentProject;
+                    if (currentProj != null)
+                    {
+                        currentProj.RefreshUI();
+                    }
+
+                    _employeeData.designSkill++;
+                    StartCoroutine(Levelup());
+                }
                 break;
 
             case ExpType.devExp:
                 _employeeData.devExp += expValue;
                 if (_employeeData.devSkill >= 5) break; //Max Level 5
-                if (ChekSkilLevelup(_employeeData.devSkill, _employeeData.devExp)) { _employeeData.devSkill++; StartCoroutine("Levelup"); }                    
+                if (ChekSkilLevelup(_employeeData.devSkill, _employeeData.devExp))
+                {
+                    Project currentProj = GetComponent<DraggableEmployee>().currentProject;
+                    if (currentProj != null)
+                    {
+                        currentProj.RefreshUI();
+                    }
+                    _employeeData.devSkill++;
+                    StartCoroutine(Levelup());
+                }
                 break;
 
             case ExpType.artExp:
                 _employeeData.artExp += expValue;
                 if (_employeeData.artSkill >= 5) break; //Max Level 5 
-                if (ChekSkilLevelup(_employeeData.artSkill, _employeeData.artExp)) { _employeeData.artSkill++; StartCoroutine(Levelup()); }
+                if (ChekSkilLevelup(_employeeData.artSkill, _employeeData.artExp))
+                {
+                    Project currentProj = GetComponent<DraggableEmployee>().currentProject;
+                    if (currentProj != null)
+                    {
+                        currentProj.RefreshUI();
+                    }
+                    _employeeData.artSkill++;
+                    StartCoroutine(Levelup());
+                }
                 break;
         }
     }
@@ -102,12 +130,12 @@ public class Employee : MonoBehaviour
     }
     public void IncreaseSalary()
     {
-        if(yearInWork < 10)
+        if (yearInWork < 10)
         {
             yearInWork++;
             _employeeData.salary += (int)Math.Floor((ResumeManager.increaseSalary * _employeeData.salary / 100.0) + ResumeManager.baseIncrease);
         }
-        
+
     }
     Dictionary<int, int> levelupExpTable = new Dictionary<int, int>
     {
