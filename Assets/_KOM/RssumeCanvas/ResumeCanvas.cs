@@ -33,9 +33,9 @@ public class ResumeCanvas : MonoBehaviour
         //resumePage.SetActive(true);
         nowEmployData = resumeManager.CreateResume(true);
 
-        (DesignText1, DesignText2) = printResume.GetRandomText(SkilType.design, nowEmployData.designSkil);
-        (DevText1, DevText2) = printResume.GetRandomText(SkilType.dev, nowEmployData.devSkil);
-        (ArtText1, ArtText2) = printResume.GetRandomText(SkilType.art, nowEmployData.artSkil);
+        (DesignText1, DesignText2) = printResume.GetRandomText(SkilType.design, nowEmployData.designSkill);
+        (DevText1, DevText2) = printResume.GetRandomText(SkilType.dev, nowEmployData.devSkill);
+        (ArtText1, ArtText2) = printResume.GetRandomText(SkilType.art, nowEmployData.artSkill);
         SalaryValuyeGUI.text = nowEmployData.salary.ToString() + " G";
         PrintResume();
     }
@@ -44,9 +44,9 @@ public class ResumeCanvas : MonoBehaviour
         //resumePage.SetActive(true);
         nowEmployData = resumeManager.CreateResume(false);
 
-        (DesignText1, DesignText2) = printResume.GetRandomText(SkilType.design, nowEmployData.designSkil);
-        (DevText1, DevText2) = printResume.GetRandomText(SkilType.dev, nowEmployData.devSkil);
-        (ArtText1, ArtText2) = printResume.GetRandomText(SkilType.art, nowEmployData.artSkil);
+        (DesignText1, DesignText2) = printResume.GetRandomText(SkilType.design, nowEmployData.designSkill);
+        (DevText1, DevText2) = printResume.GetRandomText(SkilType.dev, nowEmployData.devSkill);
+        (ArtText1, ArtText2) = printResume.GetRandomText(SkilType.art, nowEmployData.artSkill);
         SalaryValuyeGUI.text = nowEmployData.salary.ToString()+" G";
         PrintResume();
         // 경력직 고용시에만 경력직으로 할당

@@ -120,9 +120,9 @@ public class DraggableEmployee : MonoBehaviour
     private void ShowInfo()
     {
         string[] infoStr = new string[4];
-        infoStr[0] = employee.GetEmployeeData().designSkil == 5 ? $"기획: {employee.GetEmployeeData().designSkil} (Max)" : $"기획: {employee.GetEmployeeData().designSkil}";
-        infoStr[0] += employee.GetEmployeeData().devSkil == 5 ? $" \n개발: {employee.GetEmployeeData().devSkil} (Max)" : $" \n개발: {employee.GetEmployeeData().devSkil}";
-        infoStr[0] += employee.GetEmployeeData().artSkil == 5 ? $" \n아트: {employee.GetEmployeeData().artSkil} (Max)" : $" \n아트: {employee.GetEmployeeData().artSkil}";
+        infoStr[0] = employee.GetEmployeeData().designSkill == 5 ? $"기획: {employee.GetEmployeeData().designSkill} (Max)" : $"기획: {employee.GetEmployeeData().designSkill}";
+        infoStr[0] += employee.GetEmployeeData().devSkill == 5 ? $" \n개발: {employee.GetEmployeeData().devSkill} (Max)" : $" \n개발: {employee.GetEmployeeData().devSkill}";
+        infoStr[0] += employee.GetEmployeeData().artSkill == 5 ? $" \n아트: {employee.GetEmployeeData().artSkill} (Max)" : $" \n아트: {employee.GetEmployeeData().artSkill}";
         //infoStr[0] = $"기획: {employee.GetEmployeeData().designSkil} \n개발: {employee.GetEmployeeData().devSkil} \n아트: {employee.GetEmployeeData().artSkil}";
         infoStr[1] = ((int)employee.GetEmployeeData().stress).ToString();
 
