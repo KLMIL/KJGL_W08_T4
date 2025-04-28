@@ -233,7 +233,6 @@ public class GameManager : MonoBehaviour
         switch (myCompanyScale)
         {
             case CompanyScale.MidsizeCompany:
-                Debug.LogError("Called here");
                 backgroundSprite.sprite = Resources.Load<Sprite>("CompanyBackground/CompanyBackground_Midsize");
                 break;
             case CompanyScale.LargeCompany:

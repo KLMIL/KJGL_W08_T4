@@ -196,7 +196,35 @@ public class Project : MonoBehaviour
                 _resignationList.Remove(resignation);
             }
         }
+
+        SpawnMoneyEffect(finalReward);
     }
+    
+    private void SpawnMoneyEffect(int earnedMoney)
+    {
+        GameObject moneyEffectPrefab = Resources.Load<GameObject>("_KDY/Prefabs/MoneyBundleEffect"); 
+        if (moneyEffectPrefab == null) return;
+
+        int bundleCount = earnedMoney / 400;
+        bundleCount = Mathf.Clamp(bundleCount, 0, 25);
+
+        for (int i = 0; i < bundleCount; i++)
+        {
+            Vector3 spawnPos = transform.position + (Vector3)(Random.insideUnitCircle * 0.2f);
+            GameObject money = Instantiate(moneyEffectPrefab, spawnPos, Quaternion.Euler(0, 0, Random.Range(0f, 360f)));
+        
+            Rigidbody2D rb = money.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                rb.gravityScale = 3.0f; // 중력 강하게
+                Vector2 randomForce = new Vector2(Random.Range(-0.1f, 0.2f), Random.Range(0.7f, 1f)); // 거의 안 튐
+                rb.AddForce(randomForce * 10f, ForceMode2D.Impulse); // 10f로 매우 약하게
+            }
+
+            Destroy(money, Random.Range(2f, 3f));
+        }
+    }
+
 
 
     private void CheckAssignedStats()
