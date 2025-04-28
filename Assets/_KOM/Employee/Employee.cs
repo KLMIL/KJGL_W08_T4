@@ -93,6 +93,7 @@ public class Employee : MonoBehaviour
     public void ResetStress()
     {
         _employeeData.stress = 0;
+        Debug.Log($"{gameObject.name}, {_employeeData.stress}");
     }
 
     bool ChekSkilLevelup(int skilLevel, float expValue)

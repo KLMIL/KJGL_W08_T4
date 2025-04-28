@@ -1846,7 +1846,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uCC3D\uC5C5\uD558\uAE30"
+  m_text: "[\uACE0\uC720 \uC2A4\uD0AC], \u300E\uD68C\uADC0\u300F \uBC1C\uB3D9!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 425f29185fab7de45a6a9521a32342bc, type: 2}
   m_sharedMaterial: {fileID: 7046050184719477439, guid: 425f29185fab7de45a6a9521a32342bc, type: 2}
@@ -1873,13 +1873,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 54
-  m_fontSizeBase: 54
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 2
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -4580,7 +4580,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uD68C\uC0AC \uC774\uB984 \uC785\uB825"
+  m_text: "SSS\uAE09 \uD68C\uC0AC \uC774\uB984 \uC785\uB825"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 425f29185fab7de45a6a9521a32342bc, type: 2}
   m_sharedMaterial: {fileID: 7046050184719477439, guid: 425f29185fab7de45a6a9521a32342bc, type: 2}
@@ -4613,7 +4613,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 2
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -5816,6 +5816,10 @@ PrefabInstance:
     - target: {fileID: 7183903033498238679, guid: 4c1444ec81ea5f34198c0a6e42c52005, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ToggleUpgradesCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469319844430866845, guid: 4c1444ec81ea5f34198c0a6e42c52005, type: 3}
+      propertyPath: m_text
+      value: "\uC608\uC0C1 \uC218\uC775: 30000G-50000G"
       objectReference: {fileID: 0}
     - target: {fileID: 8283442497724452526, guid: 4c1444ec81ea5f34198c0a6e42c52005, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

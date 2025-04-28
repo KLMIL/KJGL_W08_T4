@@ -66,7 +66,7 @@ public class Project : MonoBehaviour
         if (_isCompleted || _assignedEmployees.Count == 0) return;
 
         // 능력 부족시 스트레스 주기
-        
+
 
 
         int totalPower = 0;
@@ -108,8 +108,6 @@ public class Project : MonoBehaviour
             RefreshUI();
             CheckProjectCompletion();
         }
-
-        CheckAssignedStats();
     }
 
 
@@ -120,6 +118,9 @@ public class Project : MonoBehaviour
             UIManager.Instance.ui_projectProgressCavas.GetComponent<UI_ProjectProgress>().
                 UpdateBar(_thisProjectNum, 0); //Progressbar Reset _KOM
             CompleteProject();
+        } else
+        {
+            CheckAssignedStats();
         }
     }
 
@@ -201,10 +202,10 @@ public class Project : MonoBehaviour
 
         SpawnMoneyEffect(finalReward);
     }
-    
+
     private void SpawnMoneyEffect(int earnedMoney)
     {
-        GameObject moneyEffectPrefab = Resources.Load<GameObject>("_KDY/Prefabs/MoneyBundleEffect"); 
+        GameObject moneyEffectPrefab = Resources.Load<GameObject>("_KDY/Prefabs/MoneyBundleEffect");
         if (moneyEffectPrefab == null) return;
 
         int bundleCount = earnedMoney / 400;
@@ -214,7 +215,7 @@ public class Project : MonoBehaviour
         {
             Vector3 spawnPos = transform.position + (Vector3)(Random.insideUnitCircle * 0.2f);
             GameObject money = Instantiate(moneyEffectPrefab, spawnPos, Quaternion.Euler(0, 0, Random.Range(0f, 360f)));
-        
+
             Rigidbody2D rb = money.GetComponent<Rigidbody2D>();
             if (rb != null)
             {
@@ -336,7 +337,7 @@ public class Project : MonoBehaviour
     {
         int prevQuality = _quality;
         Quality = _quality + amount;
-        if(Quality > 100)
+        if (Quality > 100)
         {
             Quality = 100;
         }
@@ -361,13 +362,13 @@ public class Project : MonoBehaviour
         infoStr[3] = $"[요구 역량]\n 기획: {_totalDesignSkill} / {_requiredDesignSkill} \n 개발: {_totalProgrammingSkill} / {_requiredProgrammingSkill}\n 아트: {_totalArtSkill} / {_requiredArtSkill}";
         //infoStr[4] = "";
         infoStr[4] = $"[예상 수익]\n {(int)(_completionReward * _quality / 100 * 0.8)} G ~ {(int)(_completionReward * _quality / 100 * 1.2)} G";
-        infoStr[5] = $"+{_totalArtSkill+_totalDesignSkill+_totalProgrammingSkill}";
+        infoStr[5] = $"+{_totalArtSkill + _totalDesignSkill + _totalProgrammingSkill}";
         bool[] enough = {
             _totalDesignSkill >= _requiredDesignSkill ? true : false,
             _totalProgrammingSkill >= _requiredProgrammingSkill ? true : false,
             _totalArtSkill >= _requiredArtSkill ? true : false,
         };
-        
+
         _infoCanvas.ShowProjectInfo(infoStr, enough);
     }
 
