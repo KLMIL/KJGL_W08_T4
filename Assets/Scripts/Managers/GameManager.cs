@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private string _companyName;
     private int _roomLevel = 0;
 
-    private int _companyFunds = 3000; // 초기 자산 예시
+    private int _companyFunds = 300000; // 초기 자산 예시
     private const int MaxEmployeeCount = 40;
 
     public int CompanyFunds => _companyFunds;
