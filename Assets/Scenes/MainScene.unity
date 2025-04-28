@@ -6099,6 +6099,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutoCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 7552090089915727022, guid: 3673b88d91702c8499c11832a48fc23c, type: 3}
+      propertyPath: m_text
+      value: "\uC6D4\uAE09\uC744 \uC904 \uC2DC\uAE30\uAC00 \uC654\uC744 \uB54C \uB3C8\uC774
+        \uBD80\uC871\uD558\uBA74 \uD30C\uC0B0\uD558\uAC8C \uB429\uB2C8\uB2E4.\n\n\uADF8\uB7EC\uBA74
+        \uACFC\uAC70\uB85C \uD68C\uADC0\uD558\uC5EC \uB2E4\uC2DC \uC2DC\uC791\uD560
+        \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
