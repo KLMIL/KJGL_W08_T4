@@ -66,7 +66,7 @@ public class Project : MonoBehaviour
         if (_isCompleted || _assignedEmployees.Count == 0) return;
 
         // 능력 부족시 스트레스 주기
-        CheckAssignedStats();
+        
 
 
         int totalPower = 0;
@@ -108,6 +108,8 @@ public class Project : MonoBehaviour
             RefreshUI();
             CheckProjectCompletion();
         }
+
+        CheckAssignedStats();
     }
 
 
@@ -180,14 +182,14 @@ public class Project : MonoBehaviour
 
 
         // 2025-04-27 18:20 수정 - KWS
-        if (_resignationCoroutineList.Count != 0)
-        {
-            foreach (var coroutine in _resignationCoroutineList)
-            {
-                StopCoroutine(coroutine);
-                _resignationCoroutineList.Remove(coroutine);
-            }
-        }
+        //if (_resignationCoroutineList.Count != 0)
+        //{
+        //    foreach (var coroutine in _resignationCoroutineList)
+        //    {
+        //        StopCoroutine(coroutine);
+        //        _resignationCoroutineList.Remove(coroutine);
+        //    }
+        //}
         if (_resignationList.Count != 0)
         {
             foreach (var resignation in _resignationList)
