@@ -76,7 +76,7 @@ public class Project : MonoBehaviour
             emp.FadeHairAlpha();
 
             var data = emp.GetEmployeeData();  // Employee → EmployeeData 추출
-            totalPower += data.designSkil + data.devSkil + data.artSkil;
+            totalPower += data.designSkill + data.devSkill + data.artSkill;
             float expToGive = 0;
             switch (_projectSize)
             {
@@ -236,9 +236,9 @@ public class Project : MonoBehaviour
         foreach (var employee in _assignedEmployees)
         {
             var data = employee.GetEmployeeData();
-            totalDesign += data.designSkil;
-            totalDev += data.devSkil;
-            totalArt += data.artSkil;
+            totalDesign += data.designSkill;
+            totalDev += data.devSkill;
+            totalArt += data.artSkill;
         }
 
 
@@ -431,9 +431,9 @@ public class Project : MonoBehaviour
         foreach (var employee in _assignedEmployees)
         {
             var data = employee.GetEmployeeData();
-            totalDesign += data.designSkil;
-            totalDev += data.devSkil;
-            totalArt += data.artSkil;
+            totalDesign += data.designSkill;
+            totalDev += data.devSkill;
+            totalArt += data.artSkill;
         }
         _totalDesignSkill = totalDesign;
         _totalProgrammingSkill = totalDev;

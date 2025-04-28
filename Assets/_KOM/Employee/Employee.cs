@@ -8,7 +8,7 @@ public class Employee : MonoBehaviour
 {
     EmployeeData _employeeData;
     public SpriteRenderer levelupImage;
-
+    public int yearInWork = 0;
     public void SetEmployeeData(EmployeeData employeeData)
     {
         _employeeData = employeeData;
@@ -56,20 +56,20 @@ public class Employee : MonoBehaviour
         {
             case ExpType.designExp:
                 _employeeData.designExp += expValue; 
-                if (_employeeData.designSkil >= 5) break; //Max Level 5
-                if (ChekSkilLevelup(_employeeData.designSkil, _employeeData.designExp)) { _employeeData.designSkil++; StartCoroutine("Levelup"); }
+                if (_employeeData.designSkill >= 5) break; //Max Level 5
+                if (ChekSkilLevelup(_employeeData.designSkill, _employeeData.designExp)) { _employeeData.designSkill++; StartCoroutine("Levelup"); }
                 break;
 
             case ExpType.devExp:
                 _employeeData.devExp += expValue;
-                if (_employeeData.devSkil >= 5) break; //Max Level 5
-                if (ChekSkilLevelup(_employeeData.devSkil, _employeeData.devExp)) { _employeeData.devSkil++; StartCoroutine("Levelup"); }                    
+                if (_employeeData.devSkill >= 5) break; //Max Level 5
+                if (ChekSkilLevelup(_employeeData.devSkill, _employeeData.devExp)) { _employeeData.devSkill++; StartCoroutine("Levelup"); }                    
                 break;
 
             case ExpType.artExp:
                 _employeeData.artExp += expValue;
-                if (_employeeData.artSkil >= 5) break; //Max Level 5 
-                if (ChekSkilLevelup(_employeeData.artSkil, _employeeData.artExp)) { _employeeData.artSkil++; StartCoroutine(Levelup()); }
+                if (_employeeData.artSkill >= 5) break; //Max Level 5 
+                if (ChekSkilLevelup(_employeeData.artSkill, _employeeData.artExp)) { _employeeData.artSkill++; StartCoroutine(Levelup()); }
                 break;
         }
     }
@@ -101,13 +101,18 @@ public class Employee : MonoBehaviour
     }
     public void IncreaseSalary()
     {
-        _employeeData.salary += (int)Math.Floor(ResumeManager.increaseSalary * _employeeData.salary/100.0);
+        if(yearInWork < 10)
+        {
+            yearInWork++;
+            _employeeData.salary += (int)Math.Floor((ResumeManager.increaseSalary * _employeeData.salary / 100.0) + ResumeManager.baseIncrease);
+        }
+        
     }
     Dictionary<int, int> levelupExpTable = new Dictionary<int, int>
     {
-        { 1, 500 },
-        { 2, 1250 },
-        { 3, 3750 },
-        { 4, 14250 }
+        { 1, 300 },
+        { 2, 600 },
+        { 3, 1800 },
+        { 4, 5400 }
     };
 }
