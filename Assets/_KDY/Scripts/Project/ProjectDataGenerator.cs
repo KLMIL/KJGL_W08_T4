@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public static class ProjectDataGenerator
@@ -79,7 +79,7 @@ public static class ProjectDataGenerator
         {
             ProjectSize.Small => Random.Range(1000, 2001),
             ProjectSize.Medium => Random.Range(4000, 10001),
-            ProjectSize.Large => Random.Range(15000, 30001),
+            ProjectSize.Large => Random.Range(30000, 50001),
             _ => 500
         };
     }

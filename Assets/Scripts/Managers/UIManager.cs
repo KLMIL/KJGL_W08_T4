@@ -148,7 +148,7 @@ public class UIManager : MonoBehaviour
                     _upgradeRoomText.SetText("사무실 구매\n(구매불가)");
                 } else
                 {
-                    _upgradeRoomText.SetText($"사무실 구매\n{nextUpgradePrice} G");
+                    _upgradeRoomText.SetText($"사무실 구매\n({nextUpgradePrice} G)");
                 }
             }            
         }
@@ -204,7 +204,7 @@ public class UIManager : MonoBehaviour
                 }
                 else
                 {
-                    _upgradeCompanyText.SetText($"회사 규모 키우기\n{nextUpgradePrice} G");
+                    _upgradeCompanyText.SetText($"회사 규모 키우기\n({nextUpgradePrice} G)");
                 }
             }
 
