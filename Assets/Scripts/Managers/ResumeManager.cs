@@ -46,7 +46,8 @@ public class ResumeManager : MonoBehaviour
 {
     public static ResumeManager Instance { get; private set; }
     public PrintResume printResume;
-    public static int increaseSalary = 30;
+    public const int increaseSalary = 5;
+    public const int baseIncrease = 250;
     private void Awake()
     {
         if (Instance != null && Instance != this)

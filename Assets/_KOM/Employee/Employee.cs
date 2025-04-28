@@ -8,7 +8,7 @@ public class Employee : MonoBehaviour
 {
     EmployeeData _employeeData;
     public SpriteRenderer levelupImage;
-
+    public int yearInWork = 0;
     public void SetEmployeeData(EmployeeData employeeData)
     {
         _employeeData = employeeData;
@@ -101,13 +101,18 @@ public class Employee : MonoBehaviour
     }
     public void IncreaseSalary()
     {
-        _employeeData.salary += (int)Math.Floor(ResumeManager.increaseSalary * _employeeData.salary/100.0);
+        if(yearInWork < 10)
+        {
+            yearInWork++;
+            _employeeData.salary += (int)Math.Floor((ResumeManager.increaseSalary * _employeeData.salary / 100.0) + ResumeManager.baseIncrease);
+        }
+        
     }
     Dictionary<int, int> levelupExpTable = new Dictionary<int, int>
     {
-        { 1, 500 },
-        { 2, 1250 },
-        { 3, 3750 },
-        { 4, 14250 }
+        { 1, 300 },
+        { 2, 600 },
+        { 3, 1800 },
+        { 4, 5400 }
     };
 }
